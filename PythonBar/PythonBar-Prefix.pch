@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'PythonBar' target in the 'PythonBar' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
