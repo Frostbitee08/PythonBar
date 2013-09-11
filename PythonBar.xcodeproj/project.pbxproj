@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841BDDB217E0D92E00D19D99 /* RunSuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BDDB117E0D92E00D19D99 /* RunSuff.m */; };
 		841D8471173614F900C9DE1C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8470173614F900C9DE1C /* Cocoa.framework */; };
 		841D847B173614F900C9DE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 841D8479173614F900C9DE1C /* InfoPlist.strings */; };
 		841D847D173614F900C9DE1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D847C173614F900C9DE1C /* main.m */; };
@@ -17,6 +18,20 @@
 		841D8490173614FA00C9DE1C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8470173614F900C9DE1C /* Cocoa.framework */; };
 		841D8498173614FA00C9DE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 841D8496173614FA00C9DE1C /* InfoPlist.strings */; };
 		841D849B173614FA00C9DE1C /* PythonBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D849A173614FA00C9DE1C /* PythonBarTests.m */; };
+		841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A71736175A00C9DE1C /* pythonIcon.png */; };
+		841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A81736175A00C9DE1C /* pythonIconBW.png */; };
+		843BD26317D0453B00A33EF0 /* Script.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* Script.m */; };
+		843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */; };
+		843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD27017D426B600A33EF0 /* ScriptsTableController.m */; };
+		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
+		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
+		84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC8D9717579DCB009C5733 /* PopUpView.xib */; };
+		84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC8D9A17579E2E009C5733 /* PopUpViewController.m */; };
+		84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */; };
+		84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867C817E0EE64003DBFD1 /* ShortcutRecorder.framework */; };
+		84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EABEB517D7C6940083BAE3 /* Carbon.framework */; };
+		84F109651736521100950211 /* python_document.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F109641736521100950211 /* python_document.png */; };
+		84F8B60417D3DE89003C3D7B /* DirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B60317D3DE89003C3D7B /* DirectoryScript.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +42,25 @@
 			remoteGlobalIDString = 841D846B173614F900C9DE1C;
 			remoteInfo = PythonBar;
 		};
+		84E867C717E0EE64003DBFD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 939837800DA42965007F53F3;
+			remoteInfo = ShortcutRecorder.framework;
+		};
+		84E867C917E0EE64003DBFD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E273122E1349EC9000A84433;
+			remoteInfo = PTHotKey.framework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841BDDB017E0D92E00D19D99 /* RunSuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSuff.h; sourceTree = "<group>"; };
+		841BDDB117E0D92E00D19D99 /* RunSuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunSuff.m; sourceTree = "<group>"; };
 		841D846C173614F900C9DE1C /* PythonBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PythonBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841D8470173614F900C9DE1C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		841D8473173614F900C9DE1C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -49,6 +80,23 @@
 		841D8497173614FA00C9DE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		841D8499173614FA00C9DE1C /* PythonBarTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PythonBarTests.h; sourceTree = "<group>"; };
 		841D849A173614FA00C9DE1C /* PythonBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PythonBarTests.m; sourceTree = "<group>"; };
+		841D84A71736175A00C9DE1C /* pythonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIcon.png; sourceTree = "<group>"; };
+		841D84A81736175A00C9DE1C /* pythonIconBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIconBW.png; sourceTree = "<group>"; };
+		843BD26117D0453B00A33EF0 /* Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Script.h; sourceTree = "<group>"; };
+		843BD26217D0453B00A33EF0 /* Script.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Script.m; sourceTree = "<group>"; };
+		843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		843BD26F17D426B600A33EF0 /* ScriptsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptsTableController.h; sourceTree = "<group>"; };
+		843BD27017D426B600A33EF0 /* ScriptsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptsTableController.m; sourceTree = "<group>"; };
+		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
+		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
+		84BC8D9717579DCB009C5733 /* PopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
+		84BC8D9917579E2E009C5733 /* PopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpViewController.h; sourceTree = "<group>"; };
+		84BC8D9A17579E2E009C5733 /* PopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpViewController.m; sourceTree = "<group>"; };
+		84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShortcutRecorder.xcodeproj; path = "ShortcutRecorder-develop/ShortcutRecorder.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		84EABEB517D7C6940083BAE3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		84F109641736521100950211 /* python_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = python_document.png; sourceTree = "<group>"; };
+		84F8B60217D3DE89003C3D7B /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
+		84F8B60317D3DE89003C3D7B /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */,
+				84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */,
+				84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */,
+				843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */,
 				841D8471173614F900C9DE1C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +146,8 @@
 		841D846F173614F900C9DE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84EABEB517D7C6940083BAE3 /* Carbon.framework */,
+				843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */,
 				841D8470173614F900C9DE1C /* Cocoa.framework */,
 				841D848E173614FA00C9DE1C /* SenTestingKit.framework */,
 				841D8472173614F900C9DE1C /* Other Frameworks */,
@@ -114,9 +168,12 @@
 		841D8476173614F900C9DE1C /* PythonBar */ = {
 			isa = PBXGroup;
 			children = (
+				84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */,
+				84BC8D9D17579E3F009C5733 /* ViewControllers */,
+				84BC8D9C17579E36009C5733 /* Objects */,
+				841D8485173614F900C9DE1C /* MainMenu.xib */,
 				841D8482173614F900C9DE1C /* AppDelegate.h */,
 				841D8483173614F900C9DE1C /* AppDelegate.m */,
-				841D8485173614F900C9DE1C /* MainMenu.xib */,
 				841D8477173614F900C9DE1C /* Supporting Files */,
 			);
 			path = PythonBar;
@@ -125,6 +182,9 @@
 		841D8477173614F900C9DE1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84F109641736521100950211 /* python_document.png */,
+				841D84A71736175A00C9DE1C /* pythonIcon.png */,
+				841D84A81736175A00C9DE1C /* pythonIconBW.png */,
 				841D8478173614F900C9DE1C /* PythonBar-Info.plist */,
 				841D8479173614F900C9DE1C /* InfoPlist.strings */,
 				841D847C173614F900C9DE1C /* main.m */,
@@ -151,6 +211,42 @@
 				841D8496173614FA00C9DE1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84BC8D9C17579E36009C5733 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				8479056B17CEE28E00F48DD1 /* PBStatus.h */,
+				8479056C17CEE28E00F48DD1 /* PBStatus.m */,
+				84F8B60217D3DE89003C3D7B /* DirectoryScript.h */,
+				84F8B60317D3DE89003C3D7B /* DirectoryScript.m */,
+				843BD26117D0453B00A33EF0 /* Script.h */,
+				843BD26217D0453B00A33EF0 /* Script.m */,
+				841BDDB017E0D92E00D19D99 /* RunSuff.h */,
+				841BDDB117E0D92E00D19D99 /* RunSuff.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		84BC8D9D17579E3F009C5733 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				84BC8D9917579E2E009C5733 /* PopUpViewController.h */,
+				84BC8D9A17579E2E009C5733 /* PopUpViewController.m */,
+				84BC8D9717579DCB009C5733 /* PopUpView.xib */,
+				843BD26F17D426B600A33EF0 /* ScriptsTableController.h */,
+				843BD27017D426B600A33EF0 /* ScriptsTableController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		84E867C317E0EE63003DBFD1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84E867C817E0EE64003DBFD1 /* ShortcutRecorder.framework */,
+				84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,10 +303,39 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				"es-MX",
+				es,
+				fr,
+				it,
+				ja,
+				ko,
+				nb,
+				nl,
+				pl,
+				"pt-BR",
+				pt,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 841D8461173614F900C9DE1C;
 			productRefGroup = 841D846D173614F900C9DE1C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 84E867C317E0EE63003DBFD1 /* Products */;
+					ProjectRef = 84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				841D846B173614F900C9DE1C /* PythonBar */,
@@ -218,6 +343,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		84E867C817E0EE64003DBFD1 /* ShortcutRecorder.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ShortcutRecorder.framework;
+			remoteRef = 84E867C717E0EE64003DBFD1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PTHotKey.framework;
+			remoteRef = 84E867C917E0EE64003DBFD1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		841D846A173614F900C9DE1C /* Resources */ = {
@@ -227,6 +369,10 @@
 				841D847B173614F900C9DE1C /* InfoPlist.strings in Resources */,
 				841D8481173614F900C9DE1C /* Credits.rtf in Resources */,
 				841D8487173614F900C9DE1C /* MainMenu.xib in Resources */,
+				841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */,
+				841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */,
+				84F109651736521100950211 /* python_document.png in Resources */,
+				84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,8 +407,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */,
 				841D847D173614F900C9DE1C /* main.m in Sources */,
 				841D8484173614F900C9DE1C /* AppDelegate.m in Sources */,
+				84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */,
+				843BD26317D0453B00A33EF0 /* Script.m in Sources */,
+				84F8B60417D3DE89003C3D7B /* DirectoryScript.m in Sources */,
+				843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */,
+				841BDDB217E0D92E00D19D99 /* RunSuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841D849B173614FA00C9DE1C /* PythonBarTests.m in Sources */,
+				8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +530,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ShortcutRecorder-dhfvclqxxhwmizeorfyfchmhtaht/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";
 				INFOPLIST_FILE = "PythonBar/PythonBar-Info.plist";
@@ -389,6 +547,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ShortcutRecorder-dhfvclqxxhwmizeorfyfchmhtaht/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";
 				INFOPLIST_FILE = "PythonBar/PythonBar-Info.plist";
@@ -446,6 +609,7 @@
 				841D84A0173614FA00C9DE1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		841D84A1173614FA00C9DE1C /* Build configuration list for PBXNativeTarget "PythonBarTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +618,7 @@
 				841D84A3173614FA00C9DE1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
