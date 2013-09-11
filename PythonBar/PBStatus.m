@@ -11,7 +11,12 @@
 
 @implementation PBStatus
 
-static NSString *notification = @"notfication";
+//Keys
+static NSString *notificationKey = @"notfication";
+static NSString *savePathKey = @"savePath";
+static NSString *preferencesPathKey = @"preferencesPath";
+static NSString *preferencesKey = @"preferences";
+static NSString *scriptsKey = @"scripts";
 
 //GIVEN
 //
@@ -114,7 +119,7 @@ static NSString *notification = @"notfication";
     if ([scripts count] > 0) {
         [self prePopulate];
     }
-    [notificationCheck setState:[[[defaults objectForKey:@"preferences"] objectForKey:notification] boolValue]];
+    [notificationCheck setState:[[[defaults objectForKey:preferencesKey] objectForKey:notificationKey] boolValue]];
 }
 
 - (id)init {
@@ -130,24 +135,24 @@ static NSString *notification = @"notfication";
         
         //Defaults
         defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:savePath forKey:@"savePath"];
-        [defaults setObject:preferencesPath forKey:@"preferencesPath"];
+        [defaults setObject:savePath forKey:savePathKey];
+        [defaults setObject:preferencesPath forKey:preferencesPathKey];
         
         scripts = [[NSMutableArray alloc] init];
         pythonDocument = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"python_document" ofType:@"png"]];
         
         //Fill Preferences
-        NSDictionary *tempDict = [[NSDictionary alloc] initWithContentsOfFile:[defaults objectForKey:@"preferencesPath"]];
+        NSDictionary *tempDict = [[NSDictionary alloc] initWithContentsOfFile:[defaults objectForKey:preferencesPathKey]];
         if ([[tempDict allKeys] count] > 0) {
             NSArray *keys = [tempDict allKeys];
             for (unsigned int g = 0; g<[keys count]; g++ ) {
                 [preferences setObject:[tempDict objectForKey:[keys objectAtIndex:g]] forKey:[keys objectAtIndex:g]];
             }
         }
-        [defaults setObject:preferences forKey:@"preferences"];
+        [defaults setObject:preferences forKey:preferencesPathKey];
         
         //Fill scriptPaths and scripts
-        NSArray *temp =  [[NSArray alloc] initWithContentsOfFile:[defaults objectForKey:@"savePath"]];
+        NSArray *temp =  [[NSArray alloc] initWithContentsOfFile:[defaults objectForKey:savePathKey]];
         if ([temp count] > 0) {
             for (unsigned int i = 0; i<[temp count]; i++) {
                 //Get File Type
@@ -172,7 +177,7 @@ static NSString *notification = @"notfication";
                 [scriptPaths addObject:[temp objectAtIndex:i]];
             }
         }
-        [defaults setObject:scriptPaths forKey:@"scriptsPath"];
+        [defaults setObject:scriptPaths forKey:scriptsKey];
     }
     return self;
 }
@@ -189,15 +194,15 @@ static NSString *notification = @"notfication";
 
 -(IBAction)remove:(id)sender {
     NSInteger *index = [scriptTable selectedRow];
-    scriptPaths = [defaults objectForKey:@"scriptsPaths"];
+    scriptPaths = [defaults objectForKey:scriptsKey];
     
     [scriptTable beginUpdates];
     [scriptTable removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
     [scriptTable endUpdates];
     [scripts removeObjectAtIndex:index];
     [scriptPaths removeObjectAtIndex:index];
-    [defaults setObject:scriptPaths forKey:@"scriptsPaths"];
-    [[defaults objectForKey:@"scriptsPaths"] writeToFile:[defaults objectForKey:@"savePath"] atomically:YES];
+    [defaults setObject:scriptPaths forKey:scriptsKey];
+    [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
     [removeButton setHidden:TRUE];
     
     //Remove NSMenuItem
@@ -212,7 +217,7 @@ static NSString *notification = @"notfication";
   
     //Add to scripts and scriptPaths
     NSString *jap = [[NSString alloc] initWithString:[path absoluteString]];
-    NSMutableArray *scriptsPath = [defaults objectForKey:@"scriptsPaths"];
+    NSMutableArray *scriptsPath = [defaults objectForKey:scriptsKey];
     [scriptsPath addObject:jap];
     [scripts addObject:tempScript];
 
@@ -226,8 +231,8 @@ static NSString *notification = @"notfication";
     [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
 
     //Save
-    [defaults setObject:scriptsPath forKey:@"scriptsPaths"];
-    [[defaults objectForKey:@"scriptsPaths"] writeToFile:[defaults objectForKey:@"savePath"] atomically:YES];
+    [defaults setObject:scriptsPath forKey:scriptsKey];
+    [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
 }
 
 -(void)addBarDiretory:(NSURL *)path {
@@ -260,13 +265,13 @@ static NSString *notification = @"notfication";
     
     //UpdateArrays
     NSString *jap = [[NSString alloc] initWithString:[path absoluteString]];
-    scriptPaths = [defaults objectForKey:@"scriptsPaths"];
+    scriptPaths = [defaults objectForKey:scriptsKey];
     [scriptPaths addObject:jap];
     [scripts addObject:dirScript];
     
     //Save
-    [defaults setObject:scriptPaths forKey:@"scriptsPaths"];
-    [[defaults objectForKey:@"scriptsPaths"] writeToFile:[defaults objectForKey:@"savePath"] atomically:YES];
+    [defaults setObject:scriptPaths forKey:scriptsKey];
+    [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
 }
 
 //
@@ -286,7 +291,7 @@ static NSString *notification = @"notfication";
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSFileHandlingPanelOKButton) {
             NSURL* theDoc = [[panel URLs] objectAtIndex:0];
-            if (![[defaults objectForKey:@"scriptsPaths"] containsObject:[theDoc absoluteString]]) {
+            if (![[defaults objectForKey:scriptsKey] containsObject:[theDoc absoluteString]]) {
                 NSString *temp = [[theDoc absoluteString] lastPathComponent];
                 NSMutableString *filename = [NSMutableString stringWithString:temp];
                 if([filename length] > 3) {

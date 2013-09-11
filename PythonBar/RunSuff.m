@@ -11,6 +11,9 @@
 @implementation RunSuff
 @synthesize scripts,notificationCheck,statusMenu;
 
+static NSString *savePathKey = @"savePath";
+static NSString *scriptsPathKey = @"scripts";
+
 - (id)init {
     if (self) {
         defaults = [NSUserDefaults standardUserDefaults];
@@ -31,10 +34,10 @@
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSFileHandlingPanelOKButton) {
             NSURL* theDoc = [[panel URLs] objectAtIndex:0];
-            if (![[defaults objectForKey:@"scriptsPaths"] containsObject:[theDoc absoluteString]]) {
+            if (![[defaults objectForKey:scriptsPathKey] containsObject:[theDoc absoluteString]]) {
                 NSString *temp = [[theDoc absoluteString] lastPathComponent];
                 NSMutableString *filename = [NSMutableString stringWithString:temp];
-                NSMutableArray *scriptsPath = [defaults objectForKey:@"scriptsPath"];
+                scriptPaths = [defaults objectForKey:scriptsPathKey];
                 if([filename length] > 3) {
                     [filename deleteCharactersInRange:NSMakeRange(0, ([filename length]-3))];
                 }
@@ -45,7 +48,7 @@
                     
                     //Replace in scripts and scriptPaths
                     NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    [scriptsPath replaceObjectAtIndex:_tempIndex withObject:jap];
+                    [scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
                     [scripts replaceObjectAtIndex:_tempIndex withObject:tempScript];
                     
                     //Replace NSMenuItem
@@ -59,8 +62,8 @@
                     [tempMenuItem setAttributedTitle:attributedTitle];
                     
                     //Save
-                    [defaults setObject:scriptsPath forKey:@"scriptsPaths"];
-                    [[defaults objectForKey:@"scriptsPaths"] writeToFile:[defaults objectForKey:@"savePath"] atomically:YES];
+                    [defaults setObject:scriptPaths forKey:scriptsPathKey];
+                    [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
                 }
                 else {
                     //Set Up DirectoryScript
@@ -99,17 +102,17 @@
                     
                     //UpdateArrays
                     NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    [scriptsPath replaceObjectAtIndex:_tempIndex withObject:jap];
+                    [scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
                     [scripts replaceObjectAtIndex:_tempIndex withObject:dirScript];
                     
                     //Save
-                    [defaults setObject:scriptsPath forKey:@"scriptsPath"];
-                    [[defaults objectForKey:@"scriptsPaths"] writeToFile:[defaults objectForKey:@"savePath"] atomically:YES];
+                    [defaults setObject:scriptPaths forKey:scriptsPathKey];
+                    [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
                 }
                 
             }
             else {
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The script or directory that you have selected has already been added to PythonBar"];
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has already been added to PythonBar", [[scripts objectAtIndex:_tempIndex] getTitle]]];
                 [alert runModal];
             }
         }
@@ -143,7 +146,7 @@
     //Make sure Script exist
     NSString *tempString = [@"file://localhost" stringByAppendingString:[sender representedObject]];
     tempString = [tempString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSUInteger *index = [[defaults objectForKey:@"scriptsPaths"] indexOfObject:tempString];
+    NSUInteger *index = [statusMenu indexOfItem:sender];
     
     //I have got to get a better way of doing this
     int intIndex = index;
@@ -153,12 +156,12 @@
             NSURL *folderURL = [NSURL URLWithString:tempString];
             NSRange fragmentRange = [tempString rangeOfString:[folderURL lastPathComponent] options:NSBackwardsSearch];
             NSString *folderString = [tempString substringToIndex:fragmentRange.location];
-            NSUInteger *folderIndex = [[defaults objectForKey:@"scriptsPaths"] indexOfObject:folderString];
+            NSUInteger *folderIndex = [[defaults objectForKey:scriptsPathKey] indexOfObject:folderString];
             
             if ([[scripts objectAtIndex:folderIndex] doesExist]) {
                 NSMutableArray *subscripts = [[scripts objectAtIndex:folderIndex] getSubScripts];
                 NSMenu *submenu = [[NSMenu alloc] init];
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"This Script has been moved from the directory"];
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory",[sender title]]];
                 [alert runModal];
                 int z = 0;
                 while(z<[subscripts count]) {
