@@ -58,9 +58,9 @@ static NSString *scriptsKey = @"scripts";
                 [tempMenuItem setAction:@selector(findScript:)];
             }
             [tempMenuItem setAttributedTitle:attributedTitle];
-
+            
             if ([[[[[scripts objectAtIndex:i] getShortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
-                NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutKeyCode]];
+                NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutKeyCode], [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharacters]];
                 
                 PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
                 PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];

@@ -37,6 +37,9 @@ static NSString *savePathKey = @"savePath";
     else if ([[tableColumn identifier] isEqualToString:@"hotkey"]) {
         SRRecorderControl *shortCutRecorder = (SRRecorderControl *)[cellView.subviews objectAtIndex:0];
         [shortCutRecorder setDelegate:self];
+        if ([[[[[scripts objectAtIndex:row] shortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
+            shortCutRecorder.objectValue = [[scripts objectAtIndex:row] shortCut];
+        }
         return cellView;
     }
     else if ([[tableColumn identifier] isEqualToString:@"path"]) {
