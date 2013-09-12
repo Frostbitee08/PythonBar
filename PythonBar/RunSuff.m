@@ -48,7 +48,10 @@ static NSString *scriptsPathKey = @"scripts";
                     
                     //Replace in scripts and scriptPaths
                     NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    [scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
+                    //[scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
+                    id tempKey = [[scriptPaths allKeys] objectAtIndex:_tempIndex];
+                    [scriptPaths setObject:[scriptPaths objectForKey:tempKey] forKey:jap];
+                    [scriptPaths removeObjectForKey:tempKey];
                     [scripts replaceObjectAtIndex:_tempIndex withObject:tempScript];
                     
                     //Replace NSMenuItem
@@ -102,7 +105,9 @@ static NSString *scriptsPathKey = @"scripts";
                     
                     //UpdateArrays
                     NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    [scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
+                    id tempKey = [[scriptPaths allKeys] objectAtIndex:_tempIndex];
+                    [scriptPaths setObject:[scriptPaths objectForKey:tempKey] forKey:jap];
+                    [scriptPaths removeObjectForKey:tempKey];
                     [scripts replaceObjectAtIndex:_tempIndex withObject:dirScript];
                     
                     //Save

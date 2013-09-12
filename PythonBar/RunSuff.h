@@ -23,7 +23,7 @@
     NSImage *pythonDocument;
     
     //Temporary Data stored in Defaults
-    NSMutableArray *scriptPaths;
+    NSMutableDictionary *scriptPaths;
     NSMutableDictionary *preferences;
 }
 

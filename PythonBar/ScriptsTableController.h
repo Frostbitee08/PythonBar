@@ -19,7 +19,9 @@
 @interface ScriptsTableController : NSObject <NSTableViewDataSource, NSTableViewDelegate, SRRecorderControlDelegate> {
     NSTableView *ScriptTable;
     NSMutableArray *scripts;
+    NSMutableDictionary *scriptsPaths;
     NSMenu *statusMenu;
+    NSUserDefaults *defaults;
     SRValidator *validator;
     RunSuff *runner;
 }

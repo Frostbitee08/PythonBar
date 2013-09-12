@@ -9,6 +9,11 @@
 #import "PBStatus.h"
 #import "PopUpViewController.h"
 
+//ShortCut
+#import "ShortcutRecorder/ShortcutRecorder.h"
+#import <PTHotKey/PTHotKeyCenter.h>
+#import <PTHotKey/PTHotKey+ShortcutRecorder.h>
+
 @implementation PBStatus
 
 //Keys
@@ -53,6 +58,22 @@ static NSString *scriptsKey = @"scripts";
                 [tempMenuItem setAction:@selector(findScript:)];
             }
             [tempMenuItem setAttributedTitle:attributedTitle];
+
+            if ([[[[[scripts objectAtIndex:i] getShortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
+                NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutKeyCode]];
+                
+                PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
+                PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
+                [hotKeyCenter unregisterHotKey:oldHotKey];
+                
+                PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:identifier
+                                                            keyCombo:[[scripts objectAtIndex:i] getShortCut]
+                                                              target:runner
+                                                              action:tempMenuItem.action];
+                
+                [newHotKey setRepresentedObject:tempMenuItem];
+                [hotKeyCenter registerHotKey:newHotKey];
+            }
             
             //Add NSMenuItem to StatusMenu
             [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
@@ -130,7 +151,7 @@ static NSString *scriptsKey = @"scripts";
         NSString *libraryPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/PythonBar/"];
         NSString *preferencesPath = [libraryPath stringByAppendingString:@"/Settings.plist"];
         NSString *savePath = [libraryPath stringByAppendingString:@"/Scripts.plist"];
-        scriptPaths = [[NSMutableArray alloc] init];
+        scriptPaths = [[NSMutableDictionary alloc] init];
         preferences = [[NSMutableDictionary alloc] init];
         
         //Defaults
@@ -152,7 +173,8 @@ static NSString *scriptsKey = @"scripts";
         [defaults setObject:preferences forKey:preferencesPathKey];
         
         //Fill scriptPaths and scripts
-        NSArray *temp =  [[NSArray alloc] initWithContentsOfFile:[defaults objectForKey:savePathKey]];
+        NSDictionary *tempDictionary =  [[NSDictionary alloc] initWithContentsOfFile:[defaults objectForKey:savePathKey]];
+        NSArray *temp = [[NSArray alloc] initWithArray:[tempDictionary allKeys]];
         if ([temp count] > 0) {
             for (unsigned int i = 0; i<[temp count]; i++) {
                 //Get File Type
@@ -163,6 +185,7 @@ static NSString *scriptsKey = @"scripts";
                 if([mutTemp isEqualToString:@".py"]) {
                     Script *tempScript = [[Script alloc] init];
                     [tempScript setPathURL:[temp objectAtIndex:i]];
+                    [tempScript setShortCut:[tempDictionary objectForKey:[temp objectAtIndex:i]]];
                     [scripts addObject:tempScript];
                 }
                 
@@ -174,7 +197,7 @@ static NSString *scriptsKey = @"scripts";
                 }
                 
                 //Add Path
-                [scriptPaths addObject:[temp objectAtIndex:i]];
+                [scriptPaths setObject:[tempDictionary valueForKey:[temp objectAtIndex:i]] forKey:[temp objectAtIndex:i]];
             }
         }
         [defaults setObject:scriptPaths forKey:scriptsKey];
@@ -200,7 +223,7 @@ static NSString *scriptsKey = @"scripts";
     [scriptTable removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
     [scriptTable endUpdates];
     [scripts removeObjectAtIndex:index];
-    [scriptPaths removeObjectAtIndex:index];
+    [scriptPaths removeObjectForKey:[[scriptPaths allKeys] objectAtIndex:index]];
     [defaults setObject:scriptPaths forKey:scriptsKey];
     [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
     [removeButton setHidden:TRUE];
@@ -217,8 +240,8 @@ static NSString *scriptsKey = @"scripts";
   
     //Add to scripts and scriptPaths
     NSString *jap = [[NSString alloc] initWithString:[path absoluteString]];
-    NSMutableArray *scriptsPath = [defaults objectForKey:scriptsKey];
-    [scriptsPath addObject:jap];
+    scriptPaths = [defaults objectForKey:scriptsKey];
+    [scriptPaths setObject:@"" forKey:jap];
     [scripts addObject:tempScript];
 
     //Create NSMenuItem
@@ -231,7 +254,7 @@ static NSString *scriptsKey = @"scripts";
     [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
 
     //Save
-    [defaults setObject:scriptsPath forKey:scriptsKey];
+    [defaults setObject:scriptPaths forKey:scriptsKey];
     [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
 }
 
@@ -266,7 +289,7 @@ static NSString *scriptsKey = @"scripts";
     //UpdateArrays
     NSString *jap = [[NSString alloc] initWithString:[path absoluteString]];
     scriptPaths = [defaults objectForKey:scriptsKey];
-    [scriptPaths addObject:jap];
+    [scriptPaths setObject:@"" forKey:jap];
     [scripts addObject:dirScript];
     
     //Save

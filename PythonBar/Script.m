@@ -33,8 +33,12 @@
     return false;
 }
 
+-(NSDictionary *)getShortCut {
+    return shortCut;
+}
+
 //Accessors
-- (void)setPathURL:(NSString *)givenPath {  
+- (void)setPathURL:(NSString *)givenPath {
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
@@ -64,6 +68,8 @@
     title = filename;
     
     timesRan = 0;
+    
+    shortCut = nil;
 }
 
 @end

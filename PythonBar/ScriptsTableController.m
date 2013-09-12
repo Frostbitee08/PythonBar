@@ -11,9 +11,20 @@
 @implementation ScriptsTableController
 @synthesize scripts, statusMenu, runner;
 
+static NSString *scriptsPathKey = @"scripts";
+static NSString *savePathKey = @"savePath";
+
+-(id)init {
+    if (self) {
+        defaults = [NSUserDefaults standardUserDefaults];
+        scriptsPaths = [defaults objectForKey:scriptsPathKey];
+    }
+    return self;
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
     ScriptTable = aTableView;
-    return [scripts count];
+    return [[scriptsPaths allKeys] count];
 }
 
 // This method is optional if you use bindings to provide the data
@@ -53,16 +64,27 @@
     }
     else {
         NSInteger row = [ScriptTable rowForView:[aRecorder superview]];
-        NSMenuItem *menuIem = [statusMenu itemAtIndex:row];
+        //NSMenuItem *menuIem = [statusMenu itemAtIndex:row];
+        NSMenuItem *menuIem = [statusMenu itemWithTitle:[[scripts objectAtIndex:row] getTitle]];
+        
+        NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [aShortcut valueForKey:SRShortcutKeyCode], [aShortcut valueForKey:SRShortcutCharacters]];
         
         PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
-        PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:menuIem.representedObject];
+        PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
         [hotKeyCenter unregisterHotKey:oldHotKey];
         
         PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:menuIem.representedObject
                                                     keyCombo:aShortcut
                                                       target:runner
                                                       action:menuIem.action];
+        
+        //NSString *test = (NSString *)[aShortcut valueForKey:SRShortcutKeyCode];
+        scriptsPaths = (NSMutableDictionary *)[defaults objectForKey:scriptsPathKey];
+        id tempKey = [[scriptsPaths allKeys] objectAtIndex:row];
+        [scriptsPaths setObject:aShortcut forKey:tempKey];
+        [defaults setObject:scriptsPaths forKey:scriptsPathKey];
+        [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
+        
         [newHotKey setRepresentedObject:menuIem];
         [hotKeyCenter registerHotKey:newHotKey];
     }
