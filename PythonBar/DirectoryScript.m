@@ -81,6 +81,7 @@
             
             Script *script = [[Script alloc] init];
             [script setPathURL:tempScriptPath];
+            script.isSubscript = true;
             
             //Add Script to subScripts
             [subScripts addObject:script];

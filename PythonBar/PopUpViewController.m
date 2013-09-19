@@ -25,7 +25,7 @@
     return self;
 }
 
-- (IBAction)copy {
+    - (IBAction)copy {
     NSString *text = [[outText textStorage] string];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:text  forType:NSStringPboardType];

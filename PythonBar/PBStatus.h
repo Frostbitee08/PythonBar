@@ -38,8 +38,10 @@
     NSMutableDictionary *preferences;
 }
 
-//Actions
+//Initialze
 -(void)prePopulate;
+
+//Actions
 -(void)addBarItem:(NSURL *)path;
 -(void)addBarDiretory:(NSURL *)path;
 -(IBAction)remove:(id)sender;

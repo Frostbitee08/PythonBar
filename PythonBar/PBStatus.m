@@ -23,125 +23,7 @@ static NSString *preferencesPathKey = @"preferencesPath";
 static NSString *preferencesKey = @"preferences";
 static NSString *scriptsKey = @"scripts";
 
-//GIVEN
-//
-- (id)initWithFrame:(NSRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
--(void)prePopulate {
-    //Loop through scripts and add all menuItems
-    for (unsigned int i = 0; i<[scripts count]; i++) {
-        if ([[scripts objectAtIndex:i] isMemberOfClass:[Script class]]) {
-            //Create NSMenuItem
-            NSMenuItem *tempMenuItem = [[NSMenuItem alloc] init];
-            [tempMenuItem setTarget:runner];
-            [tempMenuItem setRepresentedObject:[[scripts objectAtIndex:i] getPath]];
-            [tempMenuItem setImage:pythonDocument];
-            
-            //Add color
-            NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:i] getTitle]];
-            [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:i] getTitle].length)];
-            if ([[scripts objectAtIndex:i] doesExist]) {
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
-                [tempMenuItem setAction:@selector(runScript:)];
-                
-            }
-            else {
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
-                [tempMenuItem setAction:@selector(findScript:)];
-            }
-            [tempMenuItem setAttributedTitle:attributedTitle];
-            
-            if ([[[[[scripts objectAtIndex:i] getShortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
-                NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutKeyCode], [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharacters]];
-                
-                PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
-                PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
-                [hotKeyCenter unregisterHotKey:oldHotKey];
-                
-                PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:identifier
-                                                            keyCombo:[[scripts objectAtIndex:i] getShortCut]
-                                                              target:runner
-                                                              action:tempMenuItem.action];
-                
-                [newHotKey setRepresentedObject:tempMenuItem];
-                [hotKeyCenter registerHotKey:newHotKey];
-            }
-            
-            //Add NSMenuItem to StatusMenu
-            [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
-        }
-        else if ([[scripts objectAtIndex:i] isMemberOfClass:[DirectoryScript class]]) {
-            //Get DirectoryScript
-            DirectoryScript *tempDir = [scripts objectAtIndex:i];
-            
-            //Create Sub-Menu
-            NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
-            [directoryMenuItem setTitle:[tempDir getTitle]];
-            NSMenu *submenu = [[NSMenu alloc] init];
-            
-            //Add color
-            NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:i] getTitle]];
-            [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:i] getTitle].length)];
-            if ([[scripts objectAtIndex:i] doesExist]) {
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
-                
-                //Add Sub-Menus
-                NSArray *subscript = [tempDir getSubScripts];
-                for (unsigned int f = 0; f < [subscript count]; f++) {
-                    //Get Script
-                    Script *tempScript = [subscript objectAtIndex:f];
-                    
-                    //Create submenu
-                    NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
-                    [tempMenuItem setTarget:runner];
-                    [tempMenuItem setRepresentedObject:[tempScript getPath]];
-                    [tempMenuItem setImage:pythonDocument];
-                    [submenu addItem:tempMenuItem];
-                }
-                [directoryMenuItem setSubmenu:submenu];
-            }
-            else {
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
-                [directoryMenuItem setTarget:runner];
-                [directoryMenuItem setAction:@selector(findScript:)];
-            }
-            [directoryMenuItem setAttributedTitle:attributedTitle];
-            
-            //Add subMenu to StatusMenu
-            [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
-
-        }
-    }
-}
-
--(void)awakeFromNib {
-    //Runner
-    runner = [[RunSuff alloc] init];
-    runner.scripts = scripts;
-    runner.statusMenu = statusMenu;
-    runner.notificationCheck = notificationCheck;
-    
-    //TableController
-    stc = [[ScriptsTableController alloc] init];
-    [scriptTable setDelegate:stc];
-    [scriptTable setDataSource:stc];
-    stc.runner = runner;
-    stc.statusMenu = statusMenu;
-    stc.scripts = scripts;
-    
-    if ([scripts count] > 0) {
-        [self prePopulate];
-    }
-    [notificationCheck setState:[[[defaults objectForKey:preferencesKey] objectForKey:notificationKey] boolValue]];
-}
+#pragma mark - Initial setup
 
 - (id)init {
     CGFloat height = [NSStatusBar systemStatusBar].thickness;
@@ -180,12 +62,14 @@ static NSString *scriptsKey = @"scripts";
                 //Get File Type
                 NSMutableString *mutTemp = [NSMutableString stringWithString:[temp objectAtIndex:i]];
                 [mutTemp deleteCharactersInRange:NSMakeRange(0, ([mutTemp length]-3))];
+                NSURL *tempURL = [NSURL URLWithString:[temp objectAtIndex:i]];
                 
                 //If Python File
                 if([mutTemp isEqualToString:@".py"]) {
                     Script *tempScript = [[Script alloc] init];
                     [tempScript setPathURL:[temp objectAtIndex:i]];
                     [tempScript setShortCut:[tempDictionary objectForKey:[temp objectAtIndex:i]]];
+                    tempScript.isSubscript = false;
                     [scripts addObject:tempScript];
                 }
                 
@@ -205,15 +89,128 @@ static NSString *scriptsKey = @"scripts";
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    // Drawing code here.
+
+-(void)awakeFromNib {
+    //Runner
+    runner = [[RunSuff alloc] init];
+    runner.scripts = scripts;
+    runner.statusMenu = statusMenu;
+    runner.notificationCheck = notificationCheck;
+    
+    //TableController
+    stc = [[ScriptsTableController alloc] init];
+    [scriptTable setDelegate:stc];
+    [scriptTable setDataSource:stc];
+    stc.runner = runner;
+    stc.statusMenu = statusMenu;
+    stc.scripts = scripts;
+    
+    if ([scripts count] > 0) {
+        [self prePopulate];
+    }
+    [notificationCheck setState:[[[defaults objectForKey:preferencesKey] objectForKey:notificationKey] boolValue]];
+}
+
+-(void)prePopulate {
+    //Loop through scripts and add all menuItems
+    for (unsigned int i = 0; i<[scripts count]; i++) {
+        if ([[scripts objectAtIndex:i] isMemberOfClass:[Script class]]) {
+            //Create NSMenuItem
+            NSMenuItem *tempMenuItem = [[NSMenuItem alloc] init];
+            [tempMenuItem setTarget:runner];
+            [tempMenuItem setRepresentedObject:[scripts objectAtIndex:i]];
+            [tempMenuItem setImage:pythonDocument];
+            
+            //Add color
+            NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:i] getTitle]];
+            [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:i] getTitle].length)];
+            if ([[scripts objectAtIndex:i] doesExist]) {
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
+                [tempMenuItem setAction:@selector(runScript:)];
+                
+            }
+            else {
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
+                [tempMenuItem setAction:@selector(findScript:)];
+            }
+            [tempMenuItem setAttributedTitle:attributedTitle];
+            
+            if ([[[[[scripts objectAtIndex:i] getShortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
+                NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutKeyCode], [[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharacters]];
+                
+                PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
+                PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
+                [hotKeyCenter unregisterHotKey:oldHotKey];
+                
+                PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:identifier
+                                                            keyCombo:[[scripts objectAtIndex:i] getShortCut]
+                                                              target:runner
+                                                              action:tempMenuItem.action];
+                
+                [newHotKey setRepresentedObject:tempMenuItem];
+                [hotKeyCenter registerHotKey:newHotKey];
+                
+                [tempMenuItem setKeyEquivalent:[[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharacters   ]];
+                
+            }
+            
+            //Add NSMenuItem to StatusMenu
+            [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
+        }
+        else if ([[scripts objectAtIndex:i] isMemberOfClass:[DirectoryScript class]]) {
+            //Get DirectoryScript
+            DirectoryScript *tempDir = [scripts objectAtIndex:i];
+            
+            //Create Sub-Menu
+            NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
+            [directoryMenuItem setTitle:[tempDir getTitle]];
+            NSMenu *submenu = [[NSMenu alloc] init];
+            
+            //Add color
+            NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:i] getTitle]];
+            [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:i] getTitle].length)];
+            if ([[scripts objectAtIndex:i] doesExist]) {
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
+                
+                //Add Sub-Menus
+                NSArray *subscript = [tempDir getSubScripts];
+                for (unsigned int f = 0; f < [subscript count]; f++) {
+                    //Get Script
+                    Script *tempScript = [subscript objectAtIndex:f];
+                    
+                    //Create submenu
+                    NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
+                    [tempMenuItem setTarget:runner];
+                    [tempMenuItem setRepresentedObject:tempScript];
+                    [tempMenuItem setImage:pythonDocument];
+                    [submenu addItem:tempMenuItem];
+                }
+                
+                //Add Run all
+                [submenu addItem:[NSMenuItem separatorItem]];
+                NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:@"Run All" action:@selector(runAllInDirectory:) keyEquivalent:@""];
+                [tempMenuItem setTarget:runner];
+                [tempMenuItem setRepresentedObject:[scripts objectAtIndex:i]];
+                [submenu addItem:tempMenuItem];
+                
+                [directoryMenuItem setSubmenu:submenu];
+            }
+            else {
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
+                [directoryMenuItem setTarget:runner];
+                [directoryMenuItem setAction:@selector(findScript:)];
+            }
+            [directoryMenuItem setAttributedTitle:attributedTitle];
+            
+            //Add subMenu to StatusMenu
+            [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
+            
+        }
+    }
 }
 
 
-//
-//Delegates
-//
+#pragma mark - Actions
 
 -(IBAction)remove:(id)sender {
     NSInteger *index = [scriptTable selectedRow];
@@ -237,6 +234,7 @@ static NSString *scriptsKey = @"scripts";
     //Set Up Script
     Script *tempScript = [[Script alloc] init];
     [tempScript setPathURL:[path absoluteString]];
+    tempScript.isSubscript = false;
   
     //Add to scripts and scriptPaths
     NSString *jap = [[NSString alloc] initWithString:[path absoluteString]];
@@ -247,7 +245,7 @@ static NSString *scriptsKey = @"scripts";
     //Create NSMenuItem
     NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
     [tempMenuItem setTarget:runner];
-    [tempMenuItem setRepresentedObject:[tempScript getPath]];
+    [tempMenuItem setRepresentedObject:tempScript];
     [tempMenuItem setImage:pythonDocument];
 
     //Add NSMenuItem to StatusMenu
@@ -277,13 +275,21 @@ static NSString *scriptsKey = @"scripts";
         //Create submenu
         NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
         [tempMenuItem setTarget:runner];
-        [tempMenuItem setRepresentedObject:[tempScript getPath]];
+        [tempMenuItem setRepresentedObject:tempScript];
         [tempMenuItem setImage:pythonDocument];
         [submenu addItem:tempMenuItem];
     }
     
+    //Add Run all
+    [submenu addItem:[NSMenuItem separatorItem]];
+    NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:@"Run All" action:@selector(runAllInDirectory:) keyEquivalent:@""];
+    [tempMenuItem setTarget:runner];
+    [tempMenuItem setRepresentedObject:dirScript];
+    [submenu addItem:tempMenuItem];
+    
     //Add subMenu to StatusMenu
     [directoryMenuItem setSubmenu:submenu];
+    [directoryMenuItem setRepresentedObject:dirScript];
     [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
     
     //UpdateArrays
@@ -297,9 +303,7 @@ static NSString *scriptsKey = @"scripts";
     [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
 }
 
-//
-//Show Windows
-//
+#pragma mark - Show windows
 
 //Show FileBrowser
 -(IBAction)addItem:(id)sender {

@@ -18,6 +18,7 @@
     
     //Data
     NSUInteger *_tempIndex;
+    id _tempScript;
     NSUserDefaults *defaults;
     NSMutableArray *scripts;
     NSImage *pythonDocument;
@@ -32,6 +33,7 @@
 @property(readwrite, nonatomic) NSButton *notificationCheck;
 
 //Actions
+-(void)runAllInDirectory:(id)sender;
 -(void)replaceScript:(id)sender;
 -(void)findScript:(id)sender;
 -(void)runScript:(id)sender;

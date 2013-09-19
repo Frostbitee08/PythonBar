@@ -67,7 +67,6 @@ static NSString *savePathKey = @"savePath";
     }
     else {
         NSInteger row = [ScriptTable rowForView:[aRecorder superview]];
-        //NSMenuItem *menuIem = [statusMenu itemAtIndex:row];
         NSMenuItem *menuIem = [statusMenu itemWithTitle:[[scripts objectAtIndex:row] getTitle]];
         
         NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [aShortcut valueForKey:SRShortcutKeyCode], [aShortcut valueForKey:SRShortcutCharacters]];
@@ -76,7 +75,7 @@ static NSString *savePathKey = @"savePath";
         PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
         [hotKeyCenter unregisterHotKey:oldHotKey];
         
-        PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:menuIem.representedObject
+        PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:identifier
                                                     keyCombo:aShortcut
                                                       target:runner
                                                       action:menuIem.action];
@@ -88,7 +87,7 @@ static NSString *savePathKey = @"savePath";
         [defaults setObject:scriptsPaths forKey:scriptsPathKey];
         [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
         
-        [newHotKey setRepresentedObject:menuIem];
+        [newHotKey setRepresentedObject:menuIem ];
         [hotKeyCenter registerHotKey:newHotKey];
     }
     

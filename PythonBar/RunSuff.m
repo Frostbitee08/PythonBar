@@ -14,6 +14,7 @@
 static NSString *savePathKey = @"savePath";
 static NSString *scriptsPathKey = @"scripts";
 
+#pragma mark - Initial setup
 - (id)init {
     if (self) {
         defaults = [NSUserDefaults standardUserDefaults];
@@ -22,6 +23,7 @@ static NSString *scriptsPathKey = @"scripts";
     return self;
 }
 
+#pragma mark - actions
 -(void)replaceScript:(id)sender {
     [NSApp endSheet:[findAlert window]];
     
@@ -34,10 +36,11 @@ static NSString *scriptsPathKey = @"scripts";
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSFileHandlingPanelOKButton) {
             NSURL* theDoc = [[panel URLs] objectAtIndex:0];
-            if (![[defaults objectForKey:scriptsPathKey] containsObject:[theDoc absoluteString]]) {
+            scriptPaths = [defaults objectForKey:scriptsPathKey];
+            if (![[scriptPaths allKeys] containsObject:[theDoc absoluteString]]) {
                 NSString *temp = [[theDoc absoluteString] lastPathComponent];
                 NSMutableString *filename = [NSMutableString stringWithString:temp];
-                scriptPaths = [defaults objectForKey:scriptsPathKey];
+                
                 if([filename length] > 3) {
                     [filename deleteCharactersInRange:NSMakeRange(0, ([filename length]-3))];
                 }
@@ -48,7 +51,6 @@ static NSString *scriptsPathKey = @"scripts";
                     
                     //Replace in scripts and scriptPaths
                     NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    //[scriptPaths replaceObjectAtIndex:_tempIndex withObject:jap];
                     id tempKey = [[scriptPaths allKeys] objectAtIndex:_tempIndex];
                     [scriptPaths setObject:[scriptPaths objectForKey:tempKey] forKey:jap];
                     [scriptPaths removeObjectForKey:tempKey];
@@ -127,88 +129,98 @@ static NSString *scriptsPathKey = @"scripts";
 -(void)findScript:(id)sender {
     //Get Index
     _tempIndex = [statusMenu indexOfItem:sender];
-    if ([[scripts objectAtIndex:_tempIndex] isMemberOfClass:[Script class]]) {
+    
+    //Build Alert
+    if ([[sender representedObject] isMemberOfClass:[Script class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this script. Would you like to relocate it?"];
     }
-    else if ([[scripts objectAtIndex:_tempIndex] isMemberOfClass:[DirectoryScript class]]) {
+    else if ([[sender representedObject] isMemberOfClass:[DirectoryScript class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Directory Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this Directory. Would you like to relocate it?"];
     }
     
+    //Set alert actions
     NSArray *buttonArray = [findAlert buttons];
-    
     NSButton *myBtn = [buttonArray objectAtIndex:0];
     [myBtn setAction:@selector(replaceScript:)];
     [myBtn setTarget:self];
+    
+    //Run Alert
     [findAlert runModal];
 }
 
+-(void)runAllInDirectory:(id)sender {
+    //Get the subMenuItems
+    DirectoryScript *runAll = (DirectoryScript *)[sender representedObject];
+    NSMenuItem *directoryMenuItem = [statusMenu itemWithTitle:[runAll getTitle]];
+    NSMenu *directoryMenu = directoryMenuItem.submenu;
+    NSArray *subitems = [directoryMenu itemArray];
+    
+    //Loop through scripts and run them
+    for (unsigned int i = 0; i<[subitems count]-2; i++) {
+        [self runScript:[subitems objectAtIndex:i]];
+    }
+}
+
 -(void)runScript:(id)sender {
-    //Check to see if incoming value is PTHotkey, if so transform to NSMenuItem via represented Object
+    //Make sure we have the right type
     if (![sender isMemberOfClass:[NSMenuItem class]]) {
         sender = [sender representedObject];
     }
     
-    //Make sure Script exist
-    NSString *tempString = [@"file://localhost" stringByAppendingString:[sender representedObject]];
-    tempString = [tempString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSUInteger *index = [statusMenu indexOfItem:sender];
+    //Make sure we have Script
+    NSMenuItem *tempItem = (NSMenuItem *)sender;
+    Script *runningScript = (Script *)[tempItem representedObject];
     
-    //I have got to get a better way of doing this
-    int intIndex = index;
-    if (intIndex == -1) {
-        if (![[NSFileManager defaultManager] fileExistsAtPath:tempString]){
-            //Get Corresponding Folder
-            NSURL *folderURL = [NSURL URLWithString:tempString];
-            NSRange fragmentRange = [tempString rangeOfString:[folderURL lastPathComponent] options:NSBackwardsSearch];
-            NSString *folderString = [tempString substringToIndex:fragmentRange.location];
-            NSUInteger *folderIndex = [[defaults objectForKey:scriptsPathKey] indexOfObject:folderString];
+    //Make sure Script exist
+    if (![runningScript doesExist]) {
+        //If Part of Directory
+        if ([runningScript isSubscript]) {
+            //Run the Alert
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory", [runningScript getTitle]]];
+            [alert runModal];
             
-            if ([[scripts objectAtIndex:folderIndex] doesExist]) {
-                NSMutableArray *subscripts = [[scripts objectAtIndex:folderIndex] getSubScripts];
-                NSMenu *submenu = [[NSMenu alloc] init];
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory",[sender title]]];
-                [alert runModal];
-                int z = 0;
-                while(z<[subscripts count]) {
-                    if(![[subscripts objectAtIndex:z] doesExist]) {
-                        [subscripts removeObjectAtIndex:z];
-                        z--;
-                    }
-                    else {
-                        //Get Script
-                        Script *tempScript = [subscripts objectAtIndex:z];
-                        
-                        //Create submenu
-                        NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
-                        [tempMenuItem setTarget:self];
-                        [tempMenuItem setRepresentedObject:[tempScript getPath]];
-                        [tempMenuItem setImage:pythonDocument];
-                        [submenu addItem:tempMenuItem];
-                    }
+            //Find a way to check the folder
+            /*int z = 0;
+            
+            //Loop through and check for missing scripts
+            while(z<[subscripts count]) {
+                if(![[subscripts objectAtIndex:z] doesExist]) {
+                    [subscripts removeObjectAtIndex:z];
+                    z--;
+                }
+                else {
+                    //Get Script
+                    Script *tempScript = [subscripts objectAtIndex:z];
+                    
+                    //Create submenu
+                    NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
+                    [tempMenuItem setTarget:self];
+                    [tempMenuItem setRepresentedObject:tempScript];
+                    [tempMenuItem setImage:pythonDocument];
+                    [submenu addItem:tempMenuItem];
                     z++;
                 }
-                NSMenuItem *tempMenuItem = [statusMenu itemAtIndex:folderIndex];
-                [tempMenuItem setSubmenu:submenu];
-                
-                return;
             }
-            else {
-                return [self findScript:[statusMenu itemAtIndex:folderIndex]];
-            }
+            NSMenuItem *tempMenuItem = [statusMenu itemAtIndex:folderIndex];
+            [tempMenuItem setSubmenu:submenu];*/
+            
+            return;
         }
-    }
-    else if (![[scripts objectAtIndex:index] doesExist]) {
-        NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:index] getTitle]];
-        [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:index] getTitle].length)];
-        [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:index] getTitle].length)];
-        [sender setAction:@selector(findScript:)];
-        [sender setAttributedTitle:attributedTitle];
-        
-        return [self findScript:sender];
+        else {
+            //Change text color to red
+            NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:index] getTitle]];
+            [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:index] getTitle].length)];
+            [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:index] getTitle].length)];
+            [sender setAction:@selector(findScript:)];
+            [sender setAttributedTitle:attributedTitle];
+            
+            //Find document
+            return [self findScript:sender];
+        }
     }
     
     //Create Task
-    NSString *scriptPath = [sender representedObject];
+    NSString *scriptPath = [runningScript getPath];
     NSString *print = @" > ~/Desktop/MyLog.txt";
     NSTask* python = [[NSTask alloc] init];
     
@@ -238,11 +250,11 @@ static NSString *scriptsPathKey = @"scripts";
         //Create Notification and add properties
         NSUserNotification *notification = [[NSUserNotification alloc] init];
         notification.title = title;
-        if ([outputString length] == 0) {
-            notification.informativeText = @"No output";
+        if ([outputString length] > 0) {
+            notification.informativeText = outputString;
         }
         else {
-            notification.informativeText = outputString;
+            notification.informativeText = nil;
         }
         notification.soundName = NSUserNotificationDefaultSoundName;
         
@@ -257,7 +269,8 @@ static NSString *scriptsPathKey = @"scripts";
     }
 }
 
-//Delegate for NofiicationCenter
+#pragma mark - Delegates
+
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
     return YES;
 }

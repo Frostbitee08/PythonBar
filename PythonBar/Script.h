@@ -13,12 +13,14 @@
     NSString *title;
     NSDictionary *shortCut;
     NSNumber *timesRan;
+    bool isSubscript;
 }
 
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDictionary *shortCut;
 @property (nonatomic, retain) NSNumber * timesRan;
+@property (nonatomic, readwrite) bool isSubscript;
 
 //Modifiers
 - (void)setPathURL:(NSString *)givenPathURL;

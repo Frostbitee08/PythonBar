@@ -12,11 +12,13 @@
 @interface DirectoryScript : NSObject {
     NSString *path;
     NSString *title;
+    NSDictionary *shortCut;
     NSMutableArray *subScripts;
 }
 
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSDictionary *shortCut;
 @property (nonatomic, retain) NSMutableArray *subScripts;
 
 //Modifiers
