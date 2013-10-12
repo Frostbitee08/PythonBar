@@ -20,18 +20,23 @@
 		841D849B173614FA00C9DE1C /* PythonBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D849A173614FA00C9DE1C /* PythonBarTests.m */; };
 		841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A71736175A00C9DE1C /* pythonIcon.png */; };
 		841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A81736175A00C9DE1C /* pythonIconBW.png */; };
-		843BD26317D0453B00A33EF0 /* Script.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* Script.m */; };
+		843BD26317D0453B00A33EF0 /* HandelScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* HandelScript.m */; };
 		843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */; };
 		843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD27017D426B600A33EF0 /* ScriptsTableController.m */; };
+		84520FF917F0BD7A00564562 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84520FF817F0BD7A00564562 /* Python.framework */; };
+		84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84520FFC17F1943400564562 /* Scripts.xcdatamodeld */; };
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
+		8491998917EAA96500DA071B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8474173614F900C9DE1C /* CoreData.framework */; };
 		84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC8D9717579DCB009C5733 /* PopUpView.xib */; };
 		84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC8D9A17579E2E009C5733 /* PopUpViewController.m */; };
+		84C83E671808A8A500E371B8 /* Script.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C83E661808A8A500E371B8 /* Script.m */; };
 		84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */; };
 		84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867C817E0EE64003DBFD1 /* ShortcutRecorder.framework */; };
 		84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EABEB517D7C6940083BAE3 /* Carbon.framework */; };
+		84EFBD831806210E007B3F58 /* DirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFBD821806210E007B3F58 /* DirectoryScript.m */; };
 		84F109651736521100950211 /* python_document.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F109641736521100950211 /* python_document.png */; };
-		84F8B60417D3DE89003C3D7B /* DirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B60317D3DE89003C3D7B /* DirectoryScript.m */; };
+		84F8B60417D3DE89003C3D7B /* HandelDirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,21 +87,27 @@
 		841D849A173614FA00C9DE1C /* PythonBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PythonBarTests.m; sourceTree = "<group>"; };
 		841D84A71736175A00C9DE1C /* pythonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIcon.png; sourceTree = "<group>"; };
 		841D84A81736175A00C9DE1C /* pythonIconBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIconBW.png; sourceTree = "<group>"; };
-		843BD26117D0453B00A33EF0 /* Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Script.h; sourceTree = "<group>"; };
-		843BD26217D0453B00A33EF0 /* Script.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Script.m; sourceTree = "<group>"; };
+		843BD26117D0453B00A33EF0 /* HandelScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandelScript.h; sourceTree = "<group>"; };
+		843BD26217D0453B00A33EF0 /* HandelScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandelScript.m; sourceTree = "<group>"; };
 		843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		843BD26F17D426B600A33EF0 /* ScriptsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptsTableController.h; sourceTree = "<group>"; };
 		843BD27017D426B600A33EF0 /* ScriptsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptsTableController.m; sourceTree = "<group>"; };
+		84520FF817F0BD7A00564562 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
+		84520FFD17F1943400564562 /* Scripts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scripts.xcdatamodel; sourceTree = "<group>"; };
 		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
 		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
 		84BC8D9717579DCB009C5733 /* PopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		84BC8D9917579E2E009C5733 /* PopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpViewController.h; sourceTree = "<group>"; };
 		84BC8D9A17579E2E009C5733 /* PopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpViewController.m; sourceTree = "<group>"; };
+		84C83E651808A8A500E371B8 /* Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Script.h; sourceTree = "<group>"; };
+		84C83E661808A8A500E371B8 /* Script.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Script.m; sourceTree = "<group>"; };
 		84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShortcutRecorder.xcodeproj; path = "ShortcutRecorder-develop/ShortcutRecorder.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		84EABEB517D7C6940083BAE3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		84EFBD811806210E007B3F58 /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
+		84EFBD821806210E007B3F58 /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
 		84F109641736521100950211 /* python_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = python_document.png; sourceTree = "<group>"; };
-		84F8B60217D3DE89003C3D7B /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
-		84F8B60317D3DE89003C3D7B /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
+		84F8B60217D3DE89003C3D7B /* HandelDirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandelDirectoryScript.h; sourceTree = "<group>"; };
+		84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandelDirectoryScript.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84520FF917F0BD7A00564562 /* Python.framework in Frameworks */,
+				8491998917EAA96500DA071B /* CoreData.framework in Frameworks */,
 				84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */,
 				84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */,
 				84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */,
@@ -146,6 +159,7 @@
 		841D846F173614F900C9DE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84520FF817F0BD7A00564562 /* Python.framework */,
 				84EABEB517D7C6940083BAE3 /* Carbon.framework */,
 				843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */,
 				841D8470173614F900C9DE1C /* Cocoa.framework */,
@@ -216,14 +230,10 @@
 		84BC8D9C17579E36009C5733 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				84EFBD7D18062005007B3F58 /* Core Data */,
+				84EFBD7C18061FEE007B3F58 /* Handlers */,
 				8479056B17CEE28E00F48DD1 /* PBStatus.h */,
 				8479056C17CEE28E00F48DD1 /* PBStatus.m */,
-				84F8B60217D3DE89003C3D7B /* DirectoryScript.h */,
-				84F8B60317D3DE89003C3D7B /* DirectoryScript.m */,
-				843BD26117D0453B00A33EF0 /* Script.h */,
-				843BD26217D0453B00A33EF0 /* Script.m */,
-				841BDDB017E0D92E00D19D99 /* RunSuff.h */,
-				841BDDB117E0D92E00D19D99 /* RunSuff.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -247,6 +257,31 @@
 				84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		84EFBD7C18061FEE007B3F58 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				84F8B60217D3DE89003C3D7B /* HandelDirectoryScript.h */,
+				84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */,
+				843BD26117D0453B00A33EF0 /* HandelScript.h */,
+				843BD26217D0453B00A33EF0 /* HandelScript.m */,
+				841BDDB017E0D92E00D19D99 /* RunSuff.h */,
+				841BDDB117E0D92E00D19D99 /* RunSuff.m */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
+		84EFBD7D18062005007B3F58 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				84520FFC17F1943400564562 /* Scripts.xcdatamodeld */,
+				84C83E651808A8A500E371B8 /* Script.h */,
+				84C83E661808A8A500E371B8 /* Script.m */,
+				84EFBD811806210E007B3F58 /* DirectoryScript.h */,
+				84EFBD821806210E007B3F58 /* DirectoryScript.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +329,7 @@
 		841D8463173614F900C9DE1C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Rocco Del Priore";
 			};
 			buildConfigurationList = 841D8466173614F900C9DE1C /* Build configuration list for PBXProject "PythonBar" */;
@@ -411,9 +446,12 @@
 				841D847D173614F900C9DE1C /* main.m in Sources */,
 				841D8484173614F900C9DE1C /* AppDelegate.m in Sources */,
 				84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */,
-				843BD26317D0453B00A33EF0 /* Script.m in Sources */,
-				84F8B60417D3DE89003C3D7B /* DirectoryScript.m in Sources */,
+				843BD26317D0453B00A33EF0 /* HandelScript.m in Sources */,
+				84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */,
+				84EFBD831806210E007B3F58 /* DirectoryScript.m in Sources */,
+				84F8B60417D3DE89003C3D7B /* HandelDirectoryScript.m in Sources */,
 				843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */,
+				84C83E671808A8A500E371B8 /* Script.m in Sources */,
 				841BDDB217E0D92E00D19D99 /* RunSuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +515,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -507,7 +544,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -621,6 +657,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84520FFC17F1943400564562 /* Scripts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84520FFD17F1943400564562 /* Scripts.xcdatamodel */,
+			);
+			currentVersion = 84520FFD17F1943400564562 /* Scripts.xcdatamodel */;
+			path = Scripts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 841D8463173614F900C9DE1C /* Project object */;
 }

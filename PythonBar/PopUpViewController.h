@@ -13,7 +13,7 @@
     NSUserDefaults* defaults;
 }
 
-- (IBAction)copy;
-- (IBAction)save;
+//- (IBAction)copy;
+//- (IBAction)save;
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Script.h"
-#import "DirectoryScript.h"
+#import "HandelScript.h"
+#import "HandelDirectoryScript.h"
 #import "RunSuff.h"
 
 //ShortCut
@@ -19,7 +19,6 @@
 @interface ScriptsTableController : NSObject <NSTableViewDataSource, NSTableViewDelegate, SRRecorderControlDelegate> {
     NSTableView *ScriptTable;
     NSMutableArray *scripts;
-    NSMutableDictionary *scriptsPaths;
     NSMenu *statusMenu;
     NSUserDefaults *defaults;
     SRValidator *validator;

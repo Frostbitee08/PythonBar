@@ -2,32 +2,19 @@
 //  DirectoryScript.h
 //  PythonBar
 //
-//  Created by Rocco Del Priore on 9/1/13.
+//  Created by Rocco Del Priore on 10/9/13.
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Script.h"
+#import <CoreData/CoreData.h>
 
-@interface DirectoryScript : NSObject {
-    NSString *path;
-    NSString *title;
-    NSDictionary *shortCut;
-    NSMutableArray *subScripts;
-}
+
+@interface DirectoryScript : NSManagedObject
 
 @property (nonatomic, retain) NSString * path;
+@property (nonatomic, retain) NSDictionary *shortcutdata;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSDictionary *shortCut;
-@property (nonatomic, retain) NSMutableArray *subScripts;
-
-//Modifiers
-- (void)setPathURL:(NSString *)givenPathURL;
-
-//Accessors
-- (NSString *)getPath;
-- (NSString *)getTitle;
-- (NSMutableArray *)getSubScripts;
-- (bool)doesExist;
+@property (nonatomic, retain) NSNumber * timesRan;
 
 @end

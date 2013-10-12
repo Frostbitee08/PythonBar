@@ -1,0 +1,50 @@
+//
+//  Script.h
+//  PythonBar
+//
+//  Created by Rocco Del Priore on 8/29/13.
+//  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Script.h"
+
+@interface HandelScript : NSObject {
+    //Stored
+    NSString *path;
+    NSString *title;
+    NSNumber *timesRan;
+    bool isSubscript;
+    Script *managedScript;
+    
+    //Generated
+    NSDictionary *shortCut;
+    NSMutableArray *methods;
+    
+    //Core Data
+    NSManagedObjectContext *cxt;
+}
+
+@property (nonatomic, retain) NSString * path;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSDictionary *shortCut;
+@property (nonatomic, retain) NSMutableArray *methods;
+@property (nonatomic, retain) NSNumber * timesRan;
+@property (nonatomic, readwrite) bool isSubscript;
+
+//Initialzers
+- (void)setPathURL:(NSString *)givenPathURL;
+- (void)setManagedScript:(Script *)givenManagedScript;
+
+//Modifiers
+- (void)changeShortcut:(NSDictionary*)aShortcut;
+- (void)addRun;
+
+//Accessors
+- (NSString *)getPath;
+- (NSString *)getTitle;
+- (NSDictionary *)getShortCut;
+- (int)getTimesRan;
+- (bool)doesExist;
+
+@end

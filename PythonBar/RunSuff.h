@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Script.h"
-#import "DirectoryScript.h"
+#import "HandelScript.h"
+#import "HandelDirectoryScript.h"
 
 @interface RunSuff : NSObject <NSUserNotificationCenterDelegate> {
     //IBObjects
@@ -24,7 +24,6 @@
     NSImage *pythonDocument;
     
     //Temporary Data stored in Defaults
-    NSMutableDictionary *scriptPaths;
     NSMutableDictionary *preferences;
 }
 

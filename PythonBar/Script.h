@@ -2,35 +2,20 @@
 //  Script.h
 //  PythonBar
 //
-//  Created by Rocco Del Priore on 8/29/13.
+//  Created by Rocco Del Priore on 10/11/13.
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Script : NSObject {
-    NSString *path;
-    NSString *title;
-    NSDictionary *shortCut;
-    NSNumber *timesRan;
-    bool isSubscript;
-}
 
+@interface Script : NSManagedObject
+
+@property (nonatomic, retain) NSNumber * isSubscript;
 @property (nonatomic, retain) NSString * path;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSDictionary *shortCut;
+@property (nonatomic, retain) NSDictionary * shortcutdata;
 @property (nonatomic, retain) NSNumber * timesRan;
-@property (nonatomic, readwrite) bool isSubscript;
-
-//Modifiers
-- (void)setPathURL:(NSString *)givenPathURL;
-- (void)setShortCut:(NSDictionary *)shortCut;
-
-//Accessors
-- (NSString *)getPath;
-- (NSString *)getTitle;
-- (NSDictionary *)getShortCut;
-- (int)getTimesRan;
-- (bool)doesExist;
+@property (nonatomic, retain) NSString * title;
 
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F69D0F0A-D9F7-4CB5-9857-EB69AF63A2A1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PythonBar</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2EE12DE3-E550-4744-BEB5-7045735CC274</key>
+		<string>https://github.com/Frostbitee08/PythonBar.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PythonBar.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2EE12DE3-E550-4744-BEB5-7045735CC274</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Frostbitee08/PythonBar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2EE12DE3-E550-4744-BEB5-7045735CC274</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2EE12DE3-E550-4744-BEB5-7045735CC274</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PythonBar</string>
+		</dict>
+	</array>
+</dict>
+</plist>

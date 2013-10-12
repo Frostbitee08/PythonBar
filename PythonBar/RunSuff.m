@@ -7,6 +7,7 @@
 //
 
 #import "RunSuff.h"
+#import <Python/Python.h>
 
 @implementation RunSuff
 @synthesize scripts,notificationCheck,statusMenu;
@@ -25,7 +26,7 @@ static NSString *scriptsPathKey = @"scripts";
 
 #pragma mark - actions
 -(void)replaceScript:(id)sender {
-    [NSApp endSheet:[findAlert window]];
+    /*[NSApp endSheet:[findAlert window]];
     
     //Open File browser
     NSOpenPanel* panel = [NSOpenPanel openPanel];
@@ -46,7 +47,7 @@ static NSString *scriptsPathKey = @"scripts";
                 }
                 if ([filename isEqual: @".py"]) {
                     //Set Up Script
-                    Script *tempScript = [[Script alloc] init];
+                    HandelScript *tempScript = [[HandelScript alloc] init];
                     [tempScript setPathURL:[theDoc absoluteString]];
                     
                     //Replace in scripts and scriptPaths
@@ -72,7 +73,7 @@ static NSString *scriptsPathKey = @"scripts";
                 }
                 else {
                     //Set Up DirectoryScript
-                    DirectoryScript *dirScript = [[DirectoryScript alloc] init];
+                    HandelDirectoryScript *dirScript = [[HandelDirectoryScript alloc] init];
                     [dirScript setPathURL:[theDoc absoluteString]];
                     
                     //Create Sub-Menu
@@ -84,7 +85,7 @@ static NSString *scriptsPathKey = @"scripts";
                     NSArray *subscript = [dirScript getSubScripts];
                     for (unsigned int f = 0; f < [subscript count]; f++) {
                         //Get Script
-                        Script *tempScript = [subscript objectAtIndex:f];
+                        HandelScript *tempScript = [subscript objectAtIndex:f];
                         
                         //Create submenu
                         NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
@@ -123,7 +124,18 @@ static NSString *scriptsPathKey = @"scripts";
                 [alert runModal];
             }
         }
-    }];
+    }];*/
+}
+
+-(void)testPython {
+    /*Py_Initialize();
+    
+	PyObject *sysModule = PyImport_ImportModule("sys");
+	PyObject *sysModuleDict = PyModule_GetDict(sysModule);
+	PyObject *pathObject = PyDict_GetItemString(sysModuleDict, "path");
+    
+	NSString *bundlePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Contents/Resources"];*/
+
 }
 
 -(void)findScript:(id)sender {
@@ -131,10 +143,10 @@ static NSString *scriptsPathKey = @"scripts";
     _tempIndex = [statusMenu indexOfItem:sender];
     
     //Build Alert
-    if ([[sender representedObject] isMemberOfClass:[Script class]]) {
+    if ([[sender representedObject] isMemberOfClass:[HandelScript class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this script. Would you like to relocate it?"];
     }
-    else if ([[sender representedObject] isMemberOfClass:[DirectoryScript class]]) {
+    else if ([[sender representedObject] isMemberOfClass:[HandelDirectoryScript class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Directory Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this Directory. Would you like to relocate it?"];
     }
     
@@ -150,7 +162,7 @@ static NSString *scriptsPathKey = @"scripts";
 
 -(void)runAllInDirectory:(id)sender {
     //Get the subMenuItems
-    DirectoryScript *runAll = (DirectoryScript *)[sender representedObject];
+    HandelDirectoryScript *runAll = (HandelDirectoryScript *)[sender representedObject];
     NSMenuItem *directoryMenuItem = [statusMenu itemWithTitle:[runAll getTitle]];
     NSMenu *directoryMenu = directoryMenuItem.submenu;
     NSArray *subitems = [directoryMenu itemArray];
@@ -169,7 +181,7 @@ static NSString *scriptsPathKey = @"scripts";
     
     //Make sure we have Script
     NSMenuItem *tempItem = (NSMenuItem *)sender;
-    Script *runningScript = (Script *)[tempItem representedObject];
+    HandelScript *runningScript = (HandelScript *)[tempItem representedObject];
     
     //Make sure Script exist
     if (![runningScript doesExist]) {
@@ -232,6 +244,7 @@ static NSString *scriptsPathKey = @"scripts";
     [python setStandardInput:[NSPipe pipe]];
     [python setStandardOutput:scriptOutput];
     outFile = [scriptOutput fileHandleForReading];
+    
     //Run Script
     [python launch];
     [python waitUntilExit];
@@ -267,6 +280,9 @@ static NSString *scriptsPathKey = @"scripts";
         [center setDelegate:self];
         [center deliverNotification:notification];
     }
+    
+    //Increment
+    [runningScript addRun];
 }
 
 #pragma mark - Delegates

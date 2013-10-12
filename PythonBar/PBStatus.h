@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Script.h"
-#import "DirectoryScript.h"
+#import "HandelScript.h"
+#import "HandelDirectoryScript.h"
 #import "ScriptsTableController.h"
 #import "RunSuff.h"
 
@@ -34,7 +34,6 @@
     NSImage *pythonDocument;
     
     //Temporary Data stored in Defaults
-    NSMutableDictionary *scriptPaths;
     NSMutableDictionary *preferences;
 }
 

@@ -156,7 +156,6 @@
 							<string key="NSFrame">{{18, 99}, {270, 18}}</string>
 							<reference key="NSSuperview" ref="701918717"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="679583235">
@@ -189,10 +188,10 @@
 											<reference key="NSNextResponder" ref="442837537"/>
 											<int key="NSvFlags">256</int>
 											<array class="NSMutableArray" key="NSSubviews"/>
-											<string key="NSFrameSize">{623, 190}</string>
+											<string key="NSFrameSize">{429, 190}</string>
 											<reference key="NSSuperview" ref="442837537"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="237518352"/>
+											<reference key="NSNextKeyView" ref="514882311"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -200,7 +199,7 @@
 											<object class="NSTableHeaderView" key="NSHeaderView" id="495278271">
 												<reference key="NSNextResponder" ref="514882311"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrameSize">{623, 17}</string>
+												<string key="NSFrameSize">{429, 17}</string>
 												<reference key="NSSuperview" ref="514882311"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="442837537"/>
@@ -299,7 +298,7 @@
 												</object>
 												<object class="NSTableColumn" id="632106031">
 													<string key="NSIdentifier">path</string>
-													<double key="NSWidth">293</double>
+													<double key="NSWidth">99</double>
 													<double key="NSMinWidth">10</double>
 													<double key="NSMaxWidth">3.4028234663852886e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -381,13 +380,12 @@
 								</object>
 								<object class="NSScroller" id="271848185">
 									<reference key="NSNextResponder" ref="547629955"/>
-									<int key="NSvFlags">256</int>
+									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{1, 191}, {429, 16}}</string>
 									<reference key="NSSuperview" ref="547629955"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="933368669"/>
 									<string key="NSReuseIdentifierKey">_NS:60</string>
-									<bool key="NSEnabled">YES</bool>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="547629955"/>
@@ -413,9 +411,9 @@
 							<string key="NSFrame">{{23, 154}, {431, 208}}</string>
 							<reference key="NSSuperview" ref="701918717"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="514882311"/>
+							<reference key="NSNextKeyView" ref="442837537"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<int key="NSsFlags">133810</int>
+							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="866261583"/>
 							<reference key="NSHScroller" ref="271848185"/>
 							<reference key="NSContentView" ref="442837537"/>
@@ -482,7 +480,6 @@
 							<string key="NSFrame">{{390, 28}, {69, 32}}</string>
 							<reference key="NSSuperview" ref="701918717"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="817432945">
@@ -571,14 +568,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">CheckBoxStatus:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="5018663"/>
-					</object>
-					<int key="connectionID">675</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">toggleLaunchAtLogin:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="596119904"/>
@@ -592,6 +581,22 @@
 						<reference key="destination" ref="596119904"/>
 					</object>
 					<int key="connectionID">814</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">CheckBoxStatus:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="5018663"/>
+					</object>
+					<int key="connectionID">1046</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleNotification:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="649949677"/>
+					</object>
+					<int key="connectionID">1047</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -693,7 +698,7 @@
 								<object class="NSTextField" id="101132758">
 									<reference key="NSNextResponder" ref="712173430"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrameSize">{293, 17}</string>
+									<string key="NSFrameSize">{99, 17}</string>
 									<reference key="NSSuperview" ref="712173430"/>
 									<reference key="NSNextKeyView" ref="866261583"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -710,7 +715,7 @@
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
 							</array>
-							<string key="NSFrame">{{328, 1}, {293, 17}}</string>
+							<string key="NSFrame">{{328, 1}, {99, 17}}</string>
 							<reference key="NSNextKeyView" ref="101132758"/>
 						</object>
 						<reference key="destination" ref="101132758"/>
@@ -1778,7 +1783,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1045</int>
+			<int key="maxID">1047</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1788,8 +1793,10 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="CheckBoxStatus:">id</string>
 						<string key="hidePopover:">id</string>
+						<string key="saveAction:">id</string>
 						<string key="showPopover:">id</string>
 						<string key="toggleLaunchAtLogin:">id</string>
+						<string key="toggleNotification:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="CheckBoxStatus:">
@@ -1800,12 +1807,20 @@
 							<string key="name">hidePopover:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="saveAction:">
+							<string key="name">saveAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showPopover:">
 							<string key="name">showPopover:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleLaunchAtLogin:">
 							<string key="name">toggleLaunchAtLogin:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleNotification:">
+							<string key="name">toggleNotification:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

@@ -20,15 +20,21 @@
     PBStatus *testThis;
     
     //Data
+    NSString* libraryPath;
     NSStatusItem * statusItem;
-    NSString *savePath;
+    NSURL *savePath;
     NSMutableDictionary *preferences;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 //Actions
 - (IBAction) CheckBoxStatus:(id) send;
+- (void)saveContext;
++ (AppDelegate *)sharedAppDelegate;
 
 //Test
 - (IBAction)showPopover:(id)sender;

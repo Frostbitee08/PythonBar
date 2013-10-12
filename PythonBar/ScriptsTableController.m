@@ -11,20 +11,18 @@
 @implementation ScriptsTableController
 @synthesize scripts, statusMenu, runner;
 
-static NSString *scriptsPathKey = @"scripts";
 static NSString *savePathKey = @"savePath";
 
 -(id)init {
     if (self) {
         defaults = [NSUserDefaults standardUserDefaults];
-        scriptsPaths = [defaults objectForKey:scriptsPathKey];
     }
     return self;
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
     ScriptTable = aTableView;
-    return [[scriptsPaths allKeys] count];
+    return [scripts count];
 }
 
 // This method is optional if you use bindings to provide the data
@@ -37,9 +35,10 @@ static NSString *savePathKey = @"savePath";
     else if ([[tableColumn identifier] isEqualToString:@"hotkey"]) {
         SRRecorderControl *shortCutRecorder = (SRRecorderControl *)[cellView.subviews objectAtIndex:0];
         [shortCutRecorder setDelegate:self];
-        if ([[[[[scripts objectAtIndex:row] shortCut] class] description] isEqualToString:@"__NSCFDictionary"]) {
+        if ([[[[scripts objectAtIndex:row] shortCut] allKeys] count] > 0) {
             shortCutRecorder.objectValue = [[scripts objectAtIndex:row] shortCut];
         }
+        
         return cellView;
     }
     else if ([[tableColumn identifier] isEqualToString:@"path"]) {
@@ -66,11 +65,13 @@ static NSString *savePathKey = @"savePath";
         NSLog(@"TAKEN");
     }
     else {
+        //Define the Variables
         NSInteger row = [ScriptTable rowForView:[aRecorder superview]];
-        NSMenuItem *menuIem = [statusMenu itemWithTitle:[[scripts objectAtIndex:row] getTitle]];
-        
+        HandelScript *tempScript = [scripts objectAtIndex:row];
+        NSMenuItem *menuIem = [statusMenu itemWithTitle:[tempScript getTitle]];
         NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [aShortcut valueForKey:SRShortcutKeyCode], [aShortcut valueForKey:SRShortcutCharacters]];
         
+        //Set up hotkey
         PTHotKeyCenter *hotKeyCenter = [PTHotKeyCenter sharedCenter];
         PTHotKey *oldHotKey = [hotKeyCenter hotKeyWithIdentifier:identifier];
         [hotKeyCenter unregisterHotKey:oldHotKey];
@@ -79,16 +80,11 @@ static NSString *savePathKey = @"savePath";
                                                     keyCombo:aShortcut
                                                       target:runner
                                                       action:menuIem.action];
-        
-        //NSString *test = (NSString *)[aShortcut valueForKey:SRShortcutKeyCode];
-        scriptsPaths = (NSMutableDictionary *)[defaults objectForKey:scriptsPathKey];
-        id tempKey = [[scriptsPaths allKeys] objectAtIndex:row];
-        [scriptsPaths setObject:aShortcut forKey:tempKey];
-        [defaults setObject:scriptsPaths forKey:scriptsPathKey];
-        [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
-        
         [newHotKey setRepresentedObject:menuIem ];
         [hotKeyCenter registerHotKey:newHotKey];
+        
+        //Save information
+        [tempScript changeShortcut:aShortcut];
     }
     
     return !isTaken;
