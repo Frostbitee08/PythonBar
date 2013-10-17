@@ -20,7 +20,7 @@
 		841D849B173614FA00C9DE1C /* PythonBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D849A173614FA00C9DE1C /* PythonBarTests.m */; };
 		841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A71736175A00C9DE1C /* pythonIcon.png */; };
 		841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 841D84A81736175A00C9DE1C /* pythonIconBW.png */; };
-		843BD26317D0453B00A33EF0 /* HandelScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* HandelScript.m */; };
+		843BD26317D0453B00A33EF0 /* HandleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* HandleScript.m */; };
 		843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */; };
 		843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD27017D426B600A33EF0 /* ScriptsTableController.m */; };
 		84520FF917F0BD7A00564562 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84520FF817F0BD7A00564562 /* Python.framework */; };
@@ -28,17 +28,16 @@
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8491998917EAA96500DA071B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8474173614F900C9DE1C /* CoreData.framework */; };
-		84A7D6C1180BA92900D1BFDB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A7D6C0180BA92900D1BFDB /* icon.png */; };
-		84A7D6C3180BA94700D1BFDB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A7D6C2180BA94700D1BFDB /* icon.png */; };
 		84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC8D9717579DCB009C5733 /* PopUpView.xib */; };
 		84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC8D9A17579E2E009C5733 /* PopUpViewController.m */; };
+		84C305DF181048AD00FF77C4 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 84C305DE181048AD00FF77C4 /* icon.icns */; };
 		84C83E671808A8A500E371B8 /* Script.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C83E661808A8A500E371B8 /* Script.m */; };
 		84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867CA17E0EE64003DBFD1 /* PTHotKey.framework */; };
 		84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E867C817E0EE64003DBFD1 /* ShortcutRecorder.framework */; };
 		84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EABEB517D7C6940083BAE3 /* Carbon.framework */; };
 		84EFBD831806210E007B3F58 /* DirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFBD821806210E007B3F58 /* DirectoryScript.m */; };
 		84F109651736521100950211 /* python_document.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F109641736521100950211 /* python_document.png */; };
-		84F8B60417D3DE89003C3D7B /* HandelDirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */; };
+		84F8B60417D3DE89003C3D7B /* HandleDirectoryScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B60317D3DE89003C3D7B /* HandleDirectoryScript.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,8 +88,8 @@
 		841D849A173614FA00C9DE1C /* PythonBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PythonBarTests.m; sourceTree = "<group>"; };
 		841D84A71736175A00C9DE1C /* pythonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIcon.png; sourceTree = "<group>"; };
 		841D84A81736175A00C9DE1C /* pythonIconBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pythonIconBW.png; sourceTree = "<group>"; };
-		843BD26117D0453B00A33EF0 /* HandelScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandelScript.h; sourceTree = "<group>"; };
-		843BD26217D0453B00A33EF0 /* HandelScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandelScript.m; sourceTree = "<group>"; };
+		843BD26117D0453B00A33EF0 /* HandleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleScript.h; sourceTree = "<group>"; };
+		843BD26217D0453B00A33EF0 /* HandleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleScript.m; sourceTree = "<group>"; };
 		843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		843BD26F17D426B600A33EF0 /* ScriptsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptsTableController.h; sourceTree = "<group>"; };
 		843BD27017D426B600A33EF0 /* ScriptsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptsTableController.m; sourceTree = "<group>"; };
@@ -98,11 +97,10 @@
 		84520FFD17F1943400564562 /* Scripts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scripts.xcdatamodel; sourceTree = "<group>"; };
 		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
 		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
-		84A7D6C0180BA92900D1BFDB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		84A7D6C2180BA94700D1BFDB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		84BC8D9717579DCB009C5733 /* PopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		84BC8D9917579E2E009C5733 /* PopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpViewController.h; sourceTree = "<group>"; };
 		84BC8D9A17579E2E009C5733 /* PopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpViewController.m; sourceTree = "<group>"; };
+		84C305DE181048AD00FF77C4 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		84C83E651808A8A500E371B8 /* Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Script.h; sourceTree = "<group>"; };
 		84C83E661808A8A500E371B8 /* Script.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Script.m; sourceTree = "<group>"; };
 		84E867C217E0EE63003DBFD1 /* ShortcutRecorder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShortcutRecorder.xcodeproj; path = "ShortcutRecorder-develop/ShortcutRecorder.xcodeproj"; sourceTree = SOURCE_ROOT; };
@@ -110,8 +108,8 @@
 		84EFBD811806210E007B3F58 /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
 		84EFBD821806210E007B3F58 /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
 		84F109641736521100950211 /* python_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = python_document.png; sourceTree = "<group>"; };
-		84F8B60217D3DE89003C3D7B /* HandelDirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandelDirectoryScript.h; sourceTree = "<group>"; };
-		84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandelDirectoryScript.m; sourceTree = "<group>"; };
+		84F8B60217D3DE89003C3D7B /* HandleDirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleDirectoryScript.h; sourceTree = "<group>"; };
+		84F8B60317D3DE89003C3D7B /* HandleDirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleDirectoryScript.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +142,6 @@
 		841D8461173614F900C9DE1C = {
 			isa = PBXGroup;
 			children = (
-				84A7D6C0180BA92900D1BFDB /* icon.png */,
 				841D8476173614F900C9DE1C /* PythonBar */,
 				841D8493173614FA00C9DE1C /* PythonBarTests */,
 				841D846F173614F900C9DE1C /* Frameworks */,
@@ -201,10 +198,7 @@
 		841D8477173614F900C9DE1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84A7D6C2180BA94700D1BFDB /* icon.png */,
-				84F109641736521100950211 /* python_document.png */,
-				841D84A71736175A00C9DE1C /* pythonIcon.png */,
-				841D84A81736175A00C9DE1C /* pythonIconBW.png */,
+				84C305D51810459F00FF77C4 /* Images */,
 				841D8478173614F900C9DE1C /* PythonBar-Info.plist */,
 				841D8479173614F900C9DE1C /* InfoPlist.strings */,
 				841D847C173614F900C9DE1C /* main.m */,
@@ -256,6 +250,17 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
+		84C305D51810459F00FF77C4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				84C305DE181048AD00FF77C4 /* icon.icns */,
+				84F109641736521100950211 /* python_document.png */,
+				841D84A71736175A00C9DE1C /* pythonIcon.png */,
+				841D84A81736175A00C9DE1C /* pythonIconBW.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		84E867C317E0EE63003DBFD1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,10 +273,10 @@
 		84EFBD7C18061FEE007B3F58 /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
-				84F8B60217D3DE89003C3D7B /* HandelDirectoryScript.h */,
-				84F8B60317D3DE89003C3D7B /* HandelDirectoryScript.m */,
-				843BD26117D0453B00A33EF0 /* HandelScript.h */,
-				843BD26217D0453B00A33EF0 /* HandelScript.m */,
+				84F8B60217D3DE89003C3D7B /* HandleDirectoryScript.h */,
+				84F8B60317D3DE89003C3D7B /* HandleDirectoryScript.m */,
+				843BD26117D0453B00A33EF0 /* HandleScript.h */,
+				843BD26217D0453B00A33EF0 /* HandleScript.m */,
 				841BDDB017E0D92E00D19D99 /* RunSuff.h */,
 				841BDDB117E0D92E00D19D99 /* RunSuff.m */,
 			);
@@ -407,12 +412,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C305DF181048AD00FF77C4 /* icon.icns in Resources */,
 				841D847B173614F900C9DE1C /* InfoPlist.strings in Resources */,
 				841D8481173614F900C9DE1C /* Credits.rtf in Resources */,
-				84A7D6C3180BA94700D1BFDB /* icon.png in Resources */,
 				841D8487173614F900C9DE1C /* MainMenu.xib in Resources */,
 				841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */,
-				84A7D6C1180BA92900D1BFDB /* icon.png in Resources */,
 				841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */,
 				84F109651736521100950211 /* python_document.png in Resources */,
 				84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */,
@@ -454,10 +458,10 @@
 				841D847D173614F900C9DE1C /* main.m in Sources */,
 				841D8484173614F900C9DE1C /* AppDelegate.m in Sources */,
 				84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */,
-				843BD26317D0453B00A33EF0 /* HandelScript.m in Sources */,
+				843BD26317D0453B00A33EF0 /* HandleScript.m in Sources */,
 				84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */,
 				84EFBD831806210E007B3F58 /* DirectoryScript.m in Sources */,
-				84F8B60417D3DE89003C3D7B /* HandelDirectoryScript.m in Sources */,
+				84F8B60417D3DE89003C3D7B /* HandleDirectoryScript.m in Sources */,
 				843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */,
 				84C83E671808A8A500E371B8 /* Script.m in Sources */,
 				841BDDB217E0D92E00D19D99 /* RunSuff.m in Sources */,

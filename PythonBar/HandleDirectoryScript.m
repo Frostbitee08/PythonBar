@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
-#import "HandelDirectoryScript.h"
+#import "HandleDirectoryScript.h"
 #import "AppDelegate.h"
 
-@implementation HandelDirectoryScript
+@implementation HandleDirectoryScript
 @synthesize title, subScripts, path, shortCut, timesRan;
 
 static NSString *serializationKey = @"PythonBarKey";
@@ -78,7 +78,7 @@ static NSString *timesRanKey = @"timesRan";
             NSString *space = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [tempScriptPath appendString:space];
             
-            HandelScript *script = [[HandelScript alloc] init];
+            HandleScript *script = [[HandleScript alloc] init];
             [script setPathURL:tempScriptPath isSubscript:true];
             
             //Add Script to subScripts
@@ -138,7 +138,6 @@ static NSString *timesRanKey = @"timesRan";
 }
 
 - (void)fill {
-    //This will be a function that fills subscripts
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
     NSMutableString *mutTemp;
     NSString *temp;
@@ -158,7 +157,7 @@ static NSString *timesRanKey = @"timesRan";
             NSString *space = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [tempScriptPath appendString:space];
             
-            HandelScript *script = [[HandelScript alloc] init];
+            HandleScript *script = [[HandleScript alloc] init];
             [script setPathURL:tempScriptPath isSubscript:true];
             
             //Add Script to subScripts

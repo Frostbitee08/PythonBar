@@ -28,7 +28,7 @@ static NSString *scriptsPathKey = @"scripts";
 
 -(void)runAllInDirectory:(id)sender {
     //Get the subMenuItems
-    HandelDirectoryScript *runAll = (HandelDirectoryScript *)[sender representedObject];
+    HandleDirectoryScript *runAll = (HandleDirectoryScript *)[sender representedObject];
     NSMenuItem *directoryMenuItem = [statusMenu itemWithTitle:[runAll getTitle]];
     NSMenu *directoryMenu = directoryMenuItem.submenu;
     NSArray *subitems = [directoryMenu itemArray];
@@ -47,7 +47,7 @@ static NSString *scriptsPathKey = @"scripts";
     
     //Make sure we have Script
     NSMenuItem *tempItem = (NSMenuItem *)sender;
-    HandelScript *runningScript = (HandelScript *)[tempItem representedObject];
+    HandleScript *runningScript = (HandleScript *)[tempItem representedObject];
     
     //Make sure Script exist
     if (![runningScript doesExist]) {
@@ -55,7 +55,7 @@ static NSString *scriptsPathKey = @"scripts";
         if ([runningScript isSubscript]) {
             //Get Directory
             NSMenuItem *runAll = [tempItem.menu itemWithTitle:@"Run All"];
-            HandelDirectoryScript *directoryScript = (HandelDirectoryScript *)[runAll representedObject];
+            HandleDirectoryScript *directoryScript = (HandleDirectoryScript *)[runAll representedObject];
             
             //Check if Directory exist
             if ([directoryScript doesExist]) {
@@ -63,7 +63,7 @@ static NSString *scriptsPathKey = @"scripts";
                 int count = 0;
                 NSString *name = [runningScript getTitle];
                 for (unsigned int i = 0; i <[directoryScript.subScripts count]; i++) {
-                    HandelScript *tempScript = [directoryScript.subScripts objectAtIndex:i];
+                    HandleScript *tempScript = [directoryScript.subScripts objectAtIndex:i];
                     if (![tempScript doesExist]) {
                         [tempItem.menu removeItem:[tempItem.menu itemWithTitle:[tempScript getTitle]]];
                         [directoryScript.subScripts removeObject:tempScript];
@@ -149,10 +149,6 @@ static NSString *scriptsPathKey = @"scripts";
         }
         notification.soundName = NSUserNotificationDefaultSoundName;
         
-        /*[notification setHasActionButton: YES];
-         [notification setActionButtonTitle: @"Action Button"];
-         [notification setOtherButtonTitle: @"Other Button"];*/
-        
         //Create NotificationCenter and add notification
         NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
         [center setDelegate:self];
@@ -167,10 +163,10 @@ static NSString *scriptsPathKey = @"scripts";
 
 -(void)findScript:(id)sender {
     //Build Alert
-    if ([[sender representedObject] isMemberOfClass:[HandelScript class]]) {
+    if ([[sender representedObject] isMemberOfClass:[HandleScript class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this script. Would you like to relocate it?"];
     }
-    else if ([[sender representedObject] isMemberOfClass:[HandelDirectoryScript class]]) {
+    else if ([[sender representedObject] isMemberOfClass:[HandleDirectoryScript class]]) {
         findAlert = [NSAlert alertWithMessageText:@"Directory Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this Directory. Would you like to relocate it?"];
     }
 
@@ -193,7 +189,7 @@ static NSString *scriptsPathKey = @"scripts";
     NSButton *button = (NSButton *)sender;
     NSOpenPanel* panel = [NSOpenPanel openPanel];
     NSArray  *fileTypes;
-    if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
+    if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandleScript class]]) {
         fileTypes = [NSArray arrayWithObject:@"py"];
         [panel setAllowedFileTypes:fileTypes];
     }
@@ -220,9 +216,9 @@ static NSString *scriptsPathKey = @"scripts";
             }
             
             if (!contains) {
-                if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
+                if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandleScript class]]) {
                     //Set Up Script
-                    HandelScript *tempScript = [[HandelScript alloc] init];
+                    HandleScript *tempScript = [[HandleScript alloc] init];
                     [tempScript setPathURL:[theDoc absoluteString] isSubscript:false];
                     
                     //Replace NSMenuItem
@@ -241,7 +237,7 @@ static NSString *scriptsPathKey = @"scripts";
                 }
                 else {
                     //Set Up DirectoryScript
-                    HandelDirectoryScript *dirScript = [[HandelDirectoryScript alloc] init];
+                    HandleDirectoryScript *dirScript = [[HandleDirectoryScript alloc] init];
                     [dirScript setPathURL:[theDoc absoluteString]];
                     
                     //Create Sub-Menu
@@ -253,7 +249,7 @@ static NSString *scriptsPathKey = @"scripts";
                     NSArray *subscript = [dirScript getSubScripts];
                     for (unsigned int f = 0; f < [subscript count]; f++) {
                         //Get Script
-                        HandelScript *tempScript = [subscript objectAtIndex:f];
+                        HandleScript *tempScript = [subscript objectAtIndex:f];
                         
                         //Create submenu
                         NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];

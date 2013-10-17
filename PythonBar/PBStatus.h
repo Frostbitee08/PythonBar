@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "HandelScript.h"
-#import "HandelDirectoryScript.h"
+#import "HandleScript.h"
+#import "HandleDirectoryScript.h"
 #import "ScriptsTableController.h"
 #import "RunSuff.h"
 
@@ -39,7 +39,6 @@
 //Actions
 -(void)addBarItem:(NSURL *)path;
 -(void)addBarDiretory:(NSURL *)path;
--(IBAction)remove:(id)sender;
 
 //Windows
 -(IBAction)quit:(id)sender;

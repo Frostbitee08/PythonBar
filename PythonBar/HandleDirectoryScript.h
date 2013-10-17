@@ -1,25 +1,25 @@
 //
-//  Script.h
+//  DirectoryScript.h
 //  PythonBar
 //
-//  Created by Rocco Del Priore on 8/29/13.
+//  Created by Rocco Del Priore on 9/1/13.
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Script.h"
+#import "HandleScript.h"
+#import "DirectoryScript.h"
 
-@interface HandelScript : NSObject {
+@interface HandleDirectoryScript : NSObject {
     //Stored
     NSString *path;
     NSString *title;
     NSNumber *timesRan;
-    bool isSubscript;
-    Script *managedScript;
+    DirectoryScript *managedDirectoryScript;
     
     //Generated
     NSDictionary *shortCut;
-    NSMutableArray *methods;
+    NSMutableArray *subScripts;
     
     //Core Data
     NSManagedObjectContext *cxt;
@@ -28,26 +28,19 @@
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDictionary *shortCut;
-@property (nonatomic, retain) NSMutableArray *methods;
+@property (nonatomic, retain) NSMutableArray *subScripts;
 @property (nonatomic, retain) NSNumber * timesRan;
-@property (nonatomic, readwrite) bool isSubscript;
-
-//Initialzers
-- (void)setPathURL:(NSString *)givenPath isSubscript:(BOOL)aIsSubscript;
-- (void)setManagedScript:(Script *)givenManagedScript;
 
 //Modifiers
+- (void)setPathURL:(NSString *)givenPathURL;
+- (void)setManagedDirectroyScript:(DirectoryScript *)givenManagedDirectoryScript;
 - (void)changeShortcut:(NSDictionary*)aShortcut;
-- (void)addRun;
 - (void)removeFromContext;
-- (void)setIsSubscript:(bool)aIsSubscript;
 
 //Accessors
 - (NSString *)getPath;
 - (NSString *)getTitle;
-- (NSString *)getParentPath;
-- (NSDictionary *)getShortCut;
-- (int)getTimesRan;
+- (NSMutableArray *)getSubScripts;
 - (bool)doesExist;
 
 @end

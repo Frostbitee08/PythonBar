@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HandelScript.h"
-#import "HandelDirectoryScript.h"
+#import "HandleScript.h"
+#import "HandleDirectoryScript.h"
 #import "RunSuff.h"
 
 //ShortCut
@@ -21,6 +21,7 @@
     NSMutableArray *scripts;
     NSMenu *statusMenu;
     NSUserDefaults *defaults;
+    NSButton *removeButton;
     SRValidator *validator;
     RunSuff *runner;
 }

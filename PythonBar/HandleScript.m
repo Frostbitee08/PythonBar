@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
-#import "HandelScript.h"
+#import "HandleScript.h"
 #import "AppDelegate.h"
 
 
-@implementation HandelScript
+@implementation HandleScript
 @synthesize title, timesRan, path, shortCut, isSubscript, methods;
 
 static NSString *serializationKey = @"PythonBarKey";
@@ -153,9 +153,7 @@ static NSString *isSubscriptKey = @"isSubscript";
 #pragma mark - Modifiers
 
 - (void)removeFromContext {
-    if (!isSubscript) {
-        [cxt deleteObject:managedScript];
-    }
+    [[AppDelegate sharedAppDelegate] deleteManagedObject:managedScript];
 }
 
 - (void)changeShortcut:(NSDictionary*)aShortcut {

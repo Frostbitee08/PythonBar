@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HandelScript.h"
-#import "HandelDirectoryScript.h"
+#import "HandleScript.h"
+#import "HandleDirectoryScript.h"
 
 @interface RunSuff : NSObject <NSUserNotificationCenterDelegate> {
     //IBObjects

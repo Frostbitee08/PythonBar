@@ -54,7 +54,7 @@ static NSString *preferencesKey = @"preferences";
     NSFetchRequest* scripts_request = [[NSFetchRequest alloc] initWithEntityName:@"Script"];
     for (unsigned int i = 0; i< [[cxt executeFetchRequest:scripts_request error:nil] count]; i++) {
         Script *tempScript = [[cxt executeFetchRequest:scripts_request error:nil] objectAtIndex:i];
-        HandelScript *tempHandleScript = [[HandelScript alloc] init];
+        HandleScript *tempHandleScript = [[HandleScript alloc] init];
         [tempHandleScript setManagedScript:tempScript];
         if (![tempHandleScript isSubscript]) {
             [scripts addObject:tempHandleScript];
@@ -65,7 +65,7 @@ static NSString *preferencesKey = @"preferences";
     NSFetchRequest* scriptsDirectory_request = [[NSFetchRequest alloc] initWithEntityName:@"DirectoryScript"];
     for (unsigned int i = 0; i< [[cxt executeFetchRequest:scriptsDirectory_request error:nil] count]; i++) {
         DirectoryScript *tempScript = [[cxt executeFetchRequest:scriptsDirectory_request error:nil] objectAtIndex:i];
-        HandelDirectoryScript *tempHandleScript = [[HandelDirectoryScript alloc] init];
+        HandleDirectoryScript *tempHandleScript = [[HandleDirectoryScript alloc] init];
         [tempHandleScript setManagedDirectroyScript:tempScript];
         [scripts addObject:tempHandleScript];
     }
@@ -104,7 +104,7 @@ static NSString *preferencesKey = @"preferences";
 -(void)prePopulate {
     //Loop through scripts and add all menuItems
     for (unsigned int i = 0; i<[scripts count]; i++) {
-        if ([[scripts objectAtIndex:i] isMemberOfClass:[HandelScript class]]) {
+        if ([[scripts objectAtIndex:i] isMemberOfClass:[HandleScript class]]) {
             //Create NSMenuItem
             NSMenuItem *tempMenuItem = [[NSMenuItem alloc] init];
             [tempMenuItem setTarget:runner];
@@ -147,9 +147,9 @@ static NSString *preferencesKey = @"preferences";
             //Add NSMenuItem to StatusMenu
             [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
         }
-        else if ([[scripts objectAtIndex:i] isMemberOfClass:[HandelDirectoryScript class]]) {
+        else if ([[scripts objectAtIndex:i] isMemberOfClass:[HandleDirectoryScript class]]) {
             //Get DirectoryScript
-            HandelDirectoryScript *tempDir = [scripts objectAtIndex:i];
+            HandleDirectoryScript *tempDir = [scripts objectAtIndex:i];
             
             //Create Sub-Menu
             NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
@@ -167,7 +167,7 @@ static NSString *preferencesKey = @"preferences";
                 NSArray *subscript = [tempDir getSubScripts];
                 for (unsigned int f = 0; f < [subscript count]; f++) {
                     //Get Script
-                    HandelScript *tempScript = [subscript objectAtIndex:f];
+                    HandleScript *tempScript = [subscript objectAtIndex:f];
                     
                     //Create submenu
                     NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
@@ -202,25 +202,9 @@ static NSString *preferencesKey = @"preferences";
 
 #pragma mark - Actions
 
-//RE WRITE
--(IBAction)remove:(id)sender {
-    /*NSInteger *index = [scriptTable selectedRow];
-    
-    [scriptTable beginUpdates];
-    [scriptTable removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
-    [scriptTable endUpdates];
-    [scripts removeObjectAtIndex:index];
-    [[defaults objectForKey:scriptsKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
-    [removeButton setHidden:TRUE];
-    
-    //Remove NSMenuItem
-    [statusMenu removeItemAtIndex:index];*/
-}
-
-
 -(void)addBarItem:(NSURL *)path {
     //Set Up Script
-    HandelScript *tempScript = [[HandelScript alloc] init];
+    HandleScript *tempScript = [[HandleScript alloc] init];
     [tempScript setPathURL:[path absoluteString] isSubscript:false];
     [tempScript setIsSubscript:false];
     [scripts addObject:tempScript];
@@ -233,11 +217,14 @@ static NSString *preferencesKey = @"preferences";
 
     //Add NSMenuItem to StatusMenu
     [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
+    
+    //Update Preferences
+    [scriptTable reloadData];
 }
 
 -(void)addBarDiretory:(NSURL *)path {
     //Set Up DirectoryScript
-    HandelDirectoryScript *dirScript = [[HandelDirectoryScript alloc] init];
+    HandleDirectoryScript *dirScript = [[HandleDirectoryScript alloc] init];
     [dirScript setPathURL:[path absoluteString]];
     [scripts addObject:dirScript];
     
@@ -250,7 +237,7 @@ static NSString *preferencesKey = @"preferences";
     NSArray *subscript = [dirScript getSubScripts];
     for (unsigned int f = 0; f < [subscript count]; f++) {
         //Get Script
-        HandelScript *tempScript = [subscript objectAtIndex:f];
+        HandleScript *tempScript = [subscript objectAtIndex:f];
         
         //Create submenu
         NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
@@ -271,6 +258,9 @@ static NSString *preferencesKey = @"preferences";
     [directoryMenuItem setSubmenu:submenu];
     [directoryMenuItem setRepresentedObject:dirScript];
     [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
+    
+    //Update Preferences
+    [scriptTable reloadData];
 }
 
 #pragma mark - Windows

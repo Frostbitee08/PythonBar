@@ -11,7 +11,6 @@
 @implementation ScriptsTableController
 @synthesize scripts, statusMenu, runner;
 
-
 static NSString *savePathKey = @"savePath";
 
 -(id)init {
@@ -68,7 +67,7 @@ static NSString *savePathKey = @"savePath";
     else {
         //Define the Variables
         NSInteger row = [ScriptTable rowForView:[aRecorder superview]];
-        HandelScript *tempScript = [scripts objectAtIndex:row];
+        HandleScript *tempScript = [scripts objectAtIndex:row];
         NSMenuItem *menuIem = [statusMenu itemWithTitle:[tempScript getTitle]];
         NSString *identifier = [NSString stringWithFormat:@"PythonBar-%@-%@", [aShortcut valueForKey:SRShortcutKeyCode], [aShortcut valueForKey:SRShortcutCharacters]];
         
@@ -100,8 +99,27 @@ static NSString *savePathKey = @"savePath";
     [[PTHotKeyCenter sharedCenter] resume];
 }
 
--(BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
     return YES;
+}
+
+- (void)removeAction {
+    [[scripts objectAtIndex:[ScriptTable selectedRow]] removeFromContext];
+    [scripts removeObjectAtIndex:[ScriptTable selectedRow]];
+    [ScriptTable reloadData];
+    [removeButton setHidden:true];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    removeButton = [ScriptTable.superview.superview.superview viewWithTag:101];
+    [removeButton setAction:@selector(removeAction)];
+    [removeButton setTarget:self];
+    if ([ScriptTable selectedRow] >= 0) {
+        [removeButton setHidden:false];
+    }
+    else {
+        [removeButton setHidden:true];
+    }
 }
 
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
