@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 @implementation HandelDirectoryScript
-@synthesize title, subScripts, path, shortCut;
+@synthesize title, subScripts, path, shortCut, timesRan;
 
 static NSString *serializationKey = @"PythonBarKey";
 static NSString *pathKey = @"path";
@@ -18,7 +18,7 @@ static NSString *titleKey = @"title";
 static NSString *shortcutKey = @"shortcutdata";
 static NSString *timesRanKey = @"timesRan";
 
-#pragma mark - initializers
+#pragma mark - Initializers
 
 - (id)init {
     self = [super init]; //always call the superclass init method when your class inherit from other class
@@ -32,6 +32,7 @@ static NSString *timesRanKey = @"timesRan";
     return self;
 }
 
+//For adding from GUI
 - (void)setPathURL:(NSString *)givenPath {
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
@@ -79,7 +80,7 @@ static NSString *timesRanKey = @"timesRan";
             
             HandelScript *script = [[HandelScript alloc] init];
             [script setPathURL:tempScriptPath];
-            script.isSubscript = true;
+            [script setIsSubscript:true];
             
             //Add Script to subScripts
             [subScripts addObject:script];
@@ -107,9 +108,8 @@ static NSString *timesRanKey = @"timesRan";
     //Add fill function
 }
 
+#pragma mark - Accessors
 
-
-//Accessors
 - (NSString *)getPath {
     return path;
 }
@@ -129,13 +129,19 @@ static NSString *timesRanKey = @"timesRan";
     return false;
 }
 
-//Modifiers
+#pragma mark - Modifiers
+
+- (void)removeFromContext {
+    [cxt deleteObject:managedDirectoryScript];
+}
+
 - (void)changeShortcut:(NSDictionary*)aShortcut {
     shortCut = aShortcut;
     [self save];
 }
 
 - (void)fill {
+    //This will be a function that fills subscripts
 }
 
 - (void)save {

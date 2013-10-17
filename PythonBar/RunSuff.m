@@ -24,141 +24,7 @@ static NSString *scriptsPathKey = @"scripts";
     return self;
 }
 
-#pragma mark - actions
--(void)replaceScript:(id)sender {
-    /*[NSApp endSheet:[findAlert window]];
-    
-    //Open File browser
-    NSOpenPanel* panel = [NSOpenPanel openPanel];
-    NSArray  *fileTypes = [NSArray arrayWithObject:@"py"];
-    [panel setAllowedFileTypes:fileTypes];
-    [panel setCanChooseDirectories:true];
-    
-    [panel beginWithCompletionHandler:^(NSInteger result){
-        if (result == NSFileHandlingPanelOKButton) {
-            NSURL* theDoc = [[panel URLs] objectAtIndex:0];
-            scriptPaths = [defaults objectForKey:scriptsPathKey];
-            if (![[scriptPaths allKeys] containsObject:[theDoc absoluteString]]) {
-                NSString *temp = [[theDoc absoluteString] lastPathComponent];
-                NSMutableString *filename = [NSMutableString stringWithString:temp];
-                
-                if([filename length] > 3) {
-                    [filename deleteCharactersInRange:NSMakeRange(0, ([filename length]-3))];
-                }
-                if ([filename isEqual: @".py"]) {
-                    //Set Up Script
-                    HandelScript *tempScript = [[HandelScript alloc] init];
-                    [tempScript setPathURL:[theDoc absoluteString]];
-                    
-                    //Replace in scripts and scriptPaths
-                    NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    id tempKey = [[scriptPaths allKeys] objectAtIndex:_tempIndex];
-                    [scriptPaths setObject:[scriptPaths objectForKey:tempKey] forKey:jap];
-                    [scriptPaths removeObjectForKey:tempKey];
-                    [scripts replaceObjectAtIndex:_tempIndex withObject:tempScript];
-                    
-                    //Replace NSMenuItem
-                    NSMenuItem *tempMenuItem = [statusMenu itemAtIndex:_tempIndex];
-                    [tempMenuItem setTitle:[tempScript getTitle]];
-                    [tempMenuItem setRepresentedObject:[tempScript getPath]];
-                    [tempMenuItem setAction:@selector(runScript:)];
-                    NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:_tempIndex] getTitle]];
-                    [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:_tempIndex] getTitle].length)];
-                    [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:_tempIndex] getTitle].length)];
-                    [tempMenuItem setAttributedTitle:attributedTitle];
-                    
-                    //Save
-                    [defaults setObject:scriptPaths forKey:scriptsPathKey];
-                    [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
-                }
-                else {
-                    //Set Up DirectoryScript
-                    HandelDirectoryScript *dirScript = [[HandelDirectoryScript alloc] init];
-                    [dirScript setPathURL:[theDoc absoluteString]];
-                    
-                    //Create Sub-Menu
-                    NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
-                    [directoryMenuItem setTitle:[dirScript getTitle]];
-                    NSMenu *submenu = [[NSMenu alloc] init];
-                    
-                    //Add Sub-Menus
-                    NSArray *subscript = [dirScript getSubScripts];
-                    for (unsigned int f = 0; f < [subscript count]; f++) {
-                        //Get Script
-                        HandelScript *tempScript = [subscript objectAtIndex:f];
-                        
-                        //Create submenu
-                        NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
-                        [tempMenuItem setTarget:self];
-                        [tempMenuItem setRepresentedObject:[tempScript getPath]];
-                        [tempMenuItem setImage:pythonDocument];
-                        [submenu addItem:tempMenuItem];
-                    }
-                    
-                    //Replace NSMenuItem
-                    NSMenuItem *tempMenuItem = [statusMenu itemAtIndex:_tempIndex];
-                    [tempMenuItem setTitle:[dirScript getTitle]];
-                    [tempMenuItem setRepresentedObject:[dirScript getPath]];
-                    [tempMenuItem setAction:@selector(runScript:)];
-                    NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:_tempIndex] getTitle]];
-                    [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:_tempIndex] getTitle].length)];
-                    [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:_tempIndex] getTitle].length)];
-                    [tempMenuItem setAttributedTitle:attributedTitle];
-                    [tempMenuItem setSubmenu:submenu];
-                    
-                    //UpdateArrays
-                    NSString *jap = [[NSString alloc] initWithString:[theDoc absoluteString]];
-                    id tempKey = [[scriptPaths allKeys] objectAtIndex:_tempIndex];
-                    [scriptPaths setObject:[scriptPaths objectForKey:tempKey] forKey:jap];
-                    [scriptPaths removeObjectForKey:tempKey];
-                    [scripts replaceObjectAtIndex:_tempIndex withObject:dirScript];
-                    
-                    //Save
-                    [defaults setObject:scriptPaths forKey:scriptsPathKey];
-                    [[defaults objectForKey:scriptsPathKey] writeToFile:[defaults objectForKey:savePathKey] atomically:YES];
-                }
-                
-            }
-            else {
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has already been added to PythonBar", [[scripts objectAtIndex:_tempIndex] getTitle]]];
-                [alert runModal];
-            }
-        }
-    }];*/
-}
-
--(void)testPython {
-    /*Py_Initialize();
-    
-	PyObject *sysModule = PyImport_ImportModule("sys");
-	PyObject *sysModuleDict = PyModule_GetDict(sysModule);
-	PyObject *pathObject = PyDict_GetItemString(sysModuleDict, "path");
-    
-	NSString *bundlePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Contents/Resources"];*/
-
-}
-
--(void)findScript:(id)sender {
-    //Get Index
-    _tempIndex = [statusMenu indexOfItem:sender];
-    
-    //Build Alert
-    if ([[sender representedObject] isMemberOfClass:[HandelScript class]]) {
-        findAlert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this script. Would you like to relocate it?"];
-    }
-    else if ([[sender representedObject] isMemberOfClass:[HandelDirectoryScript class]]) {
-        findAlert = [NSAlert alertWithMessageText:@"Directory Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this Directory. Would you like to relocate it?"];
-    }
-    
-    //Set alert actions
-    NSArray *buttonArray = [findAlert buttons];
-    NSButton *myBtn = [buttonArray objectAtIndex:0];
-    [myBtn setAction:@selector(replaceScript:)];
-    [myBtn setTarget:self];
-    
-    //Run Alert
-    [findAlert runModal];
-}
+#pragma mark - Run
 
 -(void)runAllInDirectory:(id)sender {
     //Get the subMenuItems
@@ -187,34 +53,47 @@ static NSString *scriptsPathKey = @"scripts";
     if (![runningScript doesExist]) {
         //If Part of Directory
         if ([runningScript isSubscript]) {
-            //Run the Alert
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory", [runningScript getTitle]]];
-            [alert runModal];
+            //Get Directory
+            NSMenuItem *runAll = [tempItem.menu itemWithTitle:@"Run All"];
+            HandelDirectoryScript *directoryScript = (HandelDirectoryScript *)[runAll representedObject];
             
-            //Find a way to check the folder
-            /*int z = 0;
-            
-            //Loop through and check for missing scripts
-            while(z<[subscripts count]) {
-                if(![[subscripts objectAtIndex:z] doesExist]) {
-                    [subscripts removeObjectAtIndex:z];
-                    z--;
+            //Check if Directory exist
+            if ([directoryScript doesExist]) {
+                //Loop through all subscripts
+                int count = 0;
+                NSString *name = [runningScript getTitle];
+                for (unsigned int i = 0; i <[directoryScript.subScripts count]; i++) {
+                    HandelScript *tempScript = [directoryScript.subScripts objectAtIndex:i];
+                    if (![tempScript doesExist]) {
+                        [tempItem.menu removeItem:[tempItem.menu itemWithTitle:[tempScript getTitle]]];
+                        [directoryScript.subScripts removeObject:tempScript];
+                        i--;
+                        count++;
+                    }
+                }
+                //Run the Alert
+                if (count > 1) {
+                    NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ and %i other scripts have been moved from their directory", name]];
+                    [alert runModal];
                 }
                 else {
-                    //Get Script
-                    Script *tempScript = [subscripts objectAtIndex:z];
-                    
-                    //Create submenu
-                    NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
-                    [tempMenuItem setTarget:self];
-                    [tempMenuItem setRepresentedObject:tempScript];
-                    [tempMenuItem setImage:pythonDocument];
-                    [submenu addItem:tempMenuItem];
-                    z++;
+                    NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory", name]];
+                    [alert runModal];
                 }
             }
-            NSMenuItem *tempMenuItem = [statusMenu itemAtIndex:folderIndex];
-            [tempMenuItem setSubmenu:submenu];*/
+            else {
+                //Get MenuItem to modifiy
+                NSMenuItem *missingDir = [statusMenu itemWithTitle:[directoryScript getTitle]];
+                NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:index] getTitle]];
+                [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:index] getTitle].length)];
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:index] getTitle].length)];
+                [missingDir setAction:@selector(findScript:)];
+                [missingDir setAttributedTitle:attributedTitle];
+                [missingDir setSubmenu:nil];
+                
+                //Find Directory
+                [self findScript:[statusMenu itemWithTitle:[directoryScript getTitle]]];
+            }
             
             return;
         }
@@ -285,10 +164,146 @@ static NSString *scriptsPathKey = @"scripts";
     [runningScript addRun];
 }
 
+#pragma mark - Missing
+
+-(void)findScript:(id)sender {
+    //Build Alert
+    if ([[sender representedObject] isMemberOfClass:[HandelScript class]]) {
+        findAlert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this script. Would you like to relocate it?"];
+    }
+    else if ([[sender representedObject] isMemberOfClass:[HandelDirectoryScript class]]) {
+        findAlert = [NSAlert alertWithMessageText:@"Directory Missing" defaultButton:@"Yes" alternateButton:nil otherButton:@"No" informativeTextWithFormat:@"PythonBar cannot find this Directory. Would you like to relocate it?"];
+    }
+
+    
+    //Set alert actions
+    NSArray *buttonArray = [findAlert buttons];
+    NSButton *myBtn = [buttonArray objectAtIndex:0];
+    [myBtn setAction:@selector(replaceScript:)];
+    [myBtn setTarget:self];
+    [myBtn setTag:[scripts indexOfObject:[sender representedObject]]];
+
+    //Run Alert
+    [findAlert runModal];
+}
+
+-(void)replaceScript:(id)sender {
+    [NSApp endSheet:[findAlert window]];
+    
+    //Open File browser
+    NSButton *button = (NSButton *)sender;
+    NSOpenPanel* panel = [NSOpenPanel openPanel];
+    NSArray  *fileTypes;
+    if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
+        fileTypes = [NSArray arrayWithObject:@"py"];
+    }
+    else {
+        fileTypes = [NSArray array];
+    }
+    [panel setAllowedFileTypes:fileTypes];
+    [panel setCanChooseDirectories:true];
+    
+    [panel beginWithCompletionHandler:^(NSInteger result){
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL* theDoc = [[panel URLs] objectAtIndex:0];
+            
+            //Check to see if the script already exist
+            bool contains = false;
+            NSString *docString = [[theDoc absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            for (unsigned int i = 0; i<[scripts count]; i++) {
+                NSString *t = [@"file://localhost" stringByAppendingString:[[scripts objectAtIndex:i] getPath]];
+                if ([docString isEqualToString:t]) {
+                    contains = true;
+                    break;
+                }
+            }
+            
+            if (!contains) {
+                if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
+                    //Set Up Script
+                    HandelScript *tempScript = [[HandelScript alloc] init];
+                    [tempScript setPathURL:[theDoc absoluteString]];
+                    
+                    //Replace NSMenuItem
+                    NSMenuItem *tempMenuItem = [statusMenu itemWithTitle:[[scripts objectAtIndex:button.tag] getTitle]];
+                    [tempMenuItem setTitle:[tempScript getTitle]];
+                    [tempMenuItem setRepresentedObject:tempScript];
+                    [tempMenuItem setAction:@selector(runScript:)];
+                    NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:button.tag] getTitle]];
+                    [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:button.tag] getTitle].length)];
+                    [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:button.tag] getTitle].length)];
+                    [tempMenuItem setAttributedTitle:attributedTitle];
+                    
+                    //Replace in Array
+                    [[scripts objectAtIndex:[button tag]] removeFromContext];
+                    [scripts replaceObjectAtIndex:[button tag] withObject:tempScript];
+                }
+                else {
+                    //Set Up DirectoryScript
+                    HandelDirectoryScript *dirScript = [[HandelDirectoryScript alloc] init];
+                    [dirScript setPathURL:[theDoc absoluteString]];
+                    
+                    //Create Sub-Menu
+                    NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
+                    [directoryMenuItem setTitle:[dirScript getTitle]];
+                    NSMenu *submenu = [[NSMenu alloc] init];
+                    
+                    //Add Sub-Menus
+                    NSArray *subscript = [dirScript getSubScripts];
+                    for (unsigned int f = 0; f < [subscript count]; f++) {
+                        //Get Script
+                        HandelScript *tempScript = [subscript objectAtIndex:f];
+                        
+                        //Create submenu
+                        NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:[tempScript getTitle] action:@selector(runScript:) keyEquivalent:@""];
+                        [tempMenuItem setTarget:self];
+                        [tempMenuItem setRepresentedObject:tempScript];
+                        [tempMenuItem setImage:pythonDocument];
+                        [submenu addItem:tempMenuItem];
+                    }
+                    
+                    //Replace NSMenuItem
+                    NSMenuItem *tempMenuItem = [statusMenu itemWithTitle:[[scripts objectAtIndex:button.tag] getTitle]];
+                    [tempMenuItem setTitle:[dirScript getTitle]];
+                    [tempMenuItem setRepresentedObject:dirScript];
+                    [tempMenuItem setAction:@selector(runScript:)];
+                    NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:button.tag] getTitle]];
+                    [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:button.tag] getTitle].length)];
+                    [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:button.tag] getTitle].length)];
+                    [tempMenuItem setAttributedTitle:attributedTitle];
+                    [tempMenuItem setSubmenu:submenu];
+                    
+                    //UpdateArrays
+                    [[scripts objectAtIndex:[button tag]] removeFromContext];
+                    [scripts replaceObjectAtIndex:[button tag] withObject:dirScript];
+                }
+                
+            }
+            else {
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has already been added to PythonBar", [[scripts objectAtIndex:[button tag]] getTitle]]];
+                [alert runModal];
+            }
+        }
+    }];
+}
+
 #pragma mark - Delegates
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
     return YES;
+}
+
+#pragma mark - Run by method
+
+-(void)testPython {
+    /*Py_Initialize();
+     
+     PyObject *sysModule = PyImport_ImportModule("sys");
+     PyObject *sysModuleDict = PyModule_GetDict(sysModule);
+     PyObject *pathObject = PyDict_GetItemString(sysModuleDict, "path");
+     
+     NSString *bundlePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/Contents/Resources"];*/
+    
 }
 
 

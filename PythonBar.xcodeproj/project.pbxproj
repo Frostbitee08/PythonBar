@@ -28,6 +28,8 @@
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8491998917EAA96500DA071B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8474173614F900C9DE1C /* CoreData.framework */; };
+		84A7D6C1180BA92900D1BFDB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A7D6C0180BA92900D1BFDB /* icon.png */; };
+		84A7D6C3180BA94700D1BFDB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A7D6C2180BA94700D1BFDB /* icon.png */; };
 		84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC8D9717579DCB009C5733 /* PopUpView.xib */; };
 		84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC8D9A17579E2E009C5733 /* PopUpViewController.m */; };
 		84C83E671808A8A500E371B8 /* Script.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C83E661808A8A500E371B8 /* Script.m */; };
@@ -96,6 +98,8 @@
 		84520FFD17F1943400564562 /* Scripts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scripts.xcdatamodel; sourceTree = "<group>"; };
 		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
 		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
+		84A7D6C0180BA92900D1BFDB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		84A7D6C2180BA94700D1BFDB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		84BC8D9717579DCB009C5733 /* PopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		84BC8D9917579E2E009C5733 /* PopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpViewController.h; sourceTree = "<group>"; };
 		84BC8D9A17579E2E009C5733 /* PopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpViewController.m; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		841D8461173614F900C9DE1C = {
 			isa = PBXGroup;
 			children = (
+				84A7D6C0180BA92900D1BFDB /* icon.png */,
 				841D8476173614F900C9DE1C /* PythonBar */,
 				841D8493173614FA00C9DE1C /* PythonBarTests */,
 				841D846F173614F900C9DE1C /* Frameworks */,
@@ -196,6 +201,7 @@
 		841D8477173614F900C9DE1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84A7D6C2180BA94700D1BFDB /* icon.png */,
 				84F109641736521100950211 /* python_document.png */,
 				841D84A71736175A00C9DE1C /* pythonIcon.png */,
 				841D84A81736175A00C9DE1C /* pythonIconBW.png */,
@@ -403,8 +409,10 @@
 			files = (
 				841D847B173614F900C9DE1C /* InfoPlist.strings in Resources */,
 				841D8481173614F900C9DE1C /* Credits.rtf in Resources */,
+				84A7D6C3180BA94700D1BFDB /* icon.png in Resources */,
 				841D8487173614F900C9DE1C /* MainMenu.xib in Resources */,
 				841D84A91736175A00C9DE1C /* pythonIcon.png in Resources */,
+				84A7D6C1180BA92900D1BFDB /* icon.png in Resources */,
 				841D84AA1736175A00C9DE1C /* pythonIconBW.png in Resources */,
 				84F109651736521100950211 /* python_document.png in Resources */,
 				84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */,

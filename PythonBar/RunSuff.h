@@ -17,8 +17,6 @@
     NSAlert *findAlert;
     
     //Data
-    NSUInteger *_tempIndex;
-    id _tempScript;
     NSUserDefaults *defaults;
     NSMutableArray *scripts;
     NSImage *pythonDocument;

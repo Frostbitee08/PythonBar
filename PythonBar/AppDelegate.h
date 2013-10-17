@@ -32,7 +32,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 //Actions
-- (IBAction) CheckBoxStatus:(id) send;
+- (IBAction)CheckBoxStatus:(id) send;
 - (void)saveContext;
 + (AppDelegate *)sharedAppDelegate;
 

@@ -56,7 +56,9 @@ static NSString *preferencesKey = @"preferences";
         Script *tempScript = [[cxt executeFetchRequest:scripts_request error:nil] objectAtIndex:i];
         HandelScript *tempHandleScript = [[HandelScript alloc] init];
         [tempHandleScript setManagedScript:tempScript];
-        [scripts addObject:tempHandleScript];
+        if (![tempHandleScript isSubscript]) {
+            [scripts addObject:tempHandleScript];
+        }
     }
     
     //Script Directories
@@ -145,7 +147,7 @@ static NSString *preferencesKey = @"preferences";
             //Add NSMenuItem to StatusMenu
             [statusMenu insertItem:tempMenuItem atIndex:[statusMenu numberOfItems]-4];
         }
-        else if ([[scripts objectAtIndex:i] isMemberOfClass:[DirectoryScript class]]) {
+        else if ([[scripts objectAtIndex:i] isMemberOfClass:[HandelDirectoryScript class]]) {
             //Get DirectoryScript
             HandelDirectoryScript *tempDir = [scripts objectAtIndex:i];
             
@@ -189,6 +191,7 @@ static NSString *preferencesKey = @"preferences";
                 [directoryMenuItem setAction:@selector(findScript:)];
             }
             [directoryMenuItem setAttributedTitle:attributedTitle];
+            [directoryMenuItem setRepresentedObject:tempDir];
             
             //Add subMenu to StatusMenu
             [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
@@ -219,7 +222,7 @@ static NSString *preferencesKey = @"preferences";
     //Set Up Script
     HandelScript *tempScript = [[HandelScript alloc] init];
     [tempScript setPathURL:[path absoluteString]];
-    tempScript.isSubscript = false;
+    [tempScript setIsSubscript:false];
     [scripts addObject:tempScript];
 
     //Create NSMenuItem
@@ -270,7 +273,7 @@ static NSString *preferencesKey = @"preferences";
     [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
 }
 
-#pragma mark - Show windows
+#pragma mark - Windows
 
 //Show FileBrowser
 -(IBAction)addItem:(id)sender {

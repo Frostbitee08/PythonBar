@@ -14,5 +14,6 @@
 @dynamic path;
 @dynamic shortcutdata;
 @dynamic title;
+@dynamic timesRan;
 
 @end

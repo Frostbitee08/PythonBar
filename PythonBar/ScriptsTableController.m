@@ -11,6 +11,7 @@
 @implementation ScriptsTableController
 @synthesize scripts, statusMenu, runner;
 
+
 static NSString *savePathKey = @"savePath";
 
 -(id)init {

@@ -19,6 +19,8 @@ static NSString *notificationKey = @"notfication";
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+#pragma mark - Initial Set up
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
@@ -62,6 +64,8 @@ static NSString *notificationKey = @"notfication";
     testThis = [[PBStatus alloc] init];
 }
 
+#pragma mark - Toggles
+
 -(IBAction)toggleNotification:(id)sender {
     NSButton *temp = (NSButton *)sender;
     [preferences setObject:[NSNumber numberWithBool:[temp state]] forKey:notificationKey];
@@ -92,7 +96,7 @@ static NSString *notificationKey = @"notfication";
     [preferences writeToFile:[libraryPath stringByAppendingString:@"Settings.plist"] atomically:YES];
 }
 
-- (IBAction) CheckBoxStatus:(id) sender {
+- (IBAction)CheckBoxStatus:(id) sender {
     //code to change the Icon to black and white when called
     NSBundle *bundle = [NSBundle mainBundle];
     NSImage *pythonImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"pythonIcon" ofType:@"png"]];
@@ -110,6 +114,8 @@ static NSString *notificationKey = @"notfication";
     bool test = [preferences writeToFile:[libraryPath stringByAppendingString:@"/Settings.plist"] atomically:YES];
 }
 
+#pragma mark - Test
+
 - (IBAction)showPopover:(id)sender
 {
     /*if (testThis != nil) {
@@ -124,7 +130,7 @@ static NSString *notificationKey = @"notfication";
     }*/
 }
 
-
+#pragma mark - Core Data Save
 
 + (AppDelegate *)sharedAppDelegate
 {

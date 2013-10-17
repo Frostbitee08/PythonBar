@@ -29,7 +29,6 @@
     
     //Data
     NSUserDefaults *defaults;
-    NSUInteger *_tempIndex;
     NSMutableArray *scripts;
     NSImage *pythonDocument;
     
@@ -37,15 +36,12 @@
     NSMutableDictionary *preferences;
 }
 
-//Initialze
--(void)prePopulate;
-
 //Actions
 -(void)addBarItem:(NSURL *)path;
 -(void)addBarDiretory:(NSURL *)path;
 -(IBAction)remove:(id)sender;
 
-//Show Windows
+//Windows
 -(IBAction)quit:(id)sender;
 -(IBAction)addItem:(id)sender;
 -(IBAction)showPreferences:(id)sender;

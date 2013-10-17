@@ -35,6 +35,7 @@
 - (void)setPathURL:(NSString *)givenPathURL;
 - (void)setManagedDirectroyScript:(DirectoryScript *)givenManagedDirectoryScript;
 - (void)changeShortcut:(NSDictionary*)aShortcut;
+- (void)removeFromContext;
 
 //Accessors
 - (NSString *)getPath;

@@ -20,8 +20,9 @@ static NSString *shortcutKey = @"shortcutdata";
 static NSString *timesRanKey = @"timesRan";
 static NSString *isSubscriptKey = @"isSubscript";
 
-#pragma mark - initializers
+#pragma mark - Initializers
 
+//Initializers
 - (id)init {
     self = [super init]; //always call the superclass init method when your class inherit from other class
     if (self) { // checking if the superclass initialization was fine
@@ -89,13 +90,17 @@ static NSString *isSubscriptKey = @"isSubscript";
     managedScript = givenManagedScript;
     path = [managedScript valueForKey:pathKey];
     title = [managedScript valueForKey:titleKey];
-    isSubscript = [managedScript valueForKey:isSubscriptKey];
+    NSNumber *browse = [managedScript valueForKey:isSubscriptKey];
+    isSubscript = [browse boolValue];
     timesRan = [NSNumber numberWithInt:[managedScript valueForKey:timesRanKey]];
     shortCut = [managedScript valueForKey:shortcutKey];
+    [self getMethods];
 }
 
+//Retrieve Methods from script
 - (void)getMethods {
-    NSString *fileContents = [NSString stringWithContentsOfFile:path];
+    NSError *error = nil;
+    NSString *fileContents = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:&error];
     NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
     for (unsigned int i = 0; i<[lines count]; i++) {
         NSString *thisLine = [lines objectAtIndex:i];
@@ -110,8 +115,8 @@ static NSString *isSubscriptKey = @"isSubscript";
     }
 }
 
+#pragma mark - Accessors
 
-//Accessors
 - (NSString *)getPath {
     return path;
 }
@@ -132,11 +137,26 @@ static NSString *isSubscriptKey = @"isSubscript";
     return false;
 }
 
+- (NSString *)getParentPath {
+    NSString *parent = [path substringToIndex:[path rangeOfString:@"/" options:NSBackwardsSearch].location];
+    parent = [parent stringByAppendingString:@"/"];
+    return parent;
+}
+
 -(NSDictionary *)getShortCut {
     return shortCut;
 }
 
-//Modifiers
+#pragma mark - Modifiers
+
+- (void)removeFromContext {
+    [cxt deleteObject:managedScript];
+}
+
+- (void)setIsSubscript:(bool)aIsSubscript {
+    isSubscript = aIsSubscript;
+    [self save];
+}
 
 - (void)changeShortcut:(NSDictionary*)aShortcut {
     shortCut = aShortcut;

@@ -39,10 +39,13 @@
 //Modifiers
 - (void)changeShortcut:(NSDictionary*)aShortcut;
 - (void)addRun;
+- (void)removeFromContext;
+- (void)setIsSubscript:(bool)aIsSubscript;
 
 //Accessors
 - (NSString *)getPath;
 - (NSString *)getTitle;
+- (NSString *)getParentPath;
 - (NSDictionary *)getShortCut;
 - (int)getTimesRan;
 - (bool)doesExist;
