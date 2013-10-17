@@ -33,7 +33,7 @@
 @property (nonatomic, readwrite) bool isSubscript;
 
 //Initialzers
-- (void)setPathURL:(NSString *)givenPathURL;
+- (void)setPathURL:(NSString *)givenPath isSubscript:(BOOL)aIsSubscript;
 - (void)setManagedScript:(Script *)givenManagedScript;
 
 //Modifiers

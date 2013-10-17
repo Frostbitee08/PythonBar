@@ -79,8 +79,7 @@ static NSString *timesRanKey = @"timesRan";
             [tempScriptPath appendString:space];
             
             HandelScript *script = [[HandelScript alloc] init];
-            [script setPathURL:tempScriptPath];
-            [script setIsSubscript:true];
+            [script setPathURL:tempScriptPath isSubscript:true];
             
             //Add Script to subScripts
             [subScripts addObject:script];
@@ -105,7 +104,8 @@ static NSString *timesRanKey = @"timesRan";
     timesRan = [NSNumber numberWithInt:[managedDirectoryScript valueForKey:timesRanKey]];
     shortCut = [managedDirectoryScript valueForKey:shortcutKey];
 
-    //Add fill function
+    //Fill
+    [self fill];
 }
 
 #pragma mark - Accessors
@@ -123,16 +123,13 @@ static NSString *timesRanKey = @"timesRan";
 }
 
 - (bool)doesExist {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]){
-        return true;
-    }
-    return false;
+    return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
 
 #pragma mark - Modifiers
 
 - (void)removeFromContext {
-    [cxt deleteObject:managedDirectoryScript];
+    [[AppDelegate sharedAppDelegate] deleteManagedObject:managedDirectoryScript];
 }
 
 - (void)changeShortcut:(NSDictionary*)aShortcut {
@@ -142,6 +139,32 @@ static NSString *timesRanKey = @"timesRan";
 
 - (void)fill {
     //This will be a function that fills subscripts
+    NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    NSMutableString *mutTemp;
+    NSString *temp;
+    NSString *givenPath = [@"file://localhost" stringByAppendingString:path];
+
+    //Fill Subscripts
+    for (unsigned int i = 0; i < [filelist count]; i++) {
+        temp = [filelist objectAtIndex: i];
+        mutTemp = [NSMutableString stringWithString:temp];
+        if ([mutTemp length] > 3) {
+            [mutTemp deleteCharactersInRange:NSMakeRange(0, ([temp length]-3))];
+        }
+        NSMutableString *tempScriptPath = [[NSMutableString alloc] init];
+        if([mutTemp isEqualToString:@".py"]) {
+            tempScriptPath = [NSMutableString stringWithString:givenPath];
+            tempScriptPath = [tempScriptPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *space = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [tempScriptPath appendString:space];
+            
+            HandelScript *script = [[HandelScript alloc] init];
+            [script setPathURL:tempScriptPath isSubscript:true];
+            
+            //Add Script to subScripts
+            [subScripts addObject:script];
+        }
+    }
 }
 
 - (void)save {

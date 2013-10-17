@@ -315,5 +315,10 @@ static NSString *notificationKey = @"notfication";
     return NSTerminateNow;
 }
 
+- (void)deleteManagedObject:(NSManagedObject *)aManagedObject {
+    [self.managedObjectContext deleteObject:aManagedObject];
+    [self saveContext];
+}
+
 @end
 

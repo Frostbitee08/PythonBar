@@ -80,22 +80,21 @@ static NSString *scriptsPathKey = @"scripts";
                     NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory", name]];
                     [alert runModal];
                 }
+                return;
             }
             else {
                 //Get MenuItem to modifiy
                 NSMenuItem *missingDir = [statusMenu itemWithTitle:[directoryScript getTitle]];
-                NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:index] getTitle]];
-                [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:index] getTitle].length)];
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[[scripts objectAtIndex:index] getTitle].length)];
+                NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[directoryScript getTitle]];
+                [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [directoryScript getTitle].length)];
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0,[directoryScript getTitle].length)];
                 [missingDir setAction:@selector(findScript:)];
                 [missingDir setAttributedTitle:attributedTitle];
                 [missingDir setSubmenu:nil];
                 
                 //Find Directory
-                [self findScript:[statusMenu itemWithTitle:[directoryScript getTitle]]];
+                return [self findScript:runAll];
             }
-            
-            return;
         }
         else {
             //Change text color to red
@@ -196,11 +195,13 @@ static NSString *scriptsPathKey = @"scripts";
     NSArray  *fileTypes;
     if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
         fileTypes = [NSArray arrayWithObject:@"py"];
+        [panel setAllowedFileTypes:fileTypes];
     }
     else {
-        fileTypes = [NSArray array];
+        fileTypes = [NSArray arrayWithObject:@"thiswillnevershowup"];
+        [panel setAllowedFileTypes:fileTypes];
     }
-    [panel setAllowedFileTypes:fileTypes];
+
     [panel setCanChooseDirectories:true];
     
     [panel beginWithCompletionHandler:^(NSInteger result){
@@ -222,7 +223,7 @@ static NSString *scriptsPathKey = @"scripts";
                 if ([[scripts objectAtIndex:button.tag] isMemberOfClass:[HandelScript class]]) {
                     //Set Up Script
                     HandelScript *tempScript = [[HandelScript alloc] init];
-                    [tempScript setPathURL:[theDoc absoluteString]];
+                    [tempScript setPathURL:[theDoc absoluteString] isSubscript:false];
                     
                     //Replace NSMenuItem
                     NSMenuItem *tempMenuItem = [statusMenu itemWithTitle:[[scripts objectAtIndex:button.tag] getTitle]];
@@ -261,6 +262,13 @@ static NSString *scriptsPathKey = @"scripts";
                         [tempMenuItem setImage:pythonDocument];
                         [submenu addItem:tempMenuItem];
                     }
+                    
+                    //Add Run all
+                    [submenu addItem:[NSMenuItem separatorItem]];
+                    NSMenuItem *runall = [[NSMenuItem alloc] initWithTitle:@"Run All" action:@selector(runAllInDirectory:) keyEquivalent:@""];
+                    [runall setTarget:self];
+                    [runall setRepresentedObject:dirScript];
+                    [submenu addItem:runall];
                     
                     //Replace NSMenuItem
                     NSMenuItem *tempMenuItem = [statusMenu itemWithTitle:[[scripts objectAtIndex:button.tag] getTitle]];

@@ -36,7 +36,7 @@ static NSString *isSubscriptKey = @"isSubscript";
 }
 
 //For addding a new script via path
-- (void)setPathURL:(NSString *)givenPath {
+- (void)setPathURL:(NSString *)givenPath isSubscript:(BOOL)aIsSubscript {
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
@@ -50,6 +50,7 @@ static NSString *isSubscriptKey = @"isSubscript";
     }
     path = scriptPath;
     methods = [[NSMutableArray alloc] init];
+    isSubscript = aIsSubscript;
     
     //Create Title
     NSMutableString *filename = [[[givenURL absoluteString] lastPathComponent] mutableCopy];
@@ -67,21 +68,23 @@ static NSString *isSubscriptKey = @"isSubscript";
     [self getMethods];
     
     //Add to Core Data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:shortCut forKey:serializationKey];
-    [archiver finishEncoding];
-    
-    //Insert into context
-    managedScript = [NSEntityDescription insertNewObjectForEntityForName:@"Script" inManagedObjectContext:cxt];
-    [managedScript setValue:path forKey:pathKey];
-    [managedScript setValue:title forKey:titleKey];
-    [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];
-    [managedScript setValue:timesRan forKey:timesRanKey];
-    [managedScript setValue:shortCut forKey:shortcutKey];
-    
-    //Save Context
-    [[AppDelegate sharedAppDelegate] saveContext];
+    if (!isSubscript) {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+        [archiver encodeObject:shortCut forKey:serializationKey];
+        [archiver finishEncoding];
+        
+        //Insert into context
+        managedScript = [NSEntityDescription insertNewObjectForEntityForName:@"Script" inManagedObjectContext:cxt];
+        [managedScript setValue:path forKey:pathKey];
+        [managedScript setValue:title forKey:titleKey];
+        [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];
+        [managedScript setValue:timesRan forKey:timesRanKey];
+        [managedScript setValue:shortCut forKey:shortcutKey];
+        
+        //Save Context
+        [[AppDelegate sharedAppDelegate] saveContext];
+    }
 }
 
 //For adding script via core data
@@ -150,12 +153,9 @@ static NSString *isSubscriptKey = @"isSubscript";
 #pragma mark - Modifiers
 
 - (void)removeFromContext {
-    [cxt deleteObject:managedScript];
-}
-
-- (void)setIsSubscript:(bool)aIsSubscript {
-    isSubscript = aIsSubscript;
-    [self save];
+    if (!isSubscript) {
+        [cxt deleteObject:managedScript];
+    }
 }
 
 - (void)changeShortcut:(NSDictionary*)aShortcut {
@@ -169,15 +169,17 @@ static NSString *isSubscriptKey = @"isSubscript";
 }
 
 - (void)save {
-    //Update values
-    [managedScript setValue:path forKey:pathKey];
-    [managedScript setValue:title forKey:titleKey];
-    [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];
-    [managedScript setValue:timesRan forKey:timesRanKey];
-    [managedScript setValue:shortCut forKey:shortcutKey];
-    
-    //Save context
-    [[AppDelegate sharedAppDelegate] saveContext];
+    if (!isSubscript) {
+        //Update values
+        [managedScript setValue:path forKey:pathKey];
+        [managedScript setValue:title forKey:titleKey];
+        [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];
+        [managedScript setValue:timesRan forKey:timesRanKey];
+        [managedScript setValue:shortCut forKey:shortcutKey];
+        
+        //Save context
+        [[AppDelegate sharedAppDelegate] saveContext];
+    }
 }
 
 @end

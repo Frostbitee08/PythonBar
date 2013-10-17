@@ -154,6 +154,7 @@ static NSString *preferencesKey = @"preferences";
             //Create Sub-Menu
             NSMenuItem *directoryMenuItem = [[NSMenuItem alloc] init];
             [directoryMenuItem setTitle:[tempDir getTitle]];
+            [directoryMenuItem setRepresentedObject:tempDir];
             NSMenu *submenu = [[NSMenu alloc] init];
             
             //Add color
@@ -180,7 +181,7 @@ static NSString *preferencesKey = @"preferences";
                 [submenu addItem:[NSMenuItem separatorItem]];
                 NSMenuItem *tempMenuItem = [[NSMenuItem alloc] initWithTitle:@"Run All" action:@selector(runAllInDirectory:) keyEquivalent:@""];
                 [tempMenuItem setTarget:runner];
-                [tempMenuItem setRepresentedObject:[scripts objectAtIndex:i]];
+                [tempMenuItem setRepresentedObject:tempDir];
                 [submenu addItem:tempMenuItem];
                 
                 [directoryMenuItem setSubmenu:submenu];
@@ -191,7 +192,6 @@ static NSString *preferencesKey = @"preferences";
                 [directoryMenuItem setAction:@selector(findScript:)];
             }
             [directoryMenuItem setAttributedTitle:attributedTitle];
-            [directoryMenuItem setRepresentedObject:tempDir];
             
             //Add subMenu to StatusMenu
             [statusMenu insertItem:directoryMenuItem atIndex:[statusMenu numberOfItems]-4];
@@ -221,7 +221,7 @@ static NSString *preferencesKey = @"preferences";
 -(void)addBarItem:(NSURL *)path {
     //Set Up Script
     HandelScript *tempScript = [[HandelScript alloc] init];
-    [tempScript setPathURL:[path absoluteString]];
+    [tempScript setPathURL:[path absoluteString] isSubscript:false];
     [tempScript setIsSubscript:false];
     [scripts addObject:tempScript];
 

@@ -34,6 +34,7 @@
 //Actions
 - (IBAction)CheckBoxStatus:(id) send;
 - (void)saveContext;
+- (void)deleteManagedObject:(NSManagedObject *)aManagedObject;
 + (AppDelegate *)sharedAppDelegate;
 
 //Test
