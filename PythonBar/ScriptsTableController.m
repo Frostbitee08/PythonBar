@@ -13,6 +13,8 @@
 
 static NSString *savePathKey = @"savePath";
 
+#pragma mark - Initializers
+
 -(id)init {
     if (self) {
         defaults = [NSUserDefaults standardUserDefaults];
@@ -20,16 +22,28 @@ static NSString *savePathKey = @"savePath";
     return self;
 }
 
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (void)setUp:(DeleteTableView *)aTableView {
     ScriptTable = aTableView;
+    removeButton = [ScriptTable.superview.superview.superview viewWithTag:101];
+    [removeButton setAction:@selector(removeAction)];
+    [removeButton setTarget:self];
+}
+
+#pragma mark - TableView
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
     return [scripts count];
 }
 
-// This method is optional if you use bindings to provide the data
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:[tableColumn identifier] owner:self];
     if ([[tableColumn identifier] isEqualToString:@"title"]) {
         cellView.textField.stringValue = [[scripts objectAtIndex:row] getTitle];
+        return cellView;
+    }
+    else if ([[tableColumn identifier] isEqualToString:@"timesRan"]) {
+        NSString *stringexample = [NSString stringWithFormat:@"%i", [[scripts objectAtIndex:row] getTimesRan]];
+        cellView.textField.stringValue = stringexample;
         return cellView;
     }
     else if ([[tableColumn identifier] isEqualToString:@"hotkey"]) {
@@ -48,21 +62,43 @@ static NSString *savePathKey = @"savePath";
     return nil;
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    if ([ScriptTable selectedRow] >= 0) {
+        [removeButton setHidden:false];
+    }
+    else {
+        [removeButton setHidden:true];
+    }
+}
+
+//Drag and drop stuff - Not working yet
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+    return NSDragOperationEvery;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    return YES;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
+    return YES;
+}
+
+- (void)tableView:(NSTableView *)tv replaceObjectAtIndex:(int)indexRow withObject:(NSString *)tempNewString {
+    NSLog(@"here");
+	//[toDoList replaceObjectAtIndex:indexRow withObject:tempNewString];
+	//[tableView reloadData];
+	return;
+}
+
 #pragma mark SRRecorderControlDelegate
 
 - (BOOL)shortcutRecorder:(SRRecorderControl *)aRecorder canRecordShortcut:(NSDictionary *)aShortcut {
     NSError *error;
     BOOL isTaken = [validator isKeyCode:[aShortcut[SRShortcutKeyCode] unsignedShortValue] andFlagsTaken:[aShortcut[SRShortcutModifierFlagsKey] unsignedIntegerValue] error:&error];
     
-    if (isTaken)
-    {
-        /*NSBeep();
-        [self presentError:error
-            modalForWindow:self.window
-                  delegate:nil
-        didPresentSelector:NULL
-               contextInfo:NULL];*/
-        NSLog(@"TAKEN");
+    if (isTaken) {
+        NSLog(@"The script is taken, replace this with an error");
     }
     else {
         //Define the Variables
@@ -80,7 +116,7 @@ static NSString *savePathKey = @"savePath";
                                                     keyCombo:aShortcut
                                                       target:runner
                                                       action:menuIem.action];
-        [newHotKey setRepresentedObject:menuIem ];
+        [newHotKey setRepresentedObject:menuIem];
         [hotKeyCenter registerHotKey:newHotKey];
         
         //Save information
@@ -99,45 +135,14 @@ static NSString *savePathKey = @"savePath";
     [[PTHotKeyCenter sharedCenter] resume];
 }
 
-- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
-    return YES;
-}
+#pragma mark - Actions
 
 - (void)removeAction {
     [[scripts objectAtIndex:[ScriptTable selectedRow]] removeFromContext];
     [scripts removeObjectAtIndex:[ScriptTable selectedRow]];
+    [self.delegate updateMenu];
     [ScriptTable reloadData];
     [removeButton setHidden:true];
-}
-
-- (void)tableViewSelectionDidChange:(NSNotification *)notification {
-    removeButton = [ScriptTable.superview.superview.superview viewWithTag:101];
-    [removeButton setAction:@selector(removeAction)];
-    [removeButton setTarget:self];
-    if ([ScriptTable selectedRow] >= 0) {
-        [removeButton setHidden:false];
-    }
-    else {
-        [removeButton setHidden:true];
-    }
-}
-
-- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-    NSLog(@"2");
-    /*if ([info draggingSource] == aTableView) {
-        if (operation == NSTableViewDropOn){
-            [aTableView setDropRow:row dropOperation:NSTableViewDropAbove];
-        }
-        return NSDragOperationMove;
-    }
-    else {
-        return NSDragOperationNone;
-    }*/
-    return NSDragOperationEvery;    
-}
-
-- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-    return YES;
 }
 
 @end

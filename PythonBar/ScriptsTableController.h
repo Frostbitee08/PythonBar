@@ -10,6 +10,8 @@
 #import "HandleScript.h"
 #import "HandleDirectoryScript.h"
 #import "RunSuff.h"
+#import "DeleteTableView.h"
+#import "ScriptsTableControllerDelegate.h"
 
 //ShortCut
 #import "ShortcutRecorder/ShortcutRecorder.h"
@@ -17,7 +19,7 @@
 #import <PTHotKey/PTHotKey+ShortcutRecorder.h>
 
 @interface ScriptsTableController : NSObject <NSTableViewDataSource, NSTableViewDelegate, SRRecorderControlDelegate> {
-    NSTableView *ScriptTable;
+    DeleteTableView *ScriptTable;
     NSMutableArray *scripts;
     NSMenu *statusMenu;
     NSUserDefaults *defaults;
@@ -29,5 +31,9 @@
 @property(nonatomic, retain, readwrite) NSMutableArray *scripts;
 @property(nonatomic, retain, readwrite) NSMenu *statusMenu;
 @property(nonatomic, retain, readwrite) RunSuff *runner;
+@property (nonatomic, assign) id<ScriptsTableControllerDelegate> delegate;
+
+- (void)setUp:(DeleteTableView *)aTableView;
+- (void)removeAction;
 
 @end

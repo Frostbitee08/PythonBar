@@ -87,6 +87,8 @@ static NSString *preferencesKey = @"preferences";
      stc.runner = runner;
      stc.statusMenu = statusMenu;
      stc.scripts = scripts;
+    [stc setDelegate:self];
+    [stc setUp:scriptTable];
     
     //Fill Preferences
     NSDictionary *tempDict = [[NSDictionary alloc] initWithContentsOfFile:[defaults objectForKey:preferencesPathKey]];
@@ -323,5 +325,13 @@ static NSString *preferencesKey = @"preferences";
     [NSApp terminate:self];
 }
 
+#pragma mark - ScriptTableViewControllerDelegate
+
+- (void)updateMenu {
+    for (unsigned int i = 0; i<[statusMenu numberOfItems]-1; i++) {
+        [statusMenu removeItemAtIndex:0];
+    }
+    [self prePopulate];
+}
 
 @end

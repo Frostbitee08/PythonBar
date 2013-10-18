@@ -11,14 +11,16 @@
 #import "HandleDirectoryScript.h"
 #import "ScriptsTableController.h"
 #import "RunSuff.h"
+#import "DeleteTableView.h"
+#import "ScriptsTableControllerDelegate.h"
 
-@interface PBStatus:  NSView <NSMenuDelegate> {
+@interface PBStatus:  NSView <NSMenuDelegate, ScriptsTableControllerDelegate> {
     //IBOutlets
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSWindow *preferencesWindow;
     IBOutlet NSButton *notificationCheck;
-    IBOutlet NSTableView *scriptTable;
     IBOutlet NSButton *removeButton;
+    IBOutlet DeleteTableView *scriptTable;
     
     //Objects
     ScriptsTableController *stc;

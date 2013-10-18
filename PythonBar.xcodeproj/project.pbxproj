@@ -28,6 +28,7 @@
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8491998917EAA96500DA071B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8474173614F900C9DE1C /* CoreData.framework */; };
+		8493C6D71810E9D200C15081 /* DeleteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C6D61810E9D200C15081 /* DeleteTableView.m */; };
 		84BC8D9817579DCB009C5733 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC8D9717579DCB009C5733 /* PopUpView.xib */; };
 		84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC8D9A17579E2E009C5733 /* PopUpViewController.m */; };
 		84C305DF181048AD00FF77C4 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 84C305DE181048AD00FF77C4 /* icon.icns */; };
@@ -97,6 +98,8 @@
 		84520FFD17F1943400564562 /* Scripts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scripts.xcdatamodel; sourceTree = "<group>"; };
 		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
 		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
+		8493C6D51810E9D200C15081 /* DeleteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteTableView.h; sourceTree = "<group>"; };
+		8493C6D61810E9D200C15081 /* DeleteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteTableView.m; sourceTree = "<group>"; };
 		84BC8D9717579DCB009C5733 /* PopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		84BC8D9917579E2E009C5733 /* PopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpViewController.h; sourceTree = "<group>"; };
 		84BC8D9A17579E2E009C5733 /* PopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpViewController.m; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 		84EFBD811806210E007B3F58 /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
 		84EFBD821806210E007B3F58 /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
 		84F109641736521100950211 /* python_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = python_document.png; sourceTree = "<group>"; };
+		84F763481811EDD000ADAA06 /* ScriptsTableControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptsTableControllerDelegate.h; sourceTree = "<group>"; };
 		84F8B60217D3DE89003C3D7B /* HandleDirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleDirectoryScript.h; sourceTree = "<group>"; };
 		84F8B60317D3DE89003C3D7B /* HandleDirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleDirectoryScript.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +238,9 @@
 				84EFBD7C18061FEE007B3F58 /* Handlers */,
 				8479056B17CEE28E00F48DD1 /* PBStatus.h */,
 				8479056C17CEE28E00F48DD1 /* PBStatus.m */,
+				8493C6D51810E9D200C15081 /* DeleteTableView.h */,
+				8493C6D61810E9D200C15081 /* DeleteTableView.m */,
+				84F763481811EDD000ADAA06 /* ScriptsTableControllerDelegate.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -460,6 +467,7 @@
 				84BC8D9B17579E2E009C5733 /* PopUpViewController.m in Sources */,
 				843BD26317D0453B00A33EF0 /* HandleScript.m in Sources */,
 				84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */,
+				8493C6D71810E9D200C15081 /* DeleteTableView.m in Sources */,
 				84EFBD831806210E007B3F58 /* DirectoryScript.m in Sources */,
 				84F8B60417D3DE89003C3D7B /* HandleDirectoryScript.m in Sources */,
 				843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */,
