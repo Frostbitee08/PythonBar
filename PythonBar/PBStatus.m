@@ -142,8 +142,7 @@ static NSString *preferencesKey = @"preferences";
                 [newHotKey setRepresentedObject:tempMenuItem];
                 [hotKeyCenter registerHotKey:newHotKey];
                 
-                [tempMenuItem setKeyEquivalent:[[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharacters   ]];
-                
+                [tempMenuItem setKeyEquivalent:[[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharactersIgnoringModifiers]];                
             }
             
             //Add NSMenuItem to StatusMenu

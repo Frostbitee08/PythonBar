@@ -40,8 +40,7 @@ static NSString *notificationKey = @"notfication";
     preferences = [[NSMutableDictionary alloc] init];
     
     //Fill Preferences
-    NSString *libraryPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/PythonBar/"];
-    NSString *preferencesPath = [libraryPath stringByAppendingString:@"/Settings.plist"];
+    NSString *preferencesPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/PythonBar/"] stringByAppendingString:@"/Settings.plist"];
     NSDictionary *tempDict = [[NSDictionary alloc] initWithContentsOfFile:preferencesPath];
     if ([[tempDict allKeys] count] > 0) {
         NSArray *keys = [tempDict allKeys];
@@ -69,7 +68,7 @@ static NSString *notificationKey = @"notfication";
 -(IBAction)toggleNotification:(id)sender {
     NSButton *temp = (NSButton *)sender;
     [preferences setObject:[NSNumber numberWithBool:[temp state]] forKey:notificationKey];
-    [preferences writeToFile:[libraryPath stringByAppendingString:@"Settings.plist"] atomically:YES];
+    [preferences writeToFile:[libraryPath stringByAppendingString:@"/Settings.plist"] atomically:YES];
 }
 
 -(IBAction)toggleLaunchAtLogin:(id)sender {
@@ -111,7 +110,6 @@ static NSString *notificationKey = @"notfication";
     }
     
     [preferences setObject:[NSNumber numberWithBool:[checkBox state]] forKey:blackandwhite];
-    bool test = [preferences writeToFile:[libraryPath stringByAppendingString:@"/Settings.plist"] atomically:YES];
 }
 
 #pragma mark - Test

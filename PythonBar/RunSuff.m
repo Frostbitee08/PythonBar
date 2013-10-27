@@ -7,7 +7,7 @@
 //
 
 #import "RunSuff.h"
-#import <Python/Python.h>
+//#import <Python/Python.h>
 
 @implementation RunSuff
 @synthesize scripts,notificationCheck,statusMenu;
@@ -72,14 +72,16 @@ static NSString *scriptsPathKey = @"scripts";
                     }
                 }
                 //Run the Alert
+                NSString *alertString;
                 if (count > 1) {
-                    NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ and %i other scripts have been moved from their directory", name]];
-                    [alert runModal];
+                    alertString = [NSString stringWithFormat:@"%@ and %i other scripts have been moved from their directory", name, count];
                 }
                 else {
-                    NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has been moved from the directory", name]];
-                    [alert runModal];
+                    alertString = [NSString stringWithFormat:@"%@ has been moved from the directory", name];
                 }
+                
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:alertString];
+                [alert runModal];
                 return;
             }
             else {

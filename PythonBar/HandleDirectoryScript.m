@@ -7,6 +7,7 @@
 //
 
 #import "HandleDirectoryScript.h"
+#import <CoreServices/CoreServices.h>
 #import "AppDelegate.h"
 
 @implementation HandleDirectoryScript
@@ -28,6 +29,7 @@ static NSString *timesRanKey = @"timesRan";
         timesRan = 0;
         subScripts = [[NSMutableArray alloc] init];
         shortCut = [[NSDictionary alloc] init];
+        Gestalt(gestaltSystemVersionMinor, &minor);
     }
     return self;
 }
@@ -37,7 +39,12 @@ static NSString *timesRanKey = @"timesRan";
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
-    [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
+    if (minor == 9) {
+        [scriptPath deleteCharactersInRange:NSMakeRange(0, 7)];
+    }
+    else if (minor == 8) {
+        [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
+    }
     
     //Get rid of %20
     NSRange twenty = [scriptPath rangeOfString:@"%20"];
@@ -153,8 +160,8 @@ static NSString *timesRanKey = @"timesRan";
         NSMutableString *tempScriptPath = [[NSMutableString alloc] init];
         if([mutTemp isEqualToString:@".py"]) {
             tempScriptPath = [NSMutableString stringWithString:givenPath];
-            tempScriptPath = [tempScriptPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSString *space = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *space = [tempScriptPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            space = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [tempScriptPath appendString:space];
             
             HandleScript *script = [[HandleScript alloc] init];

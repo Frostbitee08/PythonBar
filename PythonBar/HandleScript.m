@@ -8,6 +8,7 @@
 
 #import "HandleScript.h"
 #import "AppDelegate.h"
+#import <CoreServices/CoreServices.h>
 
 
 @implementation HandleScript
@@ -31,6 +32,7 @@ static NSString *isSubscriptKey = @"isSubscript";
         timesRan = 0;
         isSubscript = false;
         shortCut = [[NSDictionary alloc] init];
+        Gestalt(gestaltSystemVersionMinor, &minor);
     }
     return self;
 }
@@ -40,14 +42,20 @@ static NSString *isSubscriptKey = @"isSubscript";
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
-    [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
-    
+    if (minor == 9) {
+        [scriptPath deleteCharactersInRange:NSMakeRange(0, 7)];
+    }
+    else if (minor == 8) {
+        [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
+    }
+
     //Get rid of %20
     NSRange twenty = [scriptPath rangeOfString:@"%20"];
     while (twenty.location != NSNotFound) {
         [scriptPath replaceCharactersInRange:twenty withString:@" "];
         twenty = [scriptPath rangeOfString:@"%20"];
     }
+
     path = scriptPath;
     methods = [[NSMutableArray alloc] init];
     isSubscript = aIsSubscript;
@@ -92,10 +100,11 @@ static NSString *isSubscriptKey = @"isSubscript";
     //Statics
     managedScript = givenManagedScript;
     path = [managedScript valueForKey:pathKey];
+    NSLog(@"here: %@", [managedScript valueForKey:pathKey]);
     title = [managedScript valueForKey:titleKey];
     NSNumber *browse = [managedScript valueForKey:isSubscriptKey];
     isSubscript = [browse boolValue];
-    timesRan = [NSNumber numberWithInt:[managedScript valueForKey:timesRanKey]];
+    timesRan = [managedScript valueForKey:timesRanKey];
     shortCut = [managedScript valueForKey:shortcutKey];
     [self getMethods];
 }
@@ -164,6 +173,7 @@ static NSString *isSubscriptKey = @"isSubscript";
 - (void)addRun {
     int value = [timesRan intValue];
     timesRan = [NSNumber numberWithInt:value + 1];
+    [self save];
 }
 
 - (void)save {

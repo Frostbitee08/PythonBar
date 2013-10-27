@@ -23,7 +23,6 @@
 		843BD26317D0453B00A33EF0 /* HandleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD26217D0453B00A33EF0 /* HandleScript.m */; };
 		843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */; };
 		843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD27017D426B600A33EF0 /* ScriptsTableController.m */; };
-		84520FF917F0BD7A00564562 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84520FF817F0BD7A00564562 /* Python.framework */; };
 		84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84520FFC17F1943400564562 /* Scripts.xcdatamodeld */; };
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
@@ -121,7 +120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84520FF917F0BD7A00564562 /* Python.framework in Frameworks */,
 				8491998917EAA96500DA071B /* CoreData.framework in Frameworks */,
 				84E867CB17E0EE6E003DBFD1 /* PTHotKey.framework in Frameworks */,
 				84E867CC17E0EE6E003DBFD1 /* ShortcutRecorder.framework in Frameworks */,

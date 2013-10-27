@@ -7,13 +7,13 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon 256</string>
+	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>Rocco-Del-Priore.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>Rocco-Del-Priore.PythonBar1</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>PythonBar</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
