@@ -100,7 +100,6 @@ static NSString *isSubscriptKey = @"isSubscript";
     //Statics
     managedScript = givenManagedScript;
     path = [managedScript valueForKey:pathKey];
-    NSLog(@"here: %@", [managedScript valueForKey:pathKey]);
     title = [managedScript valueForKey:titleKey];
     NSNumber *browse = [managedScript valueForKey:isSubscriptKey];
     isSubscript = [browse boolValue];
