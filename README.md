@@ -10,7 +10,7 @@ PythonBar is a small OSX application that will allow you to quickly execute pyth
 ## Current Features
 + Notifications - A notification after any script has finished running, complete with output (stdout), and errors(stderr).
 + Folders - The ability to add directories to the status bar, a "Run all" with in directory button, and automatic updates when files are moved or renamed.
-+ Shortcuts - The ability to assign a global keyboard shortcut to any script or folder. This is implemented using [ShortcutRecorder](https://github.com/Kentzo/ShortcutRecorder)
++ Shortcuts - The ability to assign a global keyboard shortcut to any script or folder. This is implemented using [ShortcutRecorder](https://github.com/Kentzo/ShortcutRecorder).
 
 ## Planned Features
 + Arguments - The ability to have preset arguments, or possibly take dynamic input.
