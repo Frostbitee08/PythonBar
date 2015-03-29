@@ -42,10 +42,10 @@ static NSString *isSubscriptKey = @"isSubscript";
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
-    if (minor == 9) {
+    if (minor >= 9) {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 7)];
     }
-    else if (minor == 8) {
+    else if (minor <= 8) {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
     }
 

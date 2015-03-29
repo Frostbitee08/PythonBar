@@ -42,7 +42,7 @@ static NSString *scriptsPathKey = @"scripts";
 -(void)runScript:(id)sender {
     //Make sure we have the right type
     if (![sender isMemberOfClass:[NSMenuItem class]]) {
-        sender = [sender representedObject];
+        sender = [sender object];
     }
     
     //Make sure we have Script

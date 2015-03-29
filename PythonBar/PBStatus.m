@@ -139,7 +139,7 @@ static NSString *preferencesKey = @"preferences";
                                                               target:runner
                                                               action:tempMenuItem.action];
                 
-                [newHotKey setRepresentedObject:tempMenuItem];
+                [newHotKey setObject:tempMenuItem];
                 [hotKeyCenter registerHotKey:newHotKey];
                 
                 [tempMenuItem setKeyEquivalent:[[[scripts objectAtIndex:i] shortCut] valueForKey:SRShortcutCharactersIgnoringModifiers]];                

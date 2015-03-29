@@ -116,7 +116,7 @@ static NSString *savePathKey = @"savePath";
                                                     keyCombo:aShortcut
                                                       target:runner
                                                       action:menuIem.action];
-        [newHotKey setRepresentedObject:menuIem];
+        [newHotKey setObject:menuIem];
         [hotKeyCenter registerHotKey:newHotKey];
         
         //Save information
