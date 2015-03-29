@@ -23,7 +23,6 @@
     
     //Core Data
     NSManagedObjectContext *cxt;
-    SInt32 minor;
 }
 
 @property (nonatomic, retain) NSString * path;

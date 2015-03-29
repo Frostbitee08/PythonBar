@@ -32,7 +32,6 @@ static NSString *isSubscriptKey = @"isSubscript";
         timesRan = 0;
         isSubscript = false;
         shortCut = [[NSDictionary alloc] init];
-        Gestalt(gestaltSystemVersionMinor, &minor);
     }
     return self;
 }
@@ -42,10 +41,11 @@ static NSString *isSubscriptKey = @"isSubscript";
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
-    if (minor >= 9) {
+    
+    if (floor(kCFCoreFoundationVersionNumber) > kCFCoreFoundationVersionNumber10_8) {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 7)];
     }
-    else if (minor <= 8) {
+    else {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
     }
 

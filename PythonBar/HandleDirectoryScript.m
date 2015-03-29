@@ -29,7 +29,6 @@ static NSString *timesRanKey = @"timesRan";
         timesRan = 0;
         subScripts = [[NSMutableArray alloc] init];
         shortCut = [[NSDictionary alloc] init];
-        Gestalt(gestaltSystemVersionMinor, &minor);
     }
     return self;
 }
@@ -39,10 +38,10 @@ static NSString *timesRanKey = @"timesRan";
     //Set up initial Variables
     NSURL *givenURL = [[NSURL alloc] initWithString:givenPath];
     NSMutableString *scriptPath = [NSMutableString stringWithString:givenPath];
-    if (minor == 9) {
+    if (floor(kCFCoreFoundationVersionNumber) > kCFCoreFoundationVersionNumber10_8) {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 7)];
     }
-    else if (minor == 8) {
+    else {
         [scriptPath deleteCharactersInRange:NSMakeRange(0, 16)];
     }
     
