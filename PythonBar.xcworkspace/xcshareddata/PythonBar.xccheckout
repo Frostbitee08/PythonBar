@@ -24,9 +24,9 @@
 		<key>87CAC6B65B7382CCA7947CAE1E0D05DDF12E1DEE</key>
 		<string>..</string>
 		<key>97641889692A69A4B270231FB25F4B84FB93CA0B</key>
-		<string>../../../../ShortcutRecorder</string>
+		<string>../../ShortcutRecorder</string>
 		<key>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</key>
-		<string>../../../../../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Frostbitee08/PythonBar.git</string>
@@ -42,7 +42,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</string>
 			<key>IDESourceControlWCCName</key>
-			<string>..</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

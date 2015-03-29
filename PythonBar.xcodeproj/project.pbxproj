@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		841A9ECF1AC7A14600FFCF54 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841A9ECD1AC7A14600FFCF54 /* PTHotKey.framework */; };
-		841A9ED01AC7A14600FFCF54 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841A9ECE1AC7A14600FFCF54 /* ShortcutRecorder.framework */; };
+		841A9ED31AC7A2E800FFCF54 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841A9ED11AC7A2E800FFCF54 /* PTHotKey.framework */; };
+		841A9ED41AC7A2E800FFCF54 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841A9ED21AC7A2E800FFCF54 /* ShortcutRecorder.framework */; };
 		841BDDB217E0D92E00D19D99 /* RunSuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BDDB117E0D92E00D19D99 /* RunSuff.m */; };
 		841D8471173614F900C9DE1C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8470173614F900C9DE1C /* Cocoa.framework */; };
 		841D847B173614F900C9DE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 841D8479173614F900C9DE1C /* InfoPlist.strings */; };
@@ -53,6 +53,8 @@
 /* Begin PBXFileReference section */
 		841A9ECD1AC7A14600FFCF54 /* PTHotKey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PTHotKey.framework; path = ../../../ShortcutRecorder/build/Debug/PTHotKey.framework; sourceTree = "<group>"; };
 		841A9ECE1AC7A14600FFCF54 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = ../../../ShortcutRecorder/build/Debug/ShortcutRecorder.framework; sourceTree = "<group>"; };
+		841A9ED11AC7A2E800FFCF54 /* PTHotKey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PTHotKey.framework; path = "../../../../../../../Users/Admin/Library/Developer/Xcode/DerivedData/PythonBar-ewnborrtlkapvmawnnoqpmzjchmy/Build/Products/Debug/PTHotKey.framework"; sourceTree = "<group>"; };
+		841A9ED21AC7A2E800FFCF54 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = "../../../../../../../Users/Admin/Library/Developer/Xcode/DerivedData/PythonBar-ewnborrtlkapvmawnnoqpmzjchmy/Build/Products/Debug/ShortcutRecorder.framework"; sourceTree = "<group>"; };
 		841BDDB017E0D92E00D19D99 /* RunSuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSuff.h; sourceTree = "<group>"; };
 		841BDDB117E0D92E00D19D99 /* RunSuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunSuff.m; sourceTree = "<group>"; };
 		841D846C173614F900C9DE1C /* PythonBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PythonBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,8 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				841A9ECF1AC7A14600FFCF54 /* PTHotKey.framework in Frameworks */,
-				841A9ED01AC7A14600FFCF54 /* ShortcutRecorder.framework in Frameworks */,
+				841A9ED31AC7A2E800FFCF54 /* PTHotKey.framework in Frameworks */,
+				841A9ED41AC7A2E800FFCF54 /* ShortcutRecorder.framework in Frameworks */,
 				8491998917EAA96500DA071B /* CoreData.framework in Frameworks */,
 				84EABEB617D7C6940083BAE3 /* Carbon.framework in Frameworks */,
 				843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */,
@@ -150,6 +152,8 @@
 		841D846F173614F900C9DE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				841A9ED11AC7A2E800FFCF54 /* PTHotKey.framework */,
+				841A9ED21AC7A2E800FFCF54 /* ShortcutRecorder.framework */,
 				841A9ECD1AC7A14600FFCF54 /* PTHotKey.framework */,
 				841A9ECE1AC7A14600FFCF54 /* ShortcutRecorder.framework */,
 				84520FF817F0BD7A00564562 /* Python.framework */,
@@ -545,6 +549,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ShortcutRecorder-dhfvclqxxhwmizeorfyfchmhtaht/Build/Products/Debug\"",
 					/Volumes/Storage/Documents/Code/OSX/ShortcutRecorder/build/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PythonBar-ewnborrtlkapvmawnnoqpmzjchmy/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";
@@ -563,6 +568,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ShortcutRecorder-dhfvclqxxhwmizeorfyfchmhtaht/Build/Products/Debug\"",
 					/Volumes/Storage/Documents/Code/OSX/ShortcutRecorder/build/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PythonBar-ewnborrtlkapvmawnnoqpmzjchmy/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";

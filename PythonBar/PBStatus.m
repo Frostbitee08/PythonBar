@@ -113,11 +113,19 @@ static NSString *preferencesKey = @"preferences";
             [tempMenuItem setRepresentedObject:[scripts objectAtIndex:i]];
             [tempMenuItem setImage:pythonDocument];
             
+            NSColor *textColor = [NSColor blackColor];
+            NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+            id style = [dict objectForKey:@"AppleInterfaceStyle"];
+            BOOL darkModeOn = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+            if (darkModeOn) {
+                textColor = [NSColor whiteColor];
+            }
+            
             //Add color
             NSMutableAttributedString *attributedTitle=[[NSMutableAttributedString alloc] initWithString:[[scripts objectAtIndex:i] getTitle]];
             [attributedTitle addAttribute:NSFontAttributeName value:[NSFont menuFontOfSize:14.0] range:NSMakeRange(0, [[scripts objectAtIndex:i] getTitle].length)];
             if ([[scripts objectAtIndex:i] doesExist]) {
-                [attributedTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
+                [attributedTitle addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(0,[[scripts objectAtIndex:i] getTitle].length)];
                 [tempMenuItem setAction:@selector(runScript:)];
                 
             }
