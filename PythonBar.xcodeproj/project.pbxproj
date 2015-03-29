@@ -16,7 +16,6 @@
 		841D8481173614F900C9DE1C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 841D847F173614F900C9DE1C /* Credits.rtf */; };
 		841D8484173614F900C9DE1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D8483173614F900C9DE1C /* AppDelegate.m */; };
 		841D8487173614F900C9DE1C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841D8485173614F900C9DE1C /* MainMenu.xib */; };
-		841D848F173614FA00C9DE1C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D848E173614FA00C9DE1C /* SenTestingKit.framework */; };
 		841D8490173614FA00C9DE1C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8470173614F900C9DE1C /* Cocoa.framework */; };
 		841D8498173614FA00C9DE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 841D8496173614FA00C9DE1C /* InfoPlist.strings */; };
 		841D849B173614FA00C9DE1C /* PythonBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 841D849A173614FA00C9DE1C /* PythonBarTests.m */; };
@@ -71,7 +70,6 @@
 		841D8483173614F900C9DE1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		841D8486173614F900C9DE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		841D848D173614FA00C9DE1C /* PythonBarTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PythonBarTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		841D848E173614FA00C9DE1C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		841D8495173614FA00C9DE1C /* PythonBarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PythonBarTests-Info.plist"; sourceTree = "<group>"; };
 		841D8497173614FA00C9DE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		841D8499173614FA00C9DE1C /* PythonBarTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PythonBarTests.h; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				841D848F173614FA00C9DE1C /* SenTestingKit.framework in Frameworks */,
 				841D8490173614FA00C9DE1C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,7 +157,6 @@
 				84EABEB517D7C6940083BAE3 /* Carbon.framework */,
 				843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */,
 				841D8470173614F900C9DE1C /* Cocoa.framework */,
-				841D848E173614FA00C9DE1C /* SenTestingKit.framework */,
 				841D8472173614F900C9DE1C /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -320,7 +316,7 @@
 			name = PythonBarTests;
 			productName = PythonBarTests;
 			productReference = 841D848D173614FA00C9DE1C /* PythonBarTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -328,6 +324,7 @@
 		841D8463173614F900C9DE1C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0620;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Rocco Del Priore";
 			};
@@ -583,13 +580,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PythonBar.app/Contents/MacOS/PythonBar";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";
 				INFOPLIST_FILE = "PythonBarTests/PythonBarTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -598,13 +597,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PythonBar.app/Contents/MacOS/PythonBar";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PythonBar/PythonBar-Prefix.pch";
 				INFOPLIST_FILE = "PythonBarTests/PythonBarTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

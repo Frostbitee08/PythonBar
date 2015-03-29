@@ -80,7 +80,7 @@ static NSString *scriptsPathKey = @"scripts";
                     alertString = [NSString stringWithFormat:@"%@ has been moved from the directory", name];
                 }
                 
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:alertString];
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Script Missing" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:alertString, nil];
                 [alert runModal];
                 return;
             }
@@ -286,7 +286,7 @@ static NSString *scriptsPathKey = @"scripts";
                 
             }
             else {
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has already been added to PythonBar", [[scripts objectAtIndex:[button tag]] getTitle]]];
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Entry" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"%@ has already been added to PythonBar", [[scripts objectAtIndex:[button tag]] getTitle]], nil];
                 [alert runModal];
             }
         }

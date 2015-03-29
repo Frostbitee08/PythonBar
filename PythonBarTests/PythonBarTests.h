@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Rocco Del Priore. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface PythonBarTests : SenTestCase
+@interface PythonBarTests : XCTestCase
 
 @end
