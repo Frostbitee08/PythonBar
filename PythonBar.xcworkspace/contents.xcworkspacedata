@@ -5,6 +5,6 @@
       location = "group:PythonBar.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../ShortcutRecorder/ShortcutRecorder.xcodeproj">
+      location = "group:../../../Dependencies/ShortcutRecorder/ShortcutRecorder.xcodeproj">
    </FileRef>
 </Workspace>

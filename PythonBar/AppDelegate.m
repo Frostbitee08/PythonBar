@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <ServiceManagement/ServiceManagement.h>
+#import <CoreServices/CoreServices.h>
 
 @implementation AppDelegate
 
@@ -71,28 +72,68 @@ static NSString *notificationKey = @"notfication";
     [preferences writeToFile:[libraryPath stringByAppendingString:@"/Settings.plist"] atomically:YES];
 }
 
--(IBAction)toggleLaunchAtLogin:(id)sender {
-    NSInteger clickedSegment = [launchButton state];
-    if (clickedSegment == 0) { // ON
-        
-        // Turn on launch at login
-        if (!SMLoginItemSetEnabled ((__bridge CFStringRef)@"com.frostbitee08.PythonBar", YES)) {
-            //NSAlert *alert = [NSAlert alertWithMessageText:@"An error ocurred" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Couldn't add PythonBar to launch at login item list."];
-            //[alert runModal];
-        }
-        
+- (BOOL)isLaunchAtStartup {
+    // See if the app is currently in LoginItems.
+    LSSharedFileListItemRef itemRef = [self itemRefInLoginItems];
+    // Store away that boolean.
+    BOOL isInList = itemRef != nil;
+    // Release the reference if it exists.
+    if (itemRef != nil) CFRelease(itemRef);
+    
+    return isInList;
+}
+
+- (IBAction)toggleLaunchAtLogin:(id)sender {
+    // Toggle the state.
+    BOOL shouldBeToggled = ![self isLaunchAtStartup];
+    // Get the LoginItems list.
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return;
+    if (shouldBeToggled) {
+        // Add the app to the LoginItems list.
+        CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
+        if (itemRef) CFRelease(itemRef);
     }
-    if (clickedSegment == 1) { // OFF
-        
-        // Turn off launch at login
-        if (!SMLoginItemSetEnabled ((__bridge CFStringRef)@"com.frostbitee08.PythonBar", NO)) {
-            //NSAlert *alert = [NSAlert alertWithMessageText:@"An error ocurred" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Couldn't remove PythonBar from launch at login item list."];
-            //[alert runModal];
-        }
-        
+    else {
+        // Remove the app from the LoginItems list.
+        LSSharedFileListItemRef itemRef = [self itemRefInLoginItems];
+        LSSharedFileListItemRemove(loginItemsRef,itemRef);
+        if (itemRef != nil) CFRelease(itemRef);
     }
+    CFRelease(loginItemsRef);
+    
     [preferences setObject:[NSNumber numberWithBool:[launchButton state]] forKey:startatlaunch];
     [preferences writeToFile:[libraryPath stringByAppendingString:@"Settings.plist"] atomically:YES];
+}
+
+- (LSSharedFileListItemRef)itemRefInLoginItems {
+    LSSharedFileListItemRef itemRef = nil;
+    NSURL *itemUrl = nil;
+    
+    // Get the app's URL.
+    NSURL *appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    // Get the LoginItems list.
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return nil;
+    // Iterate over the LoginItems.
+    NSArray *loginItems = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, nil);
+    for (int currentIndex = 0; currentIndex < [loginItems count]; currentIndex++) {
+        // Get the current LoginItem and resolve its URL.
+        LSSharedFileListItemRef currentItemRef = (__bridge LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
+        if (LSSharedFileListItemResolve(currentItemRef, 0, (__bridge CFURLRef) itemUrl, NULL) == noErr) {
+            // Compare the URLs for the current LoginItem and the app.
+            if ([itemUrl isEqual:appUrl]) {
+                // Save the LoginItem reference.
+                itemRef = currentItemRef;
+            }
+        }
+    }
+    // Retain the LoginItem reference.
+    if (itemRef != nil) CFRetain(itemRef);
+    CFRelease(loginItemsRef);
+    
+    return itemRef;
 }
 
 - (IBAction)CheckBoxStatus:(id) sender {

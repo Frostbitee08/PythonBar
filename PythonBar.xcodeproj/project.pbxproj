@@ -25,6 +25,7 @@
 		843BD26B17D402CD00A33EF0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BD26A17D402CD00A33EF0 /* ServiceManagement.framework */; };
 		843BD27117D426B600A33EF0 /* ScriptsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BD27017D426B600A33EF0 /* ScriptsTableController.m */; };
 		84520FFE17F1943400564562 /* Scripts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84520FFC17F1943400564562 /* Scripts.xcdatamodeld */; };
+		8477B22D1BBB83870029DDAA /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8477B22C1BBB83870029DDAA /* CoreServices.framework */; };
 		8479056D17CEE28E00F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8479056E17CEE32900F48DD1 /* PBStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479056C17CEE28E00F48DD1 /* PBStatus.m */; };
 		8491998917EAA96500DA071B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8474173614F900C9DE1C /* CoreData.framework */; };
@@ -69,7 +70,7 @@
 		841D8482173614F900C9DE1C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		841D8483173614F900C9DE1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		841D8486173614F900C9DE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		841D848D173614FA00C9DE1C /* PythonBarTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PythonBarTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		841D848D173614FA00C9DE1C /* PythonBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PythonBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		841D8495173614FA00C9DE1C /* PythonBarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PythonBarTests-Info.plist"; sourceTree = "<group>"; };
 		841D8497173614FA00C9DE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		841D8499173614FA00C9DE1C /* PythonBarTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PythonBarTests.h; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		843BD27017D426B600A33EF0 /* ScriptsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptsTableController.m; sourceTree = "<group>"; };
 		84520FF817F0BD7A00564562 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
 		84520FFD17F1943400564562 /* Scripts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scripts.xcdatamodel; sourceTree = "<group>"; };
+		8477B22C1BBB83870029DDAA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		8479056B17CEE28E00F48DD1 /* PBStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBStatus.h; sourceTree = "<group>"; };
 		8479056C17CEE28E00F48DD1 /* PBStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBStatus.m; sourceTree = "<group>"; };
 		8493C6D51810E9D200C15081 /* DeleteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteTableView.h; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8477B22D1BBB83870029DDAA /* CoreServices.framework in Frameworks */,
 				841A9ED31AC7A2E800FFCF54 /* PTHotKey.framework in Frameworks */,
 				841A9ED41AC7A2E800FFCF54 /* ShortcutRecorder.framework in Frameworks */,
 				8491998917EAA96500DA071B /* CoreData.framework in Frameworks */,
@@ -141,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				841D846C173614F900C9DE1C /* PythonBar.app */,
-				841D848D173614FA00C9DE1C /* PythonBarTests.octest */,
+				841D848D173614FA00C9DE1C /* PythonBarTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 		841D846F173614F900C9DE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8477B22C1BBB83870029DDAA /* CoreServices.framework */,
 				841A9ED11AC7A2E800FFCF54 /* PTHotKey.framework */,
 				841A9ED21AC7A2E800FFCF54 /* ShortcutRecorder.framework */,
 				841A9ECD1AC7A14600FFCF54 /* PTHotKey.framework */,
@@ -315,7 +319,7 @@
 			);
 			name = PythonBarTests;
 			productName = PythonBarTests;
-			productReference = 841D848D173614FA00C9DE1C /* PythonBarTests.octest */;
+			productReference = 841D848D173614FA00C9DE1C /* PythonBarTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -510,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -533,6 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;
