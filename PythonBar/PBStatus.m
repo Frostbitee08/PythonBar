@@ -17,6 +17,8 @@
 #import <PTHotKey/PTHotKeyCenter.h>
 #import <PTHotKey/PTHotKey+ShortcutRecorder.h>
 
+#define BasicTableViewDragAndDropDataType @"BasicTableViewDragAndDropDataType"
+
 @implementation PBStatus
 
 //Keys
@@ -45,6 +47,10 @@ static NSString *preferencesKey = @"preferences";
 }
 
 -(void)awakeFromNib {
+    [scriptTable registerForDraggedTypes:[NSArray arrayWithObjects:BasicTableViewDragAndDropDataType, nil]];
+    [scriptTable setDraggingSourceOperationMask:NSDragOperationLink forLocal:NO];
+    [scriptTable setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+    
     [self getCoreData];
 }
 
@@ -52,22 +58,22 @@ static NSString *preferencesKey = @"preferences";
     //Scripts
     NSManagedObjectContext* cxt = [[AppDelegate sharedAppDelegate] managedObjectContext];
     NSFetchRequest* scripts_request = [[NSFetchRequest alloc] initWithEntityName:@"Script"];
-    for (unsigned int i = 0; i< [[cxt executeFetchRequest:scripts_request error:nil] count]; i++) {
-        Script *tempScript = [[cxt executeFetchRequest:scripts_request error:nil] objectAtIndex:i];
-        HandleScript *tempHandleScript = [[HandleScript alloc] init];
-        [tempHandleScript setManagedScript:tempScript];
-        if (![tempHandleScript isSubscript]) {
-            [scripts addObject:tempHandleScript];
+    NSArray *array = [cxt executeFetchRequest:scripts_request error:nil];
+    for (Script *script in array) {
+        HandleScript *handleScript = [[HandleScript alloc] init];
+        [handleScript setManagedScript:script];
+        if (![handleScript isSubscript]) {
+            [scripts addObject:handleScript];
         }
     }
     
     //Script Directories
     NSFetchRequest* scriptsDirectory_request = [[NSFetchRequest alloc] initWithEntityName:@"DirectoryScript"];
-    for (unsigned int i = 0; i< [[cxt executeFetchRequest:scriptsDirectory_request error:nil] count]; i++) {
-        DirectoryScript *tempScript = [[cxt executeFetchRequest:scriptsDirectory_request error:nil] objectAtIndex:i];
-        HandleDirectoryScript *tempHandleScript = [[HandleDirectoryScript alloc] init];
-        [tempHandleScript setManagedDirectroyScript:tempScript];
-        [scripts addObject:tempHandleScript];
+    array = [cxt executeFetchRequest:scriptsDirectory_request error:nil];
+    for (DirectoryScript *script in array) {
+        HandleDirectoryScript *handleScript = [[HandleDirectoryScript alloc] init];
+        [handleScript setManagedDirectroyScript:script];
+        [scripts addObject:handleScript];
     }
     [self setUp];
     [self prePopulate];

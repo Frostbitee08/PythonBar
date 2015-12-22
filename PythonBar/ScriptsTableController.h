@@ -11,12 +11,17 @@
 #import "HandleDirectoryScript.h"
 #import "RunSuff.h"
 #import "DeleteTableView.h"
-#import "ScriptsTableControllerDelegate.h"
 
 //ShortCut
 #import "ShortcutRecorder/ShortcutRecorder.h"
 #import <PTHotKey/PTHotKeyCenter.h>
 #import <PTHotKey/PTHotKey+ShortcutRecorder.h>
+
+@protocol ScriptsTableControllerDelegate <NSObject>
+
+- (void)updateMenu;
+
+@end
 
 @interface ScriptsTableController : NSObject <NSTableViewDataSource, NSTableViewDelegate, SRRecorderControlDelegate> {
     DeleteTableView *ScriptTable;

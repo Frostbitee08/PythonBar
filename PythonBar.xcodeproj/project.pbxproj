@@ -99,7 +99,6 @@
 		84EFBD811806210E007B3F58 /* DirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryScript.h; sourceTree = "<group>"; };
 		84EFBD821806210E007B3F58 /* DirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryScript.m; sourceTree = "<group>"; };
 		84F109641736521100950211 /* python_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = python_document.png; sourceTree = "<group>"; };
-		84F763481811EDD000ADAA06 /* ScriptsTableControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptsTableControllerDelegate.h; sourceTree = "<group>"; };
 		84F8B60217D3DE89003C3D7B /* HandleDirectoryScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleDirectoryScript.h; sourceTree = "<group>"; };
 		84F8B60317D3DE89003C3D7B /* HandleDirectoryScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleDirectoryScript.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,7 +229,6 @@
 				8479056C17CEE28E00F48DD1 /* PBStatus.m */,
 				8493C6D51810E9D200C15081 /* DeleteTableView.h */,
 				8493C6D61810E9D200C15081 /* DeleteTableView.m */,
-				84F763481811EDD000ADAA06 /* ScriptsTableControllerDelegate.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -329,7 +327,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0620;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Rocco Del Priore";
 			};
 			buildConfigurationList = 841D8466173614F900C9DE1C /* Build configuration list for PBXProject "PythonBar" */;
@@ -514,7 +512,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;

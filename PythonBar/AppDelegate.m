@@ -10,6 +10,8 @@
 #import <ServiceManagement/ServiceManagement.h>
 #import <CoreServices/CoreServices.h>
 
+#define BasicTableViewDragAndDropDataType @"BasicTableViewDragAndDropDataType"
+
 @implementation AppDelegate
 
 static NSString *blackandwhite = @"bw";

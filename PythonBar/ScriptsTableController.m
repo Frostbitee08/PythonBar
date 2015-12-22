@@ -13,6 +13,8 @@
 
 static NSString *savePathKey = @"savePath";
 
+#define BasicTableViewDragAndDropDataType @"BasicTableViewDragAndDropDataType"
+
 #pragma mark - Initializers
 
 -(id)init {
@@ -73,22 +75,39 @@ static NSString *savePathKey = @"savePath";
 
 //Drag and drop stuff - Not working yet
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-    return NSDragOperationEvery;
+    if (operation == NSTableViewDropAbove) {
+        return NSDragOperationMove;
+    }
+    return NSDragOperationNone;
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    // Drag and drop support
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard declareTypes:[NSArray arrayWithObject:BasicTableViewDragAndDropDataType] owner:self];
+    [pboard setData:data forType:BasicTableViewDragAndDropDataType];
     return YES;
 }
 
 - (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
-    return YES;
-}
+    NSLog(@"Row: %li", (long)row);
+    NSLog(@"Info: %@", info);
+    
+    NSData *data = [[info draggingPasteboard] dataForType:BasicTableViewDragAndDropDataType];
+    NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
-- (void)tableView:(NSTableView *)tv replaceObjectAtIndex:(int)indexRow withObject:(NSString *)tempNewString {
-    NSLog(@"here");
-	//[toDoList replaceObjectAtIndex:indexRow withObject:tempNewString];
-	//[tableView reloadData];
-	return;
+    NSArray *tArr = [scripts objectsAtIndexes:rowIndexes];
+    [scripts removeObjectsAtIndexes:rowIndexes];
+    if (row > scripts.count) {
+        [scripts insertObject:[tArr objectAtIndex:0] atIndex:row-1];
+    }
+    else {
+        [scripts insertObject:[tArr objectAtIndex:0] atIndex:row];
+    }
+    [tableView reloadData];
+    [tableView deselectAll:nil];
+
+    return YES;
 }
 
 #pragma mark SRRecorderControlDelegate

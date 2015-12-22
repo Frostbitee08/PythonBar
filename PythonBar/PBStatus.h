@@ -12,7 +12,6 @@
 #import "ScriptsTableController.h"
 #import "RunSuff.h"
 #import "DeleteTableView.h"
-#import "ScriptsTableControllerDelegate.h"
 
 @interface PBStatus:  NSView <NSMenuDelegate, ScriptsTableControllerDelegate> {
     //IBOutlets
