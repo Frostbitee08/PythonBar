@@ -11,6 +11,7 @@
 
 @implementation DirectoryScript
 
+@dynamic index;
 @dynamic path;
 @dynamic shortcutdata;
 @dynamic title;

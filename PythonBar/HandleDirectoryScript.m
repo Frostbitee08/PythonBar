@@ -11,9 +11,10 @@
 #import "AppDelegate.h"
 
 @implementation HandleDirectoryScript
-@synthesize title, subScripts, path, shortCut, timesRan;
+@synthesize title, subScripts, path, shortCut, timesRan, index;
 
 static NSString *serializationKey = @"PythonBarKey";
+static NSString *indexKey = @"index";
 static NSString *pathKey = @"path";
 static NSString *titleKey = @"title";
 static NSString *shortcutKey = @"shortcutdata";
@@ -93,12 +94,7 @@ static NSString *timesRanKey = @"timesRan";
     }
     
     managedDirectoryScript = [NSEntityDescription insertNewObjectForEntityForName:@"DirectoryScript" inManagedObjectContext:cxt];
-    [managedDirectoryScript setValue:path forKey:pathKey];
-    [managedDirectoryScript setValue:title forKey:titleKey];
-    [managedDirectoryScript setValue:timesRan forKey:timesRanKey];
-    [managedDirectoryScript setValue:shortCut forKey:shortcutKey];
-    
-    [[AppDelegate sharedAppDelegate] saveContext];
+    [self save];
 }
 
 //For adding script via core data
@@ -108,6 +104,7 @@ static NSString *timesRanKey = @"timesRan";
     path = [managedDirectoryScript valueForKey:pathKey];
     title = [managedDirectoryScript valueForKey:titleKey];
     timesRan = [NSNumber numberWithInt:[managedDirectoryScript valueForKey:timesRanKey]];
+    index = [NSNumber numberWithInt:[managedDirectoryScript valueForKey:indexKey]];
     shortCut = [managedDirectoryScript valueForKey:shortcutKey];
 
     //Fill
@@ -143,6 +140,11 @@ static NSString *timesRanKey = @"timesRan";
     [self save];
 }
 
+- (void)updateIndex:(int)newIndex {
+    index = [NSNumber numberWithInt:newIndex];
+    [self save];
+}
+
 - (void)fill {
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
     NSMutableString *mutTemp;
@@ -173,6 +175,7 @@ static NSString *timesRanKey = @"timesRan";
 }
 
 - (void)save {
+    [managedDirectoryScript setValue:index forKey:indexKey];
     [managedDirectoryScript setValue:path forKey:pathKey];
     [managedDirectoryScript setValue:title forKey:titleKey];
     [managedDirectoryScript setValue:timesRan forKey:timesRanKey];

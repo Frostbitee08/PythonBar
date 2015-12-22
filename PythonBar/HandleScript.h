@@ -14,6 +14,7 @@
     NSString *path;
     NSString *title;
     NSNumber *timesRan;
+    NSNumber *index;
     bool isSubscript;
     Script *managedScript;
     
@@ -25,6 +26,7 @@
     NSManagedObjectContext *cxt;
 }
 
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDictionary *shortCut;
@@ -41,6 +43,7 @@
 - (void)addRun;
 - (void)removeFromContext;
 - (void)setIsSubscript:(bool)aIsSubscript;
+- (void)updateIndex:(int)newIndex;
 
 //Accessors
 - (NSString *)getPath;

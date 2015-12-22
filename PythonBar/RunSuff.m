@@ -234,6 +234,7 @@ static NSString *scriptsPathKey = @"scripts";
                     [tempMenuItem setAttributedTitle:attributedTitle];
                     
                     //Replace in Array
+                    [tempScript updateIndex:(int)[button tag]];
                     [[scripts objectAtIndex:[button tag]] removeFromContext];
                     [scripts replaceObjectAtIndex:[button tag] withObject:tempScript];
                 }
@@ -280,6 +281,7 @@ static NSString *scriptsPathKey = @"scripts";
                     [tempMenuItem setSubmenu:submenu];
                     
                     //UpdateArrays
+                    [dirScript updateIndex:(int)[button tag]];
                     [[scripts objectAtIndex:[button tag]] removeFromContext];
                     [scripts replaceObjectAtIndex:[button tag] withObject:dirScript];
                 }

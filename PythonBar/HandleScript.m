@@ -12,9 +12,10 @@
 
 
 @implementation HandleScript
-@synthesize title, timesRan, path, shortCut, isSubscript, methods;
+@synthesize title, timesRan, path, shortCut, isSubscript, methods, index;
 
 static NSString *serializationKey = @"PythonBarKey";
+static NSString *indexKey = @"index";
 static NSString *pathKey = @"path";
 static NSString *titleKey = @"title";
 static NSString *shortcutKey = @"shortcutdata";
@@ -84,14 +85,7 @@ static NSString *isSubscriptKey = @"isSubscript";
         
         //Insert into context
         managedScript = [NSEntityDescription insertNewObjectForEntityForName:@"Script" inManagedObjectContext:cxt];
-        [managedScript setValue:path forKey:pathKey];
-        [managedScript setValue:title forKey:titleKey];
-        [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];
-        [managedScript setValue:timesRan forKey:timesRanKey];
-        [managedScript setValue:shortCut forKey:shortcutKey];
-        
-        //Save Context
-        [[AppDelegate sharedAppDelegate] saveContext];
+        [self save];
     }
 }
 
@@ -105,6 +99,7 @@ static NSString *isSubscriptKey = @"isSubscript";
     isSubscript = [browse boolValue];
     timesRan = [managedScript valueForKey:timesRanKey];
     shortCut = [managedScript valueForKey:shortcutKey];
+    index = [managedScript valueForKey:indexKey];
     [self getMethods];
 }
 
@@ -160,8 +155,9 @@ static NSString *isSubscriptKey = @"isSubscript";
 
 #pragma mark - Modifiers
 
-- (void)removeFromContext {
-    [[AppDelegate sharedAppDelegate] deleteManagedObject:managedScript];
+- (void)updateIndex:(int)newIndex {
+    index = [NSNumber numberWithInt:newIndex];
+    [self save];
 }
 
 - (void)changeShortcut:(NSDictionary*)aShortcut {
@@ -175,9 +171,14 @@ static NSString *isSubscriptKey = @"isSubscript";
     [self save];
 }
 
+- (void)removeFromContext {
+    [[AppDelegate sharedAppDelegate] deleteManagedObject:managedScript];
+}
+
 - (void)save {
     if (!isSubscript) {
         //Update values
+        [managedScript setValue:index forKey:indexKey];
         [managedScript setValue:path forKey:pathKey];
         [managedScript setValue:title forKey:titleKey];
         [managedScript setValue:[NSNumber numberWithBool:isSubscript] forKey:isSubscriptKey];

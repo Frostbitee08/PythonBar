@@ -90,9 +90,6 @@ static NSString *savePathKey = @"savePath";
 }
 
 - (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
-    NSLog(@"Row: %li", (long)row);
-    NSLog(@"Info: %@", info);
-    
     NSData *data = [[info draggingPasteboard] dataForType:BasicTableViewDragAndDropDataType];
     NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
@@ -104,6 +101,11 @@ static NSString *savePathKey = @"savePath";
     else {
         [scripts insertObject:[tArr objectAtIndex:0] atIndex:row];
     }
+    
+    for (int i = 0; i < [scripts count]; i++) {
+        [[scripts objectAtIndex:i] updateIndex:i];
+    }
+    
     [tableView reloadData];
     [tableView deselectAll:nil];
 

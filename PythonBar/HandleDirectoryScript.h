@@ -15,6 +15,7 @@
     NSString *path;
     NSString *title;
     NSNumber *timesRan;
+    NSNumber *index;
     DirectoryScript *managedDirectoryScript;
     
     //Generated
@@ -26,6 +27,7 @@
     SInt32 minor;
 }
 
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDictionary *shortCut;
@@ -36,6 +38,7 @@
 - (void)setPathURL:(NSString *)givenPathURL;
 - (void)setManagedDirectroyScript:(DirectoryScript *)givenManagedDirectoryScript;
 - (void)changeShortcut:(NSDictionary*)aShortcut;
+- (void)updateIndex:(int)newIndex;
 - (void)removeFromContext;
 
 //Accessors

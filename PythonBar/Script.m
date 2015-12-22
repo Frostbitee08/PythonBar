@@ -11,6 +11,7 @@
 
 @implementation Script
 
+@dynamic index;
 @dynamic isSubscript;
 @dynamic path;
 @dynamic shortcutdata;

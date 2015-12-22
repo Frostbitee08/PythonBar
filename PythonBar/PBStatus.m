@@ -75,6 +75,10 @@ static NSString *preferencesKey = @"preferences";
         [handleScript setManagedDirectroyScript:script];
         [scripts addObject:handleScript];
     }
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    scripts = [[scripts sortedArrayUsingDescriptors:@[sortDescriptor]] mutableCopy];
+    
     [self setUp];
     [self prePopulate];
 }
@@ -222,6 +226,7 @@ static NSString *preferencesKey = @"preferences";
     HandleScript *tempScript = [[HandleScript alloc] init];
     [tempScript setPathURL:[path absoluteString] isSubscript:false];
     [tempScript setIsSubscript:false];
+    [tempScript updateIndex:(int)scripts.count];
     [scripts addObject:tempScript];
 
     //Create NSMenuItem
@@ -241,6 +246,7 @@ static NSString *preferencesKey = @"preferences";
     //Set Up DirectoryScript
     HandleDirectoryScript *dirScript = [[HandleDirectoryScript alloc] init];
     [dirScript setPathURL:[path absoluteString]];
+    [dirScript updateIndex:(int)scripts.count];
     [scripts addObject:dirScript];
     
     //Create Sub-Menu

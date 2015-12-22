@@ -12,6 +12,7 @@
 
 @interface DirectoryScript : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSDictionary *shortcutdata;
 @property (nonatomic, retain) NSString * title;

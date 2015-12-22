@@ -12,6 +12,7 @@
 
 @interface Script : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * isSubscript;
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSDictionary * shortcutdata;
