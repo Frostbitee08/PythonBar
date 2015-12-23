@@ -92,13 +92,13 @@ static NSString *preferencesKey = @"preferences";
     
     //TableController
     stc = [[ScriptsTableController alloc] init];
-     [scriptTable setDelegate:stc];
-     [scriptTable setDataSource:stc];
-     stc.runner = runner;
-     stc.statusMenu = statusMenu;
-     stc.scripts = scripts;
+    stc.runner = runner;
+    stc.statusMenu = statusMenu;
+    stc.scripts = scripts;
     [stc setDelegate:self];
     [stc setUp:scriptTable];
+    [scriptTable setDelegate:stc];
+    [scriptTable setDataSource:stc];
     
     //Fill Preferences
     NSDictionary *tempDict = [[NSDictionary alloc] initWithContentsOfFile:[defaults objectForKey:preferencesPathKey]];

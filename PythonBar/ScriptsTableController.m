@@ -73,7 +73,6 @@ static NSString *savePathKey = @"savePath";
     }
 }
 
-//Drag and drop stuff - Not working yet
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
     if (operation == NSTableViewDropAbove) {
         return NSDragOperationMove;
@@ -82,7 +81,6 @@ static NSString *savePathKey = @"savePath";
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-    // Drag and drop support
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
     [pboard declareTypes:[NSArray arrayWithObject:BasicTableViewDragAndDropDataType] owner:self];
     [pboard setData:data forType:BasicTableViewDragAndDropDataType];
@@ -104,6 +102,21 @@ static NSString *savePathKey = @"savePath";
     
     for (int i = 0; i < [scripts count]; i++) {
         [[scripts objectAtIndex:i] updateIndex:i];
+    }
+    
+    NSArray *menuItems = [statusMenu.itemArray copy];
+    for (NSMenuItem *item in menuItems) {
+        if ([item.representedObject isKindOfClass:[HandleScript class]] || [item.representedObject isKindOfClass:[HandleDirectoryScript class]]) {
+            [statusMenu removeItemAtIndex:[statusMenu indexOfItem:item]];
+        }
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"representedObject.index" ascending:YES];
+    menuItems = [menuItems sortedArrayUsingDescriptors:@[sortDescriptor]];
+    for (NSMenuItem *item in menuItems) {
+        if ([item.representedObject isKindOfClass:[HandleScript class]] || [item.representedObject isKindOfClass:[HandleDirectoryScript class]]) {
+            HandleScript *script = (HandleScript *)item.representedObject;
+            [statusMenu insertItem:item atIndex:script.index.integerValue];
+        }
     }
     
     [tableView reloadData];
